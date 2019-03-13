@@ -53,12 +53,11 @@ public class Prueba  extends JFrame implements TuioListener {
 	//Se llama cuando un objeto se hace visible
 	public void addTuioObject(TuioObject tobj) { 
 		// TODO Auto-generated method stub
-		System.out.println(tobj.getSymbolID());      
-		if(tobj.getSymbolID()==1) {
-			mural.setBackground(Color.blue);
-			//mural.actualizar(tobj.getX(), tobj.getY());
+		//System.out.println(tobj.getSymbolID());      
+		
+			//mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID());
 
-		}
+		//Falta un tratamiento para aquellos fiducial que no se reconozcan(que no esten dentro del vector de imagenes)
 	}
 
 
@@ -66,11 +65,10 @@ public class Prueba  extends JFrame implements TuioListener {
 	// Se llama cuando un objeto fue movido(arrastrado) sobre la superficie de la mesa
 	public void updateTuioObject(TuioObject tobj) {
 		// TODO Auto-generated method stub
-		if(tobj.getSymbolID()==1) {
-			mural.actualizar(tobj.getX(), tobj.getY());
 			
-
-		}
+			mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID());
+			
+		//Falta un tratamiento para aquellos fiducial que no se reconozcan(que no esten dentro del vector de imagenes)
 	}
 
 
