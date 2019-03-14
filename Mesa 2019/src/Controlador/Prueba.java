@@ -1,7 +1,7 @@
 package Controlador;
 
 import javax.swing.JFrame;
-
+import java.io.*;
 import TUIO.TuioBlob;
 import TUIO.TuioClient;
 import TUIO.TuioCursor;
@@ -26,8 +26,8 @@ public class Prueba  extends JFrame implements TuioListener {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		TuioSimulator simulador = new TuioSimulator();
-		String[] argv = { "-host", "127.0.0.1", "-port", "3333", "-config", "C:\\Users\\"
-				+ (System.getProperty("user.name")) + "\\Desktop\\TUIO_Simulator\\resources\\config.xml" };
+		File archconfig = new File("config.xml");
+		String[] argv = { "-host", "127.0.0.1", "-port", "3333", "-config", archconfig.getAbsolutePath() };
 		simulador.main(argv);
 		final TuioClient cliente = new TuioClient();
 		cliente.connect();
