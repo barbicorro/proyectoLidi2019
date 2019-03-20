@@ -8,6 +8,8 @@ import javax.swing.ImageIcon;
 
 public class Imagenes {
 	private BufferedImage[] image=new BufferedImage[8] ;
+	private BufferedImage[] imagen_config=new BufferedImage[6];
+	
 	
 	private String [] rutaSellos= {"src/Imagenes/Objetos-01.png", //0- mamushka
 			"src/Imagenes/Objetos-02.png",  //1- Pelota 
@@ -19,10 +21,19 @@ public class Imagenes {
 			"src/Imagenes/Objetos-08.png",  //7- Flor roja
 			"src/Imagenes/Objetos-09.png",};  //8- Flor blanca
 	
+	private String [] rutaObjetosConfiguracion= {"src/Imagenes/Regla.png",  //0
+			"src/Imagenes/Circulo-cromatico.png",  							//1
+			"src/Imagenes/Deshacer.png",  									//2
+			"src/Imagenes/Goma.png",  										//3
+			"src/Imagenes/Selector-de-fondos.png",  						//4
+			"src/Imagenes/Texturas.png",  									//5
+			"src/Imagenes/Transparencias.png",};  							//6
+	
 	
 	
 	public Imagenes()  {
 		cargaImagenes();
+		cargarImagenesConfiguracion();
 	}
 	public void cargaImagenes()  {
 		try {
@@ -35,6 +46,25 @@ public class Imagenes {
 		}
 		
 		
+	}
+	public void cargarImagenesConfiguracion()  {
+		try {
+			for(int i=0; i<imagen_config.length; i++) {
+				imagen_config[i]=ImageIO.read(new File(rutaObjetosConfiguracion[i]));
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	public BufferedImage[] getImagen_config() {
+		return imagen_config;
+	}
+	public void setImagen_config(BufferedImage[] imagen_config) {
+		this.imagen_config = imagen_config;
 	}
 	public BufferedImage getImage(int i) {
 		return image[i];
