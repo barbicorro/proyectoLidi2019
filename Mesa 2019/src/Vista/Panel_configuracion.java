@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 import javax.swing.JPanel;
 
-import Controlador.Configuracion;
+import Modelo.Configuracion;
 
 
 public class Panel_configuracion extends JPanel {
@@ -48,8 +48,16 @@ public class Panel_configuracion extends JPanel {
 			g.drawImage(imgGral.getImagen_config()[0], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+500) , (miConfiguracion.getConfig_Regla()[2] + 700), 0, 0, 512, 768, null);
 			imgActual=0; //posicion de la regla en el vector
 		}
-		g.drawImage(imgGral.getImagen_config()[imgActual], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+500) , (miConfiguracion.getConfig_Regla()[2] + 700), 0, 0, 512, 768, null);
+		else {
+			if (num_img_de_configuracion==10) { //10 es el id de las tranparencias
+				miConfiguracion.getConfig_Transparencia()[1]=x;
+				miConfiguracion.getConfig_Transparencia()[2]=y;
+				g.drawImage(imgGral.getImagen_config()[1], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+500) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 700), 0, 0, 512, 768, null);
+				imgActual=1; //posicion de la herramienta de transparencia en el vector
+			} 
+		}
 		if((imgActual==0)&&(num_img_de_configuracion==666)){
+			g.drawImage(imgGral.getImagen_config()[imgActual], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+500) , (miConfiguracion.getConfig_Regla()[2] + 700), 0, 0, 512, 768, null);
 			if(((x-miConfiguracion.getConfig_Regla()[1])<90)&&((y-miConfiguracion.getConfig_Regla()[2])<86)){ //Hizo click en el nivel 1. 
 				System.out.println("Nivel 1");
 				miConfiguracion.getConfig_Regla()[0]=50;
@@ -73,9 +81,24 @@ public class Panel_configuracion extends JPanel {
 			
 					}
 		}
-		
-		
-		
+		else {
+			if((imgActual==1)&&(num_img_de_configuracion==666)){
+				g.drawImage(imgGral.getImagen_config()[imgActual], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+500) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 700), 0, 0, 512, 768, null);
+				if(((x-miConfiguracion.getConfig_Transparencia()[1])<90)&&((y-miConfiguracion.getConfig_Transparencia()[2])<86)){ //Hizo click en el nivel 1. 
+					System.out.println("Nivel 1");
+					miConfiguracion.getConfig_Transparencia()[0]=1f;
+				}else {
+					if(((x-miConfiguracion.getConfig_Transparencia()[1])<90)&&(((y-miConfiguracion.getConfig_Transparencia()[2])>90)&&(y-miConfiguracion.getConfig_Transparencia()[2])<185)){
+						System.out.println("Nivel 2");
+						miConfiguracion.getConfig_Transparencia()[0]=0.5f;
+					}else
+						if(((x-miConfiguracion.getConfig_Transparencia()[1])<90)&&(((y-miConfiguracion.getConfig_Transparencia()[2])>185)&&(y-miConfiguracion.getConfig_Transparencia()[2])<280)){
+							System.out.println("Nivel 3");
+							miConfiguracion.getConfig_Transparencia()[0]=0.1f;
+						}
+				}
+			}
+		}
 
 		if(num_img_de_configuracion==666) { //solo lo utilizo para configurar algunas cosas no se usa en el juego final. O SI?
 			g.drawImage(imgGral.getImage(1), x, y, (x+25), (y+25), 0, 0, 512, 768, null);
