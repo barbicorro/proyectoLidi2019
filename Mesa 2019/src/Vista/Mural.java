@@ -14,8 +14,8 @@ public class Mural extends JPanel {
 	private int x=0;
 	private int y=0;
 	private int num_img=-1;
-	private ArrayList<int[]> lista = new ArrayList<int[]>();
-	private int [] info_en_el_tiempo; // 0->n�mero imagen     1->coordenada x    2->coordenada y     3->ancho del rectangulo donde se va a dibujar      4-> alto del rectangulo donde se va a dibujar	5->Transparencia
+	private ArrayList<float []> lista = new ArrayList<float []>();
+	private float [] info_en_el_tiempo; // 0->n�mero imagen     1->coordenada x    2->coordenada y     3->ancho del rectangulo donde se va a dibujar      4-> alto del rectangulo donde se va a dibujar	5->Transparencia
 	private Configuracion miConfiguracion;
 
 	public Mural() {
@@ -47,18 +47,17 @@ public class Mural extends JPanel {
 			g2d.drawImage(null, x, y, null);
 		}else {
 			if(! lista.isEmpty()) {
-				Iterator<int []> listaIterada=lista.iterator();  //iteramos el ArrayList para poder recorrerlo
+				Iterator<float []> listaIterada=lista.iterator();  //iteramos el ArrayList para poder recorrerlo
 
 				while(listaIterada.hasNext()) {
 					info_en_el_tiempo=listaIterada.next();
-					float alpha = miConfiguracion.getConfig_Transparencia()[0];
-			        AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
+					AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,info_en_el_tiempo[5]);
 			        g2d.setComposite(alcom);
-					g2d.drawImage(imgGral.getImage(info_en_el_tiempo[0]), info_en_el_tiempo[1], info_en_el_tiempo[2], info_en_el_tiempo[3], info_en_el_tiempo[4], 0, 0, 744, 768, null);
+					g2d.drawImage(imgGral.getImage((int)info_en_el_tiempo[0]), (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
 				}
 			}
 
-			int [] info_en_el_tiempo= {num_img,this.x,this.y, (this.x + miConfiguracion.getConfig_Regla()[0]), (this.y + miConfiguracion.getConfig_Regla()[0]),(int) miConfiguracion.getConfig_Transparencia()[0] };
+			float [] info_en_el_tiempo= {num_img,this.x,this.y, (this.x + miConfiguracion.getConfig_Regla()[0]), (this.y + miConfiguracion.getConfig_Regla()[0]), miConfiguracion.getConfig_Transparencia()[0] };
 
 			lista.add(info_en_el_tiempo);
 
