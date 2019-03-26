@@ -23,11 +23,11 @@ public class Imagenes {
 	
 	private String [] rutaObjetosConfiguracion= {"src/Imagenes/Regla.png",  //0
 			"src/Imagenes/Transparencias.png",								//1
-			"src/Imagenes/Circulo-cromatico.png",  							//2
+			"src/Imagenes/Selector-de-fondos.png",  						//2
 			"src/Imagenes/Deshacer.png",  									//3
 			"src/Imagenes/Goma.png",  										//4
-			"src/Imagenes/Selector-de-fondos.png",  						//5
-			"src/Imagenes/Texturas.png",};  									//6
+			"src/Imagenes/Circulo-cromatico.png",  							//5
+			"src/Imagenes/Texturas.png",};  								//6
 	
 	
 	

@@ -14,6 +14,7 @@ public class Panel_configuracion extends JPanel {
 	private Imagenes imgGral = new Imagenes();
 	private int x,y,num_img_de_configuracion,imgActual;
 	private Configuracion miConfiguracion;
+	
 	public Panel_configuracion(){
 		setBackground(Color.PINK);
 		setBounds(512, 0, 512, 768);
@@ -55,6 +56,14 @@ public class Panel_configuracion extends JPanel {
 				g.drawImage(imgGral.getImagen_config()[1], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+500) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 700), 0, 0, 512, 768, null);
 				imgActual=1; //posicion de la herramienta de transparencia en el vector
 			} 
+			else {
+				if (num_img_de_configuracion==11) { //10 es el id del selector de fondos
+					miConfiguracion.getConfig_Fondo()[1]=x;
+					miConfiguracion.getConfig_Fondo()[2]=y;
+					g.drawImage(imgGral.getImagen_config()[1], (int)miConfiguracion.getConfig_Fondo()[1], (int)miConfiguracion.getConfig_Fondo()[2], (int)(miConfiguracion.getConfig_Fondo()[1]+500) , (int)(miConfiguracion.getConfig_Fondo()[2] + 700), 0, 0, 512, 768, null);
+					imgActual=2; //posicion de la herramienta de fondos en el vector
+				}
+			}
 		}
 		if((imgActual==0)&&(num_img_de_configuracion==666)){
 			g.drawImage(imgGral.getImagen_config()[imgActual], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+500) , (miConfiguracion.getConfig_Regla()[2] + 700), 0, 0, 512, 768, null);
@@ -96,6 +105,32 @@ public class Panel_configuracion extends JPanel {
 							System.out.println("Nivel 3");
 							miConfiguracion.getConfig_Transparencia()[0]=0.1f;
 						}
+				}
+			}
+			else {
+				if((imgActual==2)&&(num_img_de_configuracion==666)){
+					g.drawImage(imgGral.getImagen_config()[imgActual], (int)miConfiguracion.getConfig_Fondo()[1], (int)miConfiguracion.getConfig_Fondo()[2], (int)(miConfiguracion.getConfig_Fondo()[1]+500) , (int)(miConfiguracion.getConfig_Fondo()[2] + 700), 0, 0, 512, 768, null);
+					if(((x-miConfiguracion.getConfig_Fondo()[1])<90)&&((y-miConfiguracion.getConfig_Fondo()[2])<86)){ //Hizo click en el nivel 1. 
+						System.out.println("Nivel 1");
+						miConfiguracion.getConfig_Fondo()[0]=0; //blanco
+					}else {
+						if(((x-miConfiguracion.getConfig_Fondo()[1])<90)&&(((y-miConfiguracion.getConfig_Fondo()[2])>90)&&(y-miConfiguracion.getConfig_Fondo()[2])<185)){
+							System.out.println("Nivel 2");
+							miConfiguracion.getConfig_Fondo()[0]=1; //rojo
+						}else
+							if(((x-miConfiguracion.getConfig_Fondo()[1])<90)&&(((y-miConfiguracion.getConfig_Fondo()[2])>185)&&(y-miConfiguracion.getConfig_Fondo()[2])<280)){
+								System.out.println("Nivel 3");
+								miConfiguracion.getConfig_Fondo()[0]=2; //azul
+							}else
+								if(((x-miConfiguracion.getConfig_Fondo()[1])<90)&&(((y-miConfiguracion.getConfig_Fondo()[2])>280)&&(y-miConfiguracion.getConfig_Fondo()[2])<375)){
+									System.out.println("Nivel 4");
+									miConfiguracion.getConfig_Fondo()[0]=3; //verde
+								}else
+									if(((x-miConfiguracion.getConfig_Fondo()[1])<90)&&(((y-miConfiguracion.getConfig_Fondo()[2])>375)&&(y-miConfiguracion.getConfig_Fondo()[2])<470)){
+										System.out.println("Nivel 5");
+										miConfiguracion.getConfig_Fondo()[0]=4; //amarillo
+									}
+					}
 				}
 			}
 		}

@@ -20,12 +20,15 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
+import Modelo.Configuracion;
+
 
 public class Prueba  extends JFrame implements TuioListener, ActionListener {
 
 	private static TuioClient cliente;
 	private Mural mural = new Mural();;
 	private Panel_configuracion panel_configuracion = new Panel_configuracion();
+	private Configuracion miConfiguracion;
 	private JButton btnActivarPanel;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
