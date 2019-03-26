@@ -20,7 +20,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
-import Modelo.Configuracion;
+import Modelo.*;
 
 
 public class Prueba  extends JFrame implements TuioListener, ActionListener {
@@ -30,6 +30,8 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	private Panel_configuracion panel_configuracion = new Panel_configuracion();
 	private Configuracion miConfiguracion;
 	private JButton btnActivarPanel;
+	private Fiduciales fiduciales = new Fiduciales();
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		TuioSimulator simulador = new TuioSimulator();
@@ -85,7 +87,7 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 			panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY());
 			
 		}else {
-			if((tobj.getSymbolID()>=0)&&(tobj.getSymbolID()<=8)) {
+			if((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8])) {
 				panel_configuracion.setVisible(false);
 				mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID());
 			}

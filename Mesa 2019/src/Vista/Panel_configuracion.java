@@ -7,13 +7,14 @@ import java.util.Iterator;
 
 import javax.swing.JPanel;
 
-import Modelo.Configuracion;
+import Modelo.*;
 
 
 public class Panel_configuracion extends JPanel {
 	private Imagenes imgGral = new Imagenes();
 	private int x,y,num_img_de_configuracion,imgActual;
 	private Configuracion miConfiguracion;
+	private Fiduciales fiduciales;
 	
 	public Panel_configuracion(){
 		setBackground(Color.PINK);
@@ -43,21 +44,21 @@ public class Panel_configuracion extends JPanel {
 		super.paintComponent(g);
 		
 		
-		if(num_img_de_configuracion==9) { // 9 es el id de la regla
+		if(num_img_de_configuracion == fiduciales.getIdMarcador()[9]) { // 9 es el id de la regla
 			miConfiguracion.getConfig_Regla()[1]=x;
 			miConfiguracion.getConfig_Regla()[2]=y;
 			g.drawImage(imgGral.getImagen_config()[0], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+500) , (miConfiguracion.getConfig_Regla()[2] + 700), 0, 0, 512, 768, null);
 			imgActual=0; //posicion de la regla en el vector
 		}
 		else {
-			if (num_img_de_configuracion==10) { //10 es el id de las tranparencias
+			if (num_img_de_configuracion== fiduciales.getIdMarcador()[10]) { //10 es el id de las tranparencias
 				miConfiguracion.getConfig_Transparencia()[1]=x;
 				miConfiguracion.getConfig_Transparencia()[2]=y;
 				g.drawImage(imgGral.getImagen_config()[1], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+500) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 700), 0, 0, 512, 768, null);
 				imgActual=1; //posicion de la herramienta de transparencia en el vector
 			} 
 			else {
-				if (num_img_de_configuracion==11) { //10 es el id del selector de fondos
+				if (num_img_de_configuracion== fiduciales.getIdMarcador()[11]) { //11 es el id del selector de fondos
 					miConfiguracion.getConfig_Fondo()[1]=x;
 					miConfiguracion.getConfig_Fondo()[2]=y;
 					g.drawImage(imgGral.getImagen_config()[1], (int)miConfiguracion.getConfig_Fondo()[1], (int)miConfiguracion.getConfig_Fondo()[2], (int)(miConfiguracion.getConfig_Fondo()[1]+500) , (int)(miConfiguracion.getConfig_Fondo()[2] + 700), 0, 0, 512, 768, null);

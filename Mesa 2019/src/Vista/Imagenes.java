@@ -4,19 +4,18 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 public class Imagenes {
 	private BufferedImage[] image=new BufferedImage[9] ;
 	private BufferedImage[] imagen_config=new BufferedImage[6];
 	
 	
-	private String [] rutaSellos= {"src/Imagenes/Objetos-01.png", //0- mamushka
+	private String [] rutaSellos= {"src/Imagenes/Objetos-01.png", //0- Mamushka
 			"src/Imagenes/Objetos-02.png",  //1- Pelota 
-			"src/Imagenes/Objetos-03.png",  //2- Concha
-			"src/Imagenes/Objetos-04.png",  //3- ???
-			"src/Imagenes/Objetos-05.png",  //4- Caracol
-			"src/Imagenes/Objetos-06.png",  //5- Rosa
+			"src/Imagenes/Objetos-03.png",  //2- Caracol1
+			"src/Imagenes/Objetos-04.png",  //3- Caracol2
+			"src/Imagenes/Objetos-05.png",  //4- Caracol3
+			"src/Imagenes/Objetos-06.png",  //5- Flor rosa
 			"src/Imagenes/Objetos-07.png",  //6- Flor amarilla
 			"src/Imagenes/Objetos-08.png",  //7- Flor roja
 			"src/Imagenes/Objetos-09.png",};  //8- Flor blanca
