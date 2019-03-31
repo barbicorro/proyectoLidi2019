@@ -32,7 +32,7 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	private JButton btnActivarPanel;
 	private Fiduciales fiduciales = new Fiduciales();
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) {   
 		// TODO Auto-generated method stub
 		TuioSimulator simulador = new TuioSimulator();
 		File archconfig = new File("config.xml");
@@ -87,7 +87,7 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 			panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY());
 			
 		}else {
-			if((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8])) {
+			if(((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()>=fiduciales.getIdMarcador()[12])) {
 				panel_configuracion.setVisible(false);
 				mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID());
 			}

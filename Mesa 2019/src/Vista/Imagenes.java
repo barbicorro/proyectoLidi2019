@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 public class Imagenes {
 	private BufferedImage[] image=new BufferedImage[9] ;
 	private BufferedImage[] imagen_config=new BufferedImage[6];
+	private BufferedImage[] imagen_gomas=new BufferedImage[5];
 	
 	
 	private String [] rutaSellos= {"src/Imagenes/Objetos-01.png", //0- Mamushka
@@ -28,11 +29,17 @@ public class Imagenes {
 			"src/Imagenes/Circulo-cromatico.png",  							//5
 			"src/Imagenes/Texturas.png",};  								//6
 	
-	
+	private String [] rutaGomas= {"src/Imagenes/cuadradoblanco.png", //0
+			"src/Imagenes/cuadradorojo.png",						 //1
+			"src/Imagenes/cuadradoazul.png",						 //2
+			"src/Imagenes/cuadradoverde.png",						 //3
+			"src/Imagenes/cuadradoamarillo.png",};					 //4
 	
 	public Imagenes()  {
 		cargaImagenes();
 		cargarImagenesConfiguracion();
+		cargarImagenesGomas();
+		
 	}
 	public void cargaImagenes()  {
 		try {
@@ -55,10 +62,25 @@ public class Imagenes {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+	}
+	public void cargarImagenesGomas()  {
+		try {
+				for(int i=0; i<imagen_gomas.length; i++) {
+					imagen_gomas[i]=ImageIO.read(new File(rutaGomas[i]));
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
 	}
 
+	public BufferedImage getImagen_gomas(int i) {
+		return imagen_gomas[i];
+	}
+	public void setImagen_gomas(BufferedImage[] imagen_gomas) {
+		this.imagen_gomas = imagen_gomas;
+	}
 	public BufferedImage[] getImagen_config() {
 		return imagen_config;
 	}

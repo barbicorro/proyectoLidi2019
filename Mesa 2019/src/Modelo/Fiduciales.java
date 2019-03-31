@@ -1,7 +1,7 @@
 package Modelo;
 
 public class Fiduciales {
-	private static int [] idMarcador= new int[12];
+	private static int [] idMarcador= new int[13];
 
 	public Fiduciales () {
 		//version para simular
@@ -17,6 +17,7 @@ public class Fiduciales {
 		idMarcador[9] = 9;   //Regla
 		idMarcador[10] = 10; //Transparencias
 		idMarcador[11] = 11; //Selector de fondos
+		idMarcador[12] = 12; //Goma
 		
 		//version para la mesa
 		/*
@@ -31,7 +32,8 @@ public class Fiduciales {
 		idMarcador[8] = 116;   //Flor blanca
 		idMarcador[9] = 117;   //Regla
 		idMarcador[10] = 118;  //Transparencias
-		idMarcador[11] = 119;  //Selector de fondos */
+		idMarcador[11] = 119;  //Selector de fondos
+		idMarcador[12] = 120;  //Goma */
 	}
 	
 	public static int[] getIdMarcador() {
