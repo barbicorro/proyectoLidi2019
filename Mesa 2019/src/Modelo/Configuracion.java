@@ -1,10 +1,25 @@
 package Modelo;
 
+import java.util.ArrayList;
+
 public class Configuracion { //Esta clase deberia ser estatica? definir correctamente que vamos hacer ac�
 	
 	private static int[] config_Regla= {190,0,0};   //0-Nivel de zoom       1-eje x      2-eje y
 	private static float[] config_Transparencia = {1,0,0}; //0-Nivel de opacidad   1-eje x   2-eje y
 	private static int [] config_Fondo= {0,0,0};
+	private static boolean mural_activado=true;
+
+	public static boolean isMural_activado() {
+		return mural_activado;
+	}
+
+
+
+	public static void setMural_activado(boolean mural_activado) {
+		Configuracion.mural_activado = mural_activado;
+	}
+
+
 
 	public Configuracion()  {
 
@@ -43,6 +58,7 @@ public class Configuracion { //Esta clase deberia ser estatica? definir correcta
 	public static void setConfig_Fondo(int[] config_Fondo) {
 		Configuracion.config_Fondo = config_Fondo;
 	}
+
 
 
 

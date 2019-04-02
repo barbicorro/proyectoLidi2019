@@ -9,6 +9,7 @@ public class Imagenes {
 	private BufferedImage[] image=new BufferedImage[9] ;
 	private BufferedImage[] imagen_config=new BufferedImage[6];
 	private BufferedImage[] imagen_gomas=new BufferedImage[5];
+	private BufferedImage fondo;
 	
 	
 	private String [] rutaSellos= {"src/Imagenes/Objetos-01.png", //0- Mamushka
@@ -35,11 +36,20 @@ public class Imagenes {
 			"src/Imagenes/cuadradoverde.png",						 //3
 			"src/Imagenes/cuadradoamarillo.png",};					 //4
 	
+	private String rutaFondo= "src/Imagenes/fondo_config.png";
+	
 	public Imagenes()  {
 		cargaImagenes();
 		cargarImagenesConfiguracion();
 		cargarImagenesGomas();
+		cargarFondo();
 		
+	}
+	public BufferedImage getFondo() {
+		return fondo;
+	}
+	public void setFondo(BufferedImage fondo) {
+		this.fondo = fondo;
 	}
 	public void cargaImagenes()  {
 		try {
@@ -73,6 +83,15 @@ public class Imagenes {
 				e.printStackTrace();
 			}
 		
+	}
+	
+	public void cargarFondo() {
+		try {
+			fondo=ImageIO.read(new File(rutaFondo));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public BufferedImage getImagen_gomas(int i) {

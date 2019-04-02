@@ -19,7 +19,7 @@ public class Fiduciales {
 		idMarcador[11] = 11; //Selector de fondos
 		idMarcador[12] = 12; //Goma
 		
-		//version para la mesa
+		//version para la mesa        ---->Poner -108 en linea 84 mural
 		/*
 		idMarcador[0] = 108;   //Mamushka
 		idMarcador[1] = 109;   //Pelota

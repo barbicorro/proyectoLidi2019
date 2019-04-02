@@ -1,7 +1,9 @@
 package Vista;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -15,15 +17,14 @@ public class Panel_configuracion extends JPanel {
 	private int x,y,num_img_de_configuracion,imgActual;
 	private Configuracion miConfiguracion;
 	private Fiduciales fiduciales;
-	
+	private int actualizando;
 	public Panel_configuracion(){
-		setBackground(Color.PINK);
+		//setBackground(Color.PINK);
 		setBounds(512, 0, 512, 768);
 		
 	}
 	
 	public void actualizar(int id, double x, double y ) {
-		x=x-0.5;
 		
 		this.x=(int) (x*1024);
 		this.y=(int) (y*768);
@@ -32,23 +33,36 @@ public class Panel_configuracion extends JPanel {
 	}
 	
 	public void dibujar_punto(double x, double y) {
-		x=x-0.5;
 		
 		this.x=(int) (x*1024);
 		this.y=(int) (y*768);
 		this.num_img_de_configuracion=666; //ID del punto es 666 
-		repaint();
+		
+		
+		repaint();//----->Entra al repaint() antes de asignarle el numero de configuracion... De todas formas no vamos a utilizar el punto en la mesa
+		
 	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		Graphics2D g2d = (Graphics2D)g;
 		
+		g.drawImage(imgGral.getFondo(), 0, 0,null);
+		if((num_img_de_configuracion >= fiduciales.getIdMarcador()[0])&&(num_img_de_configuracion <= fiduciales.getIdMarcador()[8])) {
+			
+			AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,miConfiguracion.getConfig_Transparencia()[0]);
+	        g2d.setComposite(alcom);
+			g2d.drawImage(imgGral.getImage(num_img_de_configuracion), this.x-150, this.y-150, (this.x + miConfiguracion.getConfig_Regla()[0]-150), (this.y + miConfiguracion.getConfig_Regla()[0]-150), 0, 0, 744, 768, null);
+		}
+
 		
 		if(num_img_de_configuracion == fiduciales.getIdMarcador()[9]) { // 9 es el id de la regla
 			miConfiguracion.getConfig_Regla()[1]=x;
 			miConfiguracion.getConfig_Regla()[2]=y;
 			g.drawImage(imgGral.getImagen_config()[0], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+500) , (miConfiguracion.getConfig_Regla()[2] + 700), 0, 0, 512, 768, null);
 			imgActual=0; //posicion de la regla en el vector
+
+
 		}
 		else {
 			if (num_img_de_configuracion== fiduciales.getIdMarcador()[10]) { //10 es el id de las tranparencias
@@ -71,6 +85,7 @@ public class Panel_configuracion extends JPanel {
 			if(((x-miConfiguracion.getConfig_Regla()[1])<90)&&((y-miConfiguracion.getConfig_Regla()[2])<86)){ //Hizo click en el nivel 1. 
 				System.out.println("Nivel 1");
 				miConfiguracion.getConfig_Regla()[0]=50;
+
 			}else {
 				if(((x-miConfiguracion.getConfig_Regla()[1])<90)&&(((y-miConfiguracion.getConfig_Regla()[2])>90)&&(y-miConfiguracion.getConfig_Regla()[2])<185)){
 					System.out.println("Nivel 2");
@@ -137,7 +152,7 @@ public class Panel_configuracion extends JPanel {
 		}
 
 		if(num_img_de_configuracion==666) { //solo lo utilizo para configurar algunas cosas no se usa en el juego final. O SI?
-			g.drawImage(imgGral.getImage(1), x, y, (x+25), (y+25), 0, 0, 512, 768, null);
+			g.drawImage(imgGral.getImage(1), x, y, (x+25), (y+25), 0, 0, 1024, 768, null);
 			
 		}
 	}

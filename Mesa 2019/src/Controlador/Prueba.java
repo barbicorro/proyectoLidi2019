@@ -31,7 +31,8 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	private Configuracion miConfiguracion;
 	private JButton btnActivarPanel;
 	private Fiduciales fiduciales = new Fiduciales();
-	
+	private final JButton btnDesactivarPanel = new JButton("Desactivar Panel");
+
 	public static void main(String[] args) {   
 		// TODO Auto-generated method stub
 		TuioSimulator simulador = new TuioSimulator();
@@ -52,6 +53,8 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
+		panel_configuracion.setSize(1024, 768);
+		panel_configuracion.setLocation(0, 0);
 		getContentPane().add(panel_configuracion);
 		getContentPane().add(mural);
 		
@@ -60,6 +63,20 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 		mural.add(btnActivarPanel);
 		btnActivarPanel.addActionListener(this);
 		panel_configuracion.setVisible(false);
+		panel_configuracion.setOpaque(false);
+		btnDesactivarPanel.setVisible(false);
+		btnDesactivarPanel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(arg0.getSource()==btnDesactivarPanel) {
+					panel_configuracion.setVisible(false);
+					btnDesactivarPanel.setVisible(false);
+					btnActivarPanel.setVisible(true);
+					miConfiguracion.setMural_activado(true);
+				}
+			}
+		});
+		
+		panel_configuracion.add(btnDesactivarPanel);
 		
 		
 	}
@@ -72,7 +89,7 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	public void addTuioObject(TuioObject tobj) { 
 		// TODO Auto-generated method stub
 		//System.out.println(tobj.getSymbolID());      
-		if((tobj.getX()>0.5)&&(panel_configuracion.isVisible())) {
+		if(panel_configuracion.isVisible()) {
 			panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY());
 		}
 		//Falta un tratamiento para aquellos fiducial que no se reconozcan(que no esten dentro del vector de imagenes)
@@ -83,12 +100,11 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	// Se llama cuando un objeto fue movido(arrastrado) sobre la superficie de la mesa
 	public void updateTuioObject(TuioObject tobj) {
 		// TODO Auto-generated method stub
-		if((tobj.getX()>0.5)&&(panel_configuracion.isVisible())) {
+		if((panel_configuracion.isVisible())) {	
 			panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY());
 			
 		}else {
 			if(((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()>=fiduciales.getIdMarcador()[12])) {
-				panel_configuracion.setVisible(false);
 				mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID());
 			}
 		}
@@ -110,7 +126,7 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	public void addTuioCursor(TuioCursor tcur) {
 		// TODO Auto-generated method stub
 	
-		if((tcur.getX()>0.5)&&(panel_configuracion.isVisible())) {
+		if(panel_configuracion.isVisible()) {
 			//panel_configuracion.actualizar(666, tcur.getX(), tcur.getY());
 			panel_configuracion.dibujar_punto(tcur.getX(), tcur.getY());
 		}
@@ -161,8 +177,11 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getSource()==btnActivarPanel) {
+			miConfiguracion.setMural_activado(false);
+
 			panel_configuracion.setVisible(true);
-			
+			btnActivarPanel.setVisible(false);
+			btnDesactivarPanel.setVisible(true);
 		}
 		
 	}

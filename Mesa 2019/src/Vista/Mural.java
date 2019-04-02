@@ -43,7 +43,6 @@ public class Mural extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D)g; //Lo casteamos para poder usar "alphaComposite"
-		
 		int color = miConfiguracion.getConfig_Fondo()[0];
 		if (actualBackground != color) {
 			switch(color) {
@@ -79,22 +78,26 @@ public class Mural extends JPanel {
 				while(listaIterada.hasNext()) {
 					info_en_el_tiempo=listaIterada.next();
 					AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,info_en_el_tiempo[5]);
-			        g2d.setComposite(alcom);
-					if (info_en_el_tiempo[0]!=12)
+					g2d.setComposite(alcom);
+					if (info_en_el_tiempo[0]!=12) {
 						g2d.drawImage(imgGral.getImage((int)info_en_el_tiempo[0]), (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
-					else
+					}else
 						g2d.drawImage(imgGral.getImagen_gomas(actualBackground), (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
-						
+
 				}
+
 			}
-
-			float [] info_en_el_tiempo= {num_img,this.x,this.y, (this.x + miConfiguracion.getConfig_Regla()[0]), (this.y + miConfiguracion.getConfig_Regla()[0]), miConfiguracion.getConfig_Transparencia()[0] };
-
-			lista.add(info_en_el_tiempo);
-
+			if(miConfiguracion.isMural_activado()) {
+				System.out.println("Asd");
+				float [] info_en_el_tiempo= {num_img,this.x-150,this.y-150, (this.x + miConfiguracion.getConfig_Regla()[0]-150), (this.y + miConfiguracion.getConfig_Regla()[0]-150), miConfiguracion.getConfig_Transparencia()[0] };
+				lista.add(info_en_el_tiempo);
+			}
+			
 	
 		}
 		
 	}
+	
+	
 	 
 }
