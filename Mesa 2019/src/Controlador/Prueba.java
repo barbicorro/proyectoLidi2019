@@ -105,7 +105,7 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 			
 		}else {
 			if(((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()>=fiduciales.getIdMarcador()[12])) {
-				mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID());
+				mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees());
 			}
 		}
 			
