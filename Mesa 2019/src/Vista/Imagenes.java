@@ -9,6 +9,7 @@ public class Imagenes {
 	private BufferedImage[] image=new BufferedImage[9] ;
 	private BufferedImage[] imagen_config=new BufferedImage[13];
 	private BufferedImage[] imagen_gomas=new BufferedImage[5];
+	private BufferedImage[] imagen_lapiz=new BufferedImage[7];
 	private BufferedImage fondo;
 	
 	
@@ -42,12 +43,21 @@ public class Imagenes {
 			"src/Imagenes/cuadradoverde.png",						 //3
 			"src/Imagenes/cuadradoamarillo.png",};					 //4
 	
+	private String [] rutaLapiz= {"src/Imagenes/CirculoBlanco.png", //0
+			"src/Imagenes/CirculoRojo.png",							//1
+			"src/Imagenes/CirculoMagenta.png",						//2
+			"src/Imagenes/CirculoAzul.png",							//3
+			"src/Imagenes/CirculoCian.png",							//4
+			"src/Imagenes/CirculoVerde.png",						//5
+			"src/Imagenes/CirculoAmarillo.png",};					//6
+	
 	private String rutaFondo= "src/Imagenes/fondo_config.png";
 	
 	public Imagenes()  {
 		cargaImagenes();
 		cargarImagenesConfiguracion();
 		cargarImagenesGomas();
+		cargarImagenesLapiz();
 		cargarFondo();
 		
 	}
@@ -63,7 +73,6 @@ public class Imagenes {
 				image[i]=ImageIO.read(new File(rutaSellos[i]));
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -75,7 +84,6 @@ public class Imagenes {
 				imagen_config[i]=ImageIO.read(new File(rutaObjetosConfiguracion[i]));
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -85,7 +93,17 @@ public class Imagenes {
 					imagen_gomas[i]=ImageIO.read(new File(rutaGomas[i]));
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+	}
+	
+	public void cargarImagenesLapiz()  {
+		try {
+				for(int i=0; i<imagen_lapiz.length; i++) {
+					imagen_lapiz[i]=ImageIO.read(new File(rutaLapiz[i]));
+				}
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		
@@ -95,7 +113,6 @@ public class Imagenes {
 		try {
 			fondo=ImageIO.read(new File(rutaFondo));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -106,12 +123,21 @@ public class Imagenes {
 	public void setImagen_gomas(BufferedImage[] imagen_gomas) {
 		this.imagen_gomas = imagen_gomas;
 	}
+	
+	public BufferedImage getImagen_lapiz(int i) {
+		return imagen_lapiz[i];
+	}
+	public void setImagen_lapiz(BufferedImage[] imagen_lapiz) {
+		this.imagen_lapiz = imagen_lapiz;
+	}
+	
 	public BufferedImage[] getImagen_config() {
 		return imagen_config;
 	}
 	public void setImagen_config(BufferedImage[] imagen_config) {
 		this.imagen_config = imagen_config;
 	}
+	
 	public BufferedImage getImage(int i) {
 		return image[i];
 	}
