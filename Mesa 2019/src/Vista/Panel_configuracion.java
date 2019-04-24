@@ -15,7 +15,7 @@ import java.lang.Math.*;
 
 public class Panel_configuracion extends JPanel {
 	private Imagenes imgGral = new Imagenes();
-	private int x,y,num_img_de_configuracion,imgActual;
+	private int x,y,num_img_de_configuracion,imgActual,nivelActRegla=0,nivelActTrans=6;
 	private double anguloGrados=0;
 	private Configuracion miConfiguracion;
 	private Fiduciales fiduciales;
@@ -51,87 +51,104 @@ public class Panel_configuracion extends JPanel {
 		Graphics2D g2d = (Graphics2D)g;
 		
 		g.drawImage(imgGral.getFondo(), 0, 0,null);
-		
-		if((num_img_de_configuracion >= fiduciales.getIdMarcador()[0])&&(num_img_de_configuracion <= fiduciales.getIdMarcador()[8])) {
-			
-			AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,miConfiguracion.getConfig_Transparencia()[0]);
-	        g2d.setComposite(alcom);
-			g2d.drawImage(imgGral.getImage(num_img_de_configuracion), this.x-150, this.y-150, (this.x + miConfiguracion.getConfig_Regla()[0]-150), (this.y + miConfiguracion.getConfig_Regla()[0]-150), 0, 0, 744, 768, null);
-		}
+		AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,miConfiguracion.getConfig_Transparencia()[0]);
+        g2d.setComposite(alcom);
+       // g2d.drawImage(imgGral.getImage(0), 0, 0, (0 + miConfiguracion.getConfig_Regla()[0]), (0 + miConfiguracion.getConfig_Regla()[0]), 0, 0, 1024, 768, null);
 
 		if(num_img_de_configuracion == fiduciales.getIdMarcador()[9]) { // 9 es el id de la regla
 			miConfiguracion.setConfig_Regla(x,y);
-			g.drawImage(imgGral.getImagen_config()[0], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+500) , (miConfiguracion.getConfig_Regla()[2] + 700), 0, 0, 512, 768, null);
+			g.drawImage(imgGral.getImagen_config()[nivelActRegla], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+600) , (miConfiguracion.getConfig_Regla()[2] + 300), 0, 0, 1024, 768, null);
 			imgActual=0; //posicion de la regla en el vector
 		}
 		else {
 			if (num_img_de_configuracion== fiduciales.getIdMarcador()[10]) { //10 es el id de las tranparencias
 				miConfiguracion.setConfig_Transparencia(x,y);
-				g.drawImage(imgGral.getImagen_config()[1], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+500) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 700), 0, 0, 512, 768, null);
+				g.drawImage(imgGral.getImagen_config()[nivelActTrans], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+600) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 300), 0, 0, 1024, 768, null);
 				imgActual=1; //posicion de la herramienta de transparencia en el vector
 			} 
 			else {
 				if (num_img_de_configuracion== fiduciales.getIdMarcador()[11]) { //11 es el id del selector de fondos
 					miConfiguracion.setConfig_Fondo(x, y);
-					g.drawImage(imgGral.getImagen_config()[1], (int)miConfiguracion.getConfig_Fondo()[1], (int)miConfiguracion.getConfig_Fondo()[2], (int)(miConfiguracion.getConfig_Fondo()[1]+500) , (int)(miConfiguracion.getConfig_Fondo()[2] + 700), 0, 0, 512, 768, null);
+					g.drawImage(imgGral.getImagen_config()[8], (int)miConfiguracion.getConfig_Fondo()[1], (int)miConfiguracion.getConfig_Fondo()[2], (int)(miConfiguracion.getConfig_Fondo()[1]+500) , (int)(miConfiguracion.getConfig_Fondo()[2] + 700), 0, 0, 512, 768, null);
 					imgActual=2; //posicion de la herramienta de fondos en el vector
 				}
 				else {
 					if (num_img_de_configuracion== fiduciales.getIdMarcador()[13]) { //13 es el id del circulo cromatico
 						miConfiguracion.setConfig_Colores(x, y);
-						g.drawImage(imgGral.getImagen_config()[miConfiguracion.getConfig_Colores()[0]+5], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
-						imgActual= miConfiguracion.getConfig_Colores()[0]+5; //posicion del color seleccionado en el vector de imagenes
+						g.drawImage(imgGral.getImagen_config()[miConfiguracion.getConfig_Colores()[0]+11], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
+						imgActual= miConfiguracion.getConfig_Colores()[0]+11; //posicion del color seleccionado en el vector de imagenes
 						
 					}
 				}
 			}
 		}
 		if((imgActual==0)&&(num_img_de_configuracion==666)){
-			g.drawImage(imgGral.getImagen_config()[imgActual], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+500) , (miConfiguracion.getConfig_Regla()[2] + 700), 0, 0, 512, 768, null);
-			if(((x-miConfiguracion.getConfig_Regla()[1])<90)&&((y-miConfiguracion.getConfig_Regla()[2])<86)){ //Hizo click en el nivel 1. 
+			g.drawImage(imgGral.getImagen_config()[nivelActRegla], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+600) , (miConfiguracion.getConfig_Regla()[2] + 300), 0, 0, 1024, 768, null);
+			if(((x-miConfiguracion.getConfig_Regla()[1])<104)&&((x-miConfiguracion.getConfig_Regla()[1])>0)&&(((y-miConfiguracion.getConfig_Regla()[2])<64)&&(y-miConfiguracion.getConfig_Regla()[2])>0)){ //Hizo click en el nivel 1. 
+				nivelActRegla=3;
 				System.out.println("Nivel 1");
-				miConfiguracion.setConfig_ReglaNivel(50);
+				miConfiguracion.getConfig_Regla()[0]=50;
 
 			}else {
-				if(((x-miConfiguracion.getConfig_Regla()[1])<90)&&(((y-miConfiguracion.getConfig_Regla()[2])>90)&&(y-miConfiguracion.getConfig_Regla()[2])<185)){
+				if(((x-miConfiguracion.getConfig_Regla()[1])<213)&&((x-miConfiguracion.getConfig_Regla()[1])>104)&&(((y-miConfiguracion.getConfig_Regla()[2])<64)&&(y-miConfiguracion.getConfig_Regla()[2])>0)){ //Hizo click en el nivel 1. 
+					nivelActRegla=1;
 					System.out.println("Nivel 2");
-					miConfiguracion.setConfig_ReglaNivel(100);
+					miConfiguracion.getConfig_Regla()[0]=100;
 				}else
-					if(((x-miConfiguracion.getConfig_Regla()[1])<90)&&(((y-miConfiguracion.getConfig_Regla()[2])>185)&&(y-miConfiguracion.getConfig_Regla()[2])<280)){
+					if(((x-miConfiguracion.getConfig_Regla()[1])<322)&&((x-miConfiguracion.getConfig_Regla()[1])>213)&&(((y-miConfiguracion.getConfig_Regla()[2])<64)&&(y-miConfiguracion.getConfig_Regla()[2])>0)){ //Hizo click en el nivel 1. 
+						nivelActRegla=0;
 						System.out.println("Nivel 3");
-						miConfiguracion.setConfig_ReglaNivel(190);
+						miConfiguracion.getConfig_Regla()[0]=190;
 					}else
-						if(((x-miConfiguracion.getConfig_Regla()[1])<90)&&(((y-miConfiguracion.getConfig_Regla()[2])>280)&&(y-miConfiguracion.getConfig_Regla()[2])<375)){
+						if(((x-miConfiguracion.getConfig_Regla()[1])<432)&&((x-miConfiguracion.getConfig_Regla()[1])>322)&&(((y-miConfiguracion.getConfig_Regla()[2])<64)&&(y-miConfiguracion.getConfig_Regla()[2])>0)){ //Hizo click en el nivel 1. 	
+							nivelActRegla=2;
 							System.out.println("Nivel 4");
-							miConfiguracion.setConfig_ReglaNivel(250);
+							miConfiguracion.getConfig_Regla()[0]=250;
 					}else
-						if(((x-miConfiguracion.getConfig_Regla()[1])<90)&&(((y-miConfiguracion.getConfig_Regla()[2])>375)&&(y-miConfiguracion.getConfig_Regla()[2])<470)){
+						if(((x-miConfiguracion.getConfig_Regla()[1])<542)&&((x-miConfiguracion.getConfig_Regla()[1])>432)&&(((y-miConfiguracion.getConfig_Regla()[2])<64)&&(y-miConfiguracion.getConfig_Regla()[2])>0)){ //Hizo click en el nivel 1. 
+							nivelActRegla=4;
 							System.out.println("Nivel 5");
-							miConfiguracion.setConfig_ReglaNivel(400);
+							miConfiguracion.getConfig_Regla()[0]=400;
 						}
 			
 					}
+			g.drawImage(imgGral.getImagen_config()[nivelActRegla], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+600) , (miConfiguracion.getConfig_Regla()[2] + 300), 0, 0, 1024, 768, null);
+
+			//g2d.drawImage(imgGral.getImage(0), 0, 0, (0 + miConfiguracion.getConfig_Regla()[0]), (0 + miConfiguracion.getConfig_Regla()[0]), 0, 0, 744, 768, null);
 		}
 		else {
 			if((imgActual==1)&&(num_img_de_configuracion==666)){
-				g.drawImage(imgGral.getImagen_config()[imgActual], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+500) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 700), 0, 0, 512, 768, null);
-				if(((x-miConfiguracion.getConfig_Transparencia()[1])<90)&&((y-miConfiguracion.getConfig_Transparencia()[2])<86)){ //Hizo click en el nivel 1. 
+		       // g2d.drawImage(imgGral.getImage(0), 0, 0, (0 + miConfiguracion.getConfig_Regla()[0]), (0 + miConfiguracion.getConfig_Regla()[0]), 0, 0, 1024, 768, null);
+				g.drawImage(imgGral.getImagen_config()[nivelActTrans], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+600) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 300), 0, 0, 1024, 768, null);
+
+		        if(((x-miConfiguracion.getConfig_Transparencia()[1])<104)&&((x-miConfiguracion.getConfig_Transparencia()[1])>0)&&(((y-miConfiguracion.getConfig_Transparencia()[2])<64)&&(y-miConfiguracion.getConfig_Transparencia()[2])>0)){ //Hizo click en el nivel 1. 
 					System.out.println("Nivel 1");
-					miConfiguracion.setConfig_TransparenciaNivel(1f);
+					nivelActTrans=7;
+					miConfiguracion.getConfig_Transparencia()[0]=0.1f;
+
+
 				}else {
-					if(((x-miConfiguracion.getConfig_Transparencia()[1])<90)&&(((y-miConfiguracion.getConfig_Transparencia()[2])>90)&&(y-miConfiguracion.getConfig_Transparencia()[2])<185)){
+					if(((x-miConfiguracion.getConfig_Transparencia()[1])>104)&&((x-miConfiguracion.getConfig_Transparencia()[1])<212)&&(((y-miConfiguracion.getConfig_Transparencia()[2])<64)&&(y-miConfiguracion.getConfig_Transparencia()[2])>0)) {
 						System.out.println("Nivel 2");
-						miConfiguracion.setConfig_TransparenciaNivel(0.5f);
+						nivelActTrans=5;
+						miConfiguracion.getConfig_Transparencia()[0]=0.5f;
+
+
 					}else
-						if(((x-miConfiguracion.getConfig_Transparencia()[1])<90)&&(((y-miConfiguracion.getConfig_Transparencia()[2])>185)&&(y-miConfiguracion.getConfig_Transparencia()[2])<280)){
+						if(((x-miConfiguracion.getConfig_Transparencia()[1])>212)&&((x-miConfiguracion.getConfig_Transparencia()[1])<321)&&(((y-miConfiguracion.getConfig_Transparencia()[2])<64)&&(y-miConfiguracion.getConfig_Transparencia()[2])>0)) {
 							System.out.println("Nivel 3");
-							miConfiguracion.setConfig_TransparenciaNivel(0.1f);
+							nivelActTrans=6;
+							miConfiguracion.getConfig_Transparencia()[0]=1f;
+
+
 						}
 				}
+				g.drawImage(imgGral.getImagen_config()[nivelActTrans], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+600) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 300), 0, 0, 1024, 768, null);
+
 			}
 			else {
 				if((imgActual==2)&&(num_img_de_configuracion==666)){
-					g.drawImage(imgGral.getImagen_config()[imgActual], (int)miConfiguracion.getConfig_Fondo()[1], (int)miConfiguracion.getConfig_Fondo()[2], (int)(miConfiguracion.getConfig_Fondo()[1]+500) , (int)(miConfiguracion.getConfig_Fondo()[2] + 700), 0, 0, 512, 768, null);
+					g.drawImage(imgGral.getImagen_config()[8], (int)miConfiguracion.getConfig_Fondo()[1], (int)miConfiguracion.getConfig_Fondo()[2], (int)(miConfiguracion.getConfig_Fondo()[1]+500) , (int)(miConfiguracion.getConfig_Fondo()[2] + 700), 0, 0, 512, 768, null);
 					if(((x-miConfiguracion.getConfig_Fondo()[1])<90)&&((y-miConfiguracion.getConfig_Fondo()[2])<86)){ //Hizo click en el nivel 1. 
 						System.out.println("Nivel 1");
 						miConfiguracion.setConfig_FondoNivel(0); //blanco
@@ -154,7 +171,8 @@ public class Panel_configuracion extends JPanel {
 									}
 					}
 				} else {
-					if((imgActual>=5)&&(imgActual<=11)){
+					if((imgActual>=11)&&(imgActual<=17)){
+						System.out.println(imgActual);
 						if (((anguloGrados>325) && (anguloGrados<=360)) || ((anguloGrados>=0)&&(anguloGrados<25))){
 							System.out.println("Blanco");
 							miConfiguracion.setConfig_ColoresNivel(0);
@@ -193,6 +211,7 @@ public class Panel_configuracion extends JPanel {
 				}
 			}
 		}
+        g2d.drawImage(imgGral.getImage(0), 0, 0, (0 + miConfiguracion.getConfig_Regla()[0]), (0 + miConfiguracion.getConfig_Regla()[0]), 0, 0, 744, 768, null);
 
 		if(num_img_de_configuracion==666) { //solo lo utilizo para configurar algunas cosas no se usa en el juego final. O SI?
 			g.drawImage(imgGral.getImage(1), x, y, (x+25), (y+25), 0, 0, 1024, 768, null);
