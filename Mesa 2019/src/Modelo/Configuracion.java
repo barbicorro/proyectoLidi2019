@@ -8,6 +8,7 @@ public class Configuracion { //Esta clase deberia ser estatica? definir correcta
 	private static float[] config_Transparencia = {1,0,0}; //0-Nivel de opacidad   1-eje x   2-eje y
 	private static int [] config_Fondo= {0,0,0};
 	private static int [] config_Colores= {0,0,0}; //0-Color     1-eje x      2-eje y
+	private static boolean cambioConfig;
 
 	private static boolean mural_activado=true;
 
@@ -24,7 +25,7 @@ public class Configuracion { //Esta clase deberia ser estatica? definir correcta
 
 
 	public Configuracion()  {
-
+		cambioConfig = false;
 	}
 
 
@@ -42,6 +43,7 @@ public class Configuracion { //Esta clase deberia ser estatica? definir correcta
 	
 	public static void setConfig_ReglaNivel(int nivel) {
 		Configuracion.config_Regla[0] = nivel;
+		cambioConfig = true;
 	}
 	
 	
@@ -59,6 +61,7 @@ public class Configuracion { //Esta clase deberia ser estatica? definir correcta
 	
 	public static void setConfig_TransparenciaNivel(float nivel) {
 		Configuracion.config_Transparencia[0] = nivel;
+		cambioConfig = true;
 	}
 	
 	public static int[] getConfig_Fondo() {
@@ -74,6 +77,7 @@ public class Configuracion { //Esta clase deberia ser estatica? definir correcta
 
 	public static void setConfig_FondoNivel(int nivel) {
 		Configuracion.config_Fondo[0] = nivel;
+		cambioConfig = true;
 	}
 	
 	
@@ -90,6 +94,19 @@ public class Configuracion { //Esta clase deberia ser estatica? definir correcta
 	
 	public static void setConfig_ColoresNivel(int nivel) {
 		Configuracion.config_Colores[0] = nivel;
+		cambioConfig = true;
+	}
+
+
+
+	public static boolean isCambioConfig() {
+		return cambioConfig;
+	}
+
+
+
+	public static void setCambioConfig(boolean cambioConfig) {
+		Configuracion.cambioConfig = cambioConfig;
 	}
 
 

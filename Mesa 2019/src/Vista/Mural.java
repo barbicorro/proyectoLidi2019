@@ -17,6 +17,7 @@ public class Mural extends JPanel {
 	private int y=0;
 	private double anguloRadianes=0;
 	private int num_img=-1;
+	private Panel_configuracion panel_configuracion;
 	private ArrayList<float []> lista = new ArrayList<float []>();
 	private float [] info_en_el_tiempo; // 0->numero imagen     1->coordenada x    2->coordenada y     3->ancho del rectangulo donde se va a dibujar      4-> alto del rectangulo donde se va a dibujar	5->Transparencia 6->Angulo de rotacion 7->Color
 	private Configuracion miConfiguracion;
@@ -75,9 +76,18 @@ public class Mural extends JPanel {
 		if(num_img==-1) {
 			g2d.drawImage(null, x, y, null);
 		}else {
+			if(miConfiguracion.isMural_activado() && !miConfiguracion.isCambioConfig()) {
+				float [] info_en_el_tiempo= {num_img,this.x-150,this.y-150, (this.x + miConfiguracion.getConfig_Regla()[0]-150), (this.y + miConfiguracion.getConfig_Regla()[0]-150), miConfiguracion.getConfig_Transparencia()[0], (float)this.anguloRadianes, miConfiguracion.getConfig_Colores()[0]};
+				lista.add(info_en_el_tiempo);
+				System.out.println("No cambio la configuracion");
+			} else {
+				if (miConfiguracion.isCambioConfig()) {
+					miConfiguracion.setCambioConfig(false);
+					System.out.println("Cambio la configuracion y la pase a falso");
+				}
+			}
 			if(! lista.isEmpty()) {
 				Iterator<float []> listaIterada=lista.iterator();  //iteramos el ArrayList para poder recorrerlo
-
 				while(listaIterada.hasNext()) {
 					info_en_el_tiempo=listaIterada.next();
 					AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,info_en_el_tiempo[5]);
@@ -100,18 +110,7 @@ public class Mural extends JPanel {
 					  }
 					}
 				}
-
 			}
-			if(miConfiguracion.isMural_activado()) {
-				float [] info_en_el_tiempo= {num_img,this.x-150,this.y-150, (this.x + miConfiguracion.getConfig_Regla()[0]-150), (this.y + miConfiguracion.getConfig_Regla()[0]-150), miConfiguracion.getConfig_Transparencia()[0], (float)this.anguloRadianes, miConfiguracion.getConfig_Colores()[0]};
-				lista.add(info_en_el_tiempo);
-			}
-			
-	
-		}
-		
-	}
-	
-	
-	 
+		}	
+	}	 
 }

@@ -87,11 +87,11 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	@Override
 	//Se llama cuando un objeto se hace visible
 	public void addTuioObject(TuioObject tobj) { 
-		if((panel_configuracion.isVisible())) {	
-			panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY(), tobj.getAngleDegrees());
+		if((!panel_configuracion.isVisible()) && ((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12])) {
+			mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees());
 		}else {
-			if(((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12])) {
-				mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees());
+			if((panel_configuracion.isVisible())) {	
+				panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY(), tobj.getAngleDegrees());
 			}
 		}
 	}
@@ -100,17 +100,13 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	@Override
 	// Se llama cuando un objeto fue movido(arrastrado) sobre la superficie de la mesa
 	public void updateTuioObject(TuioObject tobj) {
-		// TODO Auto-generated method stub
-		if((panel_configuracion.isVisible())) {	
-			panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY(), tobj.getAngleDegrees());
-			
+		if((!panel_configuracion.isVisible()) && ((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12])) {
+			mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees());
 		}else {
-			if(((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12])) {
-				mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees());
+			if((panel_configuracion.isVisible())) {	
+				panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY(), tobj.getAngleDegrees());
 			}
-		}
-			
-			
+		}	
 	}
 
 

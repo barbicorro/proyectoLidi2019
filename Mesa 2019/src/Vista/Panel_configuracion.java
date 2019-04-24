@@ -19,7 +19,7 @@ public class Panel_configuracion extends JPanel {
 	private double anguloGrados=0;
 	private Configuracion miConfiguracion;
 	private Fiduciales fiduciales;
-	private int actualizando;
+	
 	public Panel_configuracion(){
 		//setBackground(Color.PINK);
 		setBounds(512, 0, 512, 768);
@@ -79,43 +79,9 @@ public class Panel_configuracion extends JPanel {
 				else {
 					if (num_img_de_configuracion== fiduciales.getIdMarcador()[13]) { //13 es el id del circulo cromatico
 						miConfiguracion.setConfig_Colores(x, y);
-						switch (miConfiguracion.getConfig_Colores()[0]) {
-						  case 0:{ //blanco
-							  g.drawImage(imgGral.getImagen_config()[5], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
-							  imgActual=5; //posicion seleccionado blanco en el vector de imagenes
-							  break;
-						  }
-						  case 1:{ //rojo
-							  g.drawImage(imgGral.getImagen_config()[6], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
-							  imgActual=6; //posicion seleccionado rojo en el vector de imagenes
-							  break;
-						  }
-						  case 2:{ //fucsia
-							  g.drawImage(imgGral.getImagen_config()[7], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
-							  imgActual=7; //posicion seleccionado fucsia en el vector de imagenes
-							  break;
-						  }
-						  case 3:{ //azul
-							  g.drawImage(imgGral.getImagen_config()[8], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
-							  imgActual=8; //posicion seleccionado azul en el vector de imagenes
-							  break;
-						  }
-						  case 4:{ //celeste
-							  g.drawImage(imgGral.getImagen_config()[9], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
-							  imgActual=9; //posicion seleccionado celeste en el vector de imagenes
-							  break;
-						  }
-						  case 5:{ //verde
-							  g.drawImage(imgGral.getImagen_config()[10], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
-							  imgActual=10; //posicion seleccionado verde en el vector de imagenes
-							  break;
-						  }
-						  case 6:{ //amarillo
-							  g.drawImage(imgGral.getImagen_config()[11], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
-							  imgActual=11; //posicion seleccionado amarillo en el vector de imagenes
-							  break;
-						  }
-						}
+						g.drawImage(imgGral.getImagen_config()[miConfiguracion.getConfig_Colores()[0]+5], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
+						imgActual= miConfiguracion.getConfig_Colores()[0]+5; //posicion del color seleccionado en el vector de imagenes
+						
 					}
 				}
 			}
@@ -233,6 +199,6 @@ public class Panel_configuracion extends JPanel {
 			
 		}
 	}
-	
+
 
 }
