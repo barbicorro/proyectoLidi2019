@@ -7,6 +7,9 @@ public class Configuracion { //Esta clase deberia ser estatica? definir correcta
 	private static int[] config_Regla= {190,0,0};   //0-Nivel de zoom       1-eje x      2-eje y
 	private static float[] config_Transparencia = {1,0,0}; //0-Nivel de opacidad   1-eje x   2-eje y
 	private static int [] config_Fondo= {0,0,0};
+	private static int [] config_Colores= {0,0,0}; //0-Color     1-eje x      2-eje y
+	private static boolean cambioConfig;
+
 	private static boolean mural_activado=true;
 
 	public static boolean isMural_activado() {
@@ -22,7 +25,7 @@ public class Configuracion { //Esta clase deberia ser estatica? definir correcta
 
 
 	public Configuracion()  {
-
+		cambioConfig = false;
 	}
 
 
@@ -33,8 +36,14 @@ public class Configuracion { //Esta clase deberia ser estatica? definir correcta
 
 
 
-	public static void setConfig_Regla(int[] config_Regla) {
-		Configuracion.config_Regla = config_Regla;
+	public static void setConfig_Regla(int x,int y) {
+		Configuracion.config_Regla[1] = x;
+		Configuracion.config_Regla[2] = y;
+	}
+	
+	public static void setConfig_ReglaNivel(int nivel) {
+		Configuracion.config_Regla[0] = nivel;
+		cambioConfig = true;
 	}
 	
 	
@@ -45,8 +54,14 @@ public class Configuracion { //Esta clase deberia ser estatica? definir correcta
 
 
 
-	public static void setConfig_Transparencia(float[] config_Transparencia) {
-		Configuracion.config_Transparencia = config_Transparencia;
+	public static void setConfig_Transparencia(float x, float y) {
+		Configuracion.config_Transparencia[1] = x;
+		Configuracion.config_Transparencia[2] = y;
+	}
+	
+	public static void setConfig_TransparenciaNivel(float nivel) {
+		Configuracion.config_Transparencia[0] = nivel;
+		cambioConfig = true;
 	}
 	
 	public static int[] getConfig_Fondo() {
@@ -55,11 +70,44 @@ public class Configuracion { //Esta clase deberia ser estatica? definir correcta
 
 
 
-	public static void setConfig_Fondo(int[] config_Fondo) {
-		Configuracion.config_Fondo = config_Fondo;
+	public static void setConfig_Fondo(int x, int y) {
+		Configuracion.config_Fondo[1] = x;
+		Configuracion.config_Fondo[2] = y;
+	}
+
+	public static void setConfig_FondoNivel(int nivel) {
+		Configuracion.config_Fondo[0] = nivel;
+		cambioConfig = true;
+	}
+	
+	
+	public static int[] getConfig_Colores() {
+		return config_Colores;
 	}
 
 
+
+	public static void setConfig_Colores(int x, int y) {
+		Configuracion.config_Colores[1] = x;
+		Configuracion.config_Colores[2] = y;
+	}
+	
+	public static void setConfig_ColoresNivel(int nivel) {
+		Configuracion.config_Colores[0] = nivel;
+		cambioConfig = true;
+	}
+
+
+
+	public static boolean isCambioConfig() {
+		return cambioConfig;
+	}
+
+
+
+	public static void setCambioConfig(boolean cambioConfig) {
+		Configuracion.cambioConfig = cambioConfig;
+	}
 
 
 }

@@ -87,29 +87,26 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	@Override
 	//Se llama cuando un objeto se hace visible
 	public void addTuioObject(TuioObject tobj) { 
-		// TODO Auto-generated method stub
-		//System.out.println(tobj.getSymbolID());      
-		if(panel_configuracion.isVisible()) {
-			panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY());
+		if((!panel_configuracion.isVisible()) && ((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12])) {
+			mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees());
+		}else {
+			if((panel_configuracion.isVisible())) {	
+				panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY(), tobj.getAngleDegrees());
+			}
 		}
-		//Falta un tratamiento para aquellos fiducial que no se reconozcan(que no esten dentro del vector de imagenes)
 	}
 
 
 	@Override
 	// Se llama cuando un objeto fue movido(arrastrado) sobre la superficie de la mesa
 	public void updateTuioObject(TuioObject tobj) {
-		// TODO Auto-generated method stub
-		if((panel_configuracion.isVisible())) {	
-			panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY());
-			
+		if((!panel_configuracion.isVisible()) && ((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12])) {
+			mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees());
 		}else {
-			if(((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()>=fiduciales.getIdMarcador()[12])) {
-				mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees());
+			if((panel_configuracion.isVisible())) {	
+				panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY(), tobj.getAngleDegrees());
 			}
-		}
-			
-			
+		}	
 	}
 
 
@@ -124,18 +121,27 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	@Override
 	// Se llama cuando se detecta un nuevo objeto(puede ser un dedo o el marcador) en la mesa
 	public void addTuioCursor(TuioCursor tcur) {
-		// TODO Auto-generated method stub
-	
 		if(panel_configuracion.isVisible()) {
 			//panel_configuracion.actualizar(666, tcur.getX(), tcur.getY());
 			panel_configuracion.dibujar_punto(tcur.getX(), tcur.getY());
+		}
+		else {
+			//el cursor tiene id = 0 siempre, pero mando 99 para que no se confunda con la mamushka
+			mural.actualizar(tcur.getX(), tcur.getY(), 99, 0);
 		}
 	}
 
 
 	@Override
 	public void updateTuioCursor(TuioCursor tcur) {
-		// TODO Auto-generated method stub
+		if(panel_configuracion.isVisible()) {
+			//panel_configuracion.actualizar(666, tcur.getX(), tcur.getY());
+			panel_configuracion.dibujar_punto(tcur.getX(), tcur.getY());
+		}
+		else {
+			//el cursor tiene id = 0 siempre, pero mando 99 para que no se confunda con la mamushka
+			mural.actualizar(tcur.getX(), tcur.getY(), 99, 0);
+		}
 	}
 
 

@@ -17,8 +17,9 @@ public class Mural extends JPanel {
 	private int y=0;
 	private double anguloRadianes=0;
 	private int num_img=-1;
+	private Panel_configuracion panel_configuracion;
 	private ArrayList<float []> lista = new ArrayList<float []>();
-	private float [] info_en_el_tiempo; // 0->numero imagen     1->coordenada x    2->coordenada y     3->ancho del rectangulo donde se va a dibujar      4-> alto del rectangulo donde se va a dibujar	5->Transparencia 6->Angulo de rotacion
+	private float [] info_en_el_tiempo; // 0->numero imagen     1->coordenada x    2->coordenada y     3->ancho del rectangulo donde se va a dibujar      4-> alto del rectangulo donde se va a dibujar	5->Transparencia 6->Angulo de rotacion 7->Color
 	private Configuracion miConfiguracion;
 	private int actualBackground = 0;
 
@@ -29,7 +30,6 @@ public class Mural extends JPanel {
 	}
 	
 	
-
 	public void actualizar(double x,double y, int num_id, float anguloGrados) {
 		
 
@@ -76,34 +76,41 @@ public class Mural extends JPanel {
 		if(num_img==-1) {
 			g2d.drawImage(null, x, y, null);
 		}else {
+			if(miConfiguracion.isMural_activado() && !miConfiguracion.isCambioConfig()) {
+				float [] info_en_el_tiempo= {num_img,this.x-150,this.y-150, (this.x + miConfiguracion.getConfig_Regla()[0]-150), (this.y + miConfiguracion.getConfig_Regla()[0]-150), miConfiguracion.getConfig_Transparencia()[0], (float)this.anguloRadianes, miConfiguracion.getConfig_Colores()[0]};
+				lista.add(info_en_el_tiempo);
+				System.out.println("No cambio la configuracion");
+			} else {
+				if (miConfiguracion.isCambioConfig()) {
+					miConfiguracion.setCambioConfig(false);
+					System.out.println("Cambio la configuracion y la pase a falso");
+				}
+			}
 			if(! lista.isEmpty()) {
 				Iterator<float []> listaIterada=lista.iterator();  //iteramos el ArrayList para poder recorrerlo
-
 				while(listaIterada.hasNext()) {
 					info_en_el_tiempo=listaIterada.next();
 					AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,info_en_el_tiempo[5]);
 					g2d.setComposite(alcom);
-					AffineTransform tx = AffineTransform.getRotateInstance(info_en_el_tiempo[6],imgGral.getImage((int)info_en_el_tiempo[0]).getWidth()/2,imgGral.getImage((int)info_en_el_tiempo[0]).getHeight()/2);
-					g2d.setTransform(tx);
-					if (info_en_el_tiempo[0]!=12) {
-						g2d.drawImage(imgGral.getImage((int)info_en_el_tiempo[0]), (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
-					}else
-						g2d.drawImage(imgGral.getImagen_gomas(actualBackground), (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
-
+					switch((int)info_en_el_tiempo[0]) {
+					  case 99:{ //lapiz
+						  g2d.drawImage(imgGral.getImagen_lapiz((int)info_en_el_tiempo[7]), (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
+						  break;
+					  }
+					  case 12:{ //goma
+						  AffineTransform tx = AffineTransform.getRotateInstance(info_en_el_tiempo[6],imgGral.getImagen_gomas(actualBackground).getWidth()/2,imgGral.getImagen_gomas(actualBackground).getHeight()/2);
+						  g2d.setTransform(tx);
+						  g2d.drawImage(imgGral.getImagen_gomas(actualBackground), (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
+						  break;
+					  } 
+					  default:{ //fiduciales
+						  AffineTransform tx = AffineTransform.getRotateInstance(info_en_el_tiempo[6],imgGral.getImage((int)info_en_el_tiempo[0]).getWidth()/2,imgGral.getImage((int)info_en_el_tiempo[0]).getHeight()/2);
+						  g2d.setTransform(tx);
+						  g2d.drawImage(imgGral.getImage((int)info_en_el_tiempo[0]), (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
+					  }
+					}
 				}
-
 			}
-			if(miConfiguracion.isMural_activado()) {
-				System.out.println("Asd");
-				float [] info_en_el_tiempo= {num_img,this.x-150,this.y-150, (this.x + miConfiguracion.getConfig_Regla()[0]-150), (this.y + miConfiguracion.getConfig_Regla()[0]-150), miConfiguracion.getConfig_Transparencia()[0], (float)this.anguloRadianes};
-				lista.add(info_en_el_tiempo);
-			}
-			
-	
-		}
-		
-	}
-	
-	
-	 
+		}	
+	}	 
 }
