@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 
 public class Imagenes {
 	private BufferedImage[] image=new BufferedImage[9] ;
-	private BufferedImage[] imagen_config=new BufferedImage[6];
+	private BufferedImage[] imagen_config=new BufferedImage[13];
 	private BufferedImage[] imagen_gomas=new BufferedImage[5];
 	private BufferedImage fondo;
 	
@@ -27,8 +27,14 @@ public class Imagenes {
 			"src/Imagenes/Selector-de-fondos.png",  						//2
 			"src/Imagenes/Deshacer.png",  									//3
 			"src/Imagenes/Goma.png",  										//4
-			"src/Imagenes/Circulo-cromatico.png",  							//5
-			"src/Imagenes/Texturas.png",};  								//6
+			"src/Imagenes/Circulo-cromaticoBlanco.png",  					//5
+			"src/Imagenes/Circulo-cromaticoRojo.png",  						//6
+			"src/Imagenes/Circulo-cromaticoFucsia.png",  					//7
+			"src/Imagenes/Circulo-cromaticoAzul.png",  						//8
+			"src/Imagenes/Circulo-cromaticoCeleste.png",  					//9
+			"src/Imagenes/Circulo-cromaticoVerde.png",  					//10
+			"src/Imagenes/Circulo-cromaticoAmarillo.png",  					//11
+			"src/Imagenes/Texturas.png",};  								//12
 	
 	private String [] rutaGomas= {"src/Imagenes/cuadradoblanco.png", //0
 			"src/Imagenes/cuadradorojo.png",						 //1

@@ -1,7 +1,7 @@
 package Modelo;
 
 public class Fiduciales {
-	private static int [] idMarcador= new int[13];
+	private static int [] idMarcador= new int[14];
 
 	public Fiduciales () {
 		//version para simular
@@ -18,8 +18,9 @@ public class Fiduciales {
 		idMarcador[10] = 10; //Transparencias
 		idMarcador[11] = 11; //Selector de fondos
 		idMarcador[12] = 12; //Goma
+		idMarcador[13] = 16; //Circulo cromatico
 		
-		//version para la mesa        ---->Poner -108 en linea 84 mural
+		//version para la mesa        ---->Poner -108 en linea 84 mural, vengo del futuro y ya no es la 84 ahre
 		/*
 		idMarcador[0] = 108;   //Mamushka
 		idMarcador[1] = 109;   //Pelota
@@ -33,7 +34,9 @@ public class Fiduciales {
 		idMarcador[9] = 117;   //Regla
 		idMarcador[10] = 118;  //Transparencias
 		idMarcador[11] = 119;  //Selector de fondos
-		idMarcador[12] = 120;  //Goma */
+		idMarcador[12] = 120;  //Goma
+		idMarcador[13] = 121; //Circulo cromatico
+		*/
 	}
 	
 	public static int[] getIdMarcador() {

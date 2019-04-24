@@ -4,17 +4,19 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.JPanel;
 
 import Modelo.*;
-
+import java.lang.Math.*;
 
 public class Panel_configuracion extends JPanel {
 	private Imagenes imgGral = new Imagenes();
 	private int x,y,num_img_de_configuracion,imgActual;
+	private double anguloGrados=0;
 	private Configuracion miConfiguracion;
 	private Fiduciales fiduciales;
 	private int actualizando;
@@ -24,11 +26,12 @@ public class Panel_configuracion extends JPanel {
 		
 	}
 	
-	public void actualizar(int id, double x, double y ) {
+	public void actualizar(int id, double x, double y, float anguloGrados ) {
 		
 		this.x=(int) (x*1024);
 		this.y=(int) (y*768);
 		this.num_img_de_configuracion=id;
+		this.anguloGrados = anguloGrados;
 		repaint();
 	}
 	
@@ -48,6 +51,7 @@ public class Panel_configuracion extends JPanel {
 		Graphics2D g2d = (Graphics2D)g;
 		
 		g.drawImage(imgGral.getFondo(), 0, 0,null);
+		
 		if((num_img_de_configuracion >= fiduciales.getIdMarcador()[0])&&(num_img_de_configuracion <= fiduciales.getIdMarcador()[8])) {
 			
 			AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,miConfiguracion.getConfig_Transparencia()[0]);
@@ -55,28 +59,64 @@ public class Panel_configuracion extends JPanel {
 			g2d.drawImage(imgGral.getImage(num_img_de_configuracion), this.x-150, this.y-150, (this.x + miConfiguracion.getConfig_Regla()[0]-150), (this.y + miConfiguracion.getConfig_Regla()[0]-150), 0, 0, 744, 768, null);
 		}
 
-		
 		if(num_img_de_configuracion == fiduciales.getIdMarcador()[9]) { // 9 es el id de la regla
-			miConfiguracion.getConfig_Regla()[1]=x;
-			miConfiguracion.getConfig_Regla()[2]=y;
+			miConfiguracion.setConfig_Regla(x,y);
 			g.drawImage(imgGral.getImagen_config()[0], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+500) , (miConfiguracion.getConfig_Regla()[2] + 700), 0, 0, 512, 768, null);
 			imgActual=0; //posicion de la regla en el vector
-
-
 		}
 		else {
 			if (num_img_de_configuracion== fiduciales.getIdMarcador()[10]) { //10 es el id de las tranparencias
-				miConfiguracion.getConfig_Transparencia()[1]=x;
-				miConfiguracion.getConfig_Transparencia()[2]=y;
+				miConfiguracion.setConfig_Transparencia(x,y);
 				g.drawImage(imgGral.getImagen_config()[1], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+500) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 700), 0, 0, 512, 768, null);
 				imgActual=1; //posicion de la herramienta de transparencia en el vector
 			} 
 			else {
 				if (num_img_de_configuracion== fiduciales.getIdMarcador()[11]) { //11 es el id del selector de fondos
-					miConfiguracion.getConfig_Fondo()[1]=x;
-					miConfiguracion.getConfig_Fondo()[2]=y;
+					miConfiguracion.setConfig_Fondo(x, y);
 					g.drawImage(imgGral.getImagen_config()[1], (int)miConfiguracion.getConfig_Fondo()[1], (int)miConfiguracion.getConfig_Fondo()[2], (int)(miConfiguracion.getConfig_Fondo()[1]+500) , (int)(miConfiguracion.getConfig_Fondo()[2] + 700), 0, 0, 512, 768, null);
 					imgActual=2; //posicion de la herramienta de fondos en el vector
+				}
+				else {
+					if (num_img_de_configuracion== fiduciales.getIdMarcador()[13]) { //13 es el id del circulo cromatico
+						miConfiguracion.setConfig_Colores(x, y);
+						switch (miConfiguracion.getConfig_Colores()[0]) {
+						  case 0:{ //blanco
+							  g.drawImage(imgGral.getImagen_config()[5], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
+							  imgActual=5; //posicion seleccionado blanco en el vector de imagenes
+							  break;
+						  }
+						  case 1:{ //rojo
+							  g.drawImage(imgGral.getImagen_config()[6], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
+							  imgActual=6; //posicion seleccionado rojo en el vector de imagenes
+							  break;
+						  }
+						  case 2:{ //fucsia
+							  g.drawImage(imgGral.getImagen_config()[7], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
+							  imgActual=7; //posicion seleccionado fucsia en el vector de imagenes
+							  break;
+						  }
+						  case 3:{ //azul
+							  g.drawImage(imgGral.getImagen_config()[8], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
+							  imgActual=8; //posicion seleccionado azul en el vector de imagenes
+							  break;
+						  }
+						  case 4:{ //celeste
+							  g.drawImage(imgGral.getImagen_config()[9], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
+							  imgActual=9; //posicion seleccionado celeste en el vector de imagenes
+							  break;
+						  }
+						  case 5:{ //verde
+							  g.drawImage(imgGral.getImagen_config()[10], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
+							  imgActual=10; //posicion seleccionado verde en el vector de imagenes
+							  break;
+						  }
+						  case 6:{ //amarillo
+							  g.drawImage(imgGral.getImagen_config()[11], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
+							  imgActual=11; //posicion seleccionado amarillo en el vector de imagenes
+							  break;
+						  }
+						}
+					}
 				}
 			}
 		}
@@ -84,24 +124,24 @@ public class Panel_configuracion extends JPanel {
 			g.drawImage(imgGral.getImagen_config()[imgActual], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+500) , (miConfiguracion.getConfig_Regla()[2] + 700), 0, 0, 512, 768, null);
 			if(((x-miConfiguracion.getConfig_Regla()[1])<90)&&((y-miConfiguracion.getConfig_Regla()[2])<86)){ //Hizo click en el nivel 1. 
 				System.out.println("Nivel 1");
-				miConfiguracion.getConfig_Regla()[0]=50;
+				miConfiguracion.setConfig_ReglaNivel(50);
 
 			}else {
 				if(((x-miConfiguracion.getConfig_Regla()[1])<90)&&(((y-miConfiguracion.getConfig_Regla()[2])>90)&&(y-miConfiguracion.getConfig_Regla()[2])<185)){
 					System.out.println("Nivel 2");
-					miConfiguracion.getConfig_Regla()[0]=100;
+					miConfiguracion.setConfig_ReglaNivel(100);
 				}else
 					if(((x-miConfiguracion.getConfig_Regla()[1])<90)&&(((y-miConfiguracion.getConfig_Regla()[2])>185)&&(y-miConfiguracion.getConfig_Regla()[2])<280)){
 						System.out.println("Nivel 3");
-						miConfiguracion.getConfig_Regla()[0]=190;
+						miConfiguracion.setConfig_ReglaNivel(190);
 					}else
 						if(((x-miConfiguracion.getConfig_Regla()[1])<90)&&(((y-miConfiguracion.getConfig_Regla()[2])>280)&&(y-miConfiguracion.getConfig_Regla()[2])<375)){
 							System.out.println("Nivel 4");
-							miConfiguracion.getConfig_Regla()[0]=250;
+							miConfiguracion.setConfig_ReglaNivel(250);
 					}else
 						if(((x-miConfiguracion.getConfig_Regla()[1])<90)&&(((y-miConfiguracion.getConfig_Regla()[2])>375)&&(y-miConfiguracion.getConfig_Regla()[2])<470)){
 							System.out.println("Nivel 5");
-							miConfiguracion.getConfig_Regla()[0]=400;
+							miConfiguracion.setConfig_ReglaNivel(400);
 						}
 			
 					}
@@ -111,15 +151,15 @@ public class Panel_configuracion extends JPanel {
 				g.drawImage(imgGral.getImagen_config()[imgActual], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+500) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 700), 0, 0, 512, 768, null);
 				if(((x-miConfiguracion.getConfig_Transparencia()[1])<90)&&((y-miConfiguracion.getConfig_Transparencia()[2])<86)){ //Hizo click en el nivel 1. 
 					System.out.println("Nivel 1");
-					miConfiguracion.getConfig_Transparencia()[0]=1f;
+					miConfiguracion.setConfig_TransparenciaNivel(1f);
 				}else {
 					if(((x-miConfiguracion.getConfig_Transparencia()[1])<90)&&(((y-miConfiguracion.getConfig_Transparencia()[2])>90)&&(y-miConfiguracion.getConfig_Transparencia()[2])<185)){
 						System.out.println("Nivel 2");
-						miConfiguracion.getConfig_Transparencia()[0]=0.5f;
+						miConfiguracion.setConfig_TransparenciaNivel(0.5f);
 					}else
 						if(((x-miConfiguracion.getConfig_Transparencia()[1])<90)&&(((y-miConfiguracion.getConfig_Transparencia()[2])>185)&&(y-miConfiguracion.getConfig_Transparencia()[2])<280)){
 							System.out.println("Nivel 3");
-							miConfiguracion.getConfig_Transparencia()[0]=0.1f;
+							miConfiguracion.setConfig_TransparenciaNivel(0.1f);
 						}
 				}
 			}
@@ -128,24 +168,61 @@ public class Panel_configuracion extends JPanel {
 					g.drawImage(imgGral.getImagen_config()[imgActual], (int)miConfiguracion.getConfig_Fondo()[1], (int)miConfiguracion.getConfig_Fondo()[2], (int)(miConfiguracion.getConfig_Fondo()[1]+500) , (int)(miConfiguracion.getConfig_Fondo()[2] + 700), 0, 0, 512, 768, null);
 					if(((x-miConfiguracion.getConfig_Fondo()[1])<90)&&((y-miConfiguracion.getConfig_Fondo()[2])<86)){ //Hizo click en el nivel 1. 
 						System.out.println("Nivel 1");
-						miConfiguracion.getConfig_Fondo()[0]=0; //blanco
+						miConfiguracion.setConfig_FondoNivel(0); //blanco
 					}else {
 						if(((x-miConfiguracion.getConfig_Fondo()[1])<90)&&(((y-miConfiguracion.getConfig_Fondo()[2])>90)&&(y-miConfiguracion.getConfig_Fondo()[2])<185)){
 							System.out.println("Nivel 2");
-							miConfiguracion.getConfig_Fondo()[0]=1; //rojo
+							miConfiguracion.setConfig_FondoNivel(1); //rojo
 						}else
 							if(((x-miConfiguracion.getConfig_Fondo()[1])<90)&&(((y-miConfiguracion.getConfig_Fondo()[2])>185)&&(y-miConfiguracion.getConfig_Fondo()[2])<280)){
 								System.out.println("Nivel 3");
-								miConfiguracion.getConfig_Fondo()[0]=2; //azul
+								miConfiguracion.setConfig_FondoNivel(2); //azul
 							}else
 								if(((x-miConfiguracion.getConfig_Fondo()[1])<90)&&(((y-miConfiguracion.getConfig_Fondo()[2])>280)&&(y-miConfiguracion.getConfig_Fondo()[2])<375)){
 									System.out.println("Nivel 4");
-									miConfiguracion.getConfig_Fondo()[0]=3; //verde
+									miConfiguracion.setConfig_FondoNivel(3); //verde
 								}else
 									if(((x-miConfiguracion.getConfig_Fondo()[1])<90)&&(((y-miConfiguracion.getConfig_Fondo()[2])>375)&&(y-miConfiguracion.getConfig_Fondo()[2])<470)){
 										System.out.println("Nivel 5");
-										miConfiguracion.getConfig_Fondo()[0]=4; //amarillo
+										miConfiguracion.setConfig_FondoNivel(4); //amarillo
 									}
+					}
+				} else {
+					if((imgActual>=5)&&(imgActual<=11)){
+						if (((anguloGrados>325) && (anguloGrados<=360)) || ((anguloGrados>=0)&&(anguloGrados<25))){
+							System.out.println("Blanco");
+							miConfiguracion.setConfig_ColoresNivel(0);
+						} else {
+							if ((anguloGrados>=25) && (anguloGrados<75)){
+								System.out.println("Rojo");
+								miConfiguracion.setConfig_ColoresNivel(1);
+							} else {
+								if ((anguloGrados>=75) && (anguloGrados<125)){
+									System.out.println("Fucsia");
+									miConfiguracion.setConfig_ColoresNivel(2);
+								} else {
+									if ((anguloGrados>=125) && (anguloGrados<175)){
+										System.out.println("Azul");
+										miConfiguracion.setConfig_ColoresNivel(3);
+									} else {
+										if ((anguloGrados>=175) && (anguloGrados<225)){
+											System.out.println("Celeste");
+											miConfiguracion.setConfig_ColoresNivel(4);
+										} else {
+											if ((anguloGrados>=225) && (anguloGrados<275)){
+												System.out.println("Verde");
+												miConfiguracion.setConfig_ColoresNivel(5);
+											} else {
+												if ((anguloGrados>=275) && (anguloGrados<=325)){
+													System.out.println("Amarillo");
+													miConfiguracion.setConfig_ColoresNivel(6);
+												}
+											} 
+										} 
+									} 
+								} 
+							}
+						}
 					}
 				}
 			}

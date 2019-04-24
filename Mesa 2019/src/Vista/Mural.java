@@ -29,7 +29,6 @@ public class Mural extends JPanel {
 	}
 	
 	
-
 	public void actualizar(double x,double y, int num_id, float anguloGrados) {
 		
 
@@ -83,18 +82,28 @@ public class Mural extends JPanel {
 					info_en_el_tiempo=listaIterada.next();
 					AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,info_en_el_tiempo[5]);
 					g2d.setComposite(alcom);
-					AffineTransform tx = AffineTransform.getRotateInstance(info_en_el_tiempo[6],imgGral.getImage((int)info_en_el_tiempo[0]).getWidth()/2,imgGral.getImage((int)info_en_el_tiempo[0]).getHeight()/2);
-					g2d.setTransform(tx);
-					if (info_en_el_tiempo[0]!=12) {
-						g2d.drawImage(imgGral.getImage((int)info_en_el_tiempo[0]), (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
-					}else
-						g2d.drawImage(imgGral.getImagen_gomas(actualBackground), (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
-
+					switch((int)info_en_el_tiempo[0]) {
+					  case 99:{ //lapiz
+						  //en realidad tiene que traerse el color actual con el que se esta pintando
+						  g2d.drawImage(imgGral.getImagen_gomas(2), (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
+						  break;
+					  }
+					  case 12:{ //goma
+						  AffineTransform tx = AffineTransform.getRotateInstance(info_en_el_tiempo[6],imgGral.getImagen_gomas(actualBackground).getWidth()/2,imgGral.getImagen_gomas(actualBackground).getHeight()/2);
+						  g2d.setTransform(tx);
+						  g2d.drawImage(imgGral.getImagen_gomas(actualBackground), (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
+						  break;
+					  } 
+					  default:{ //fiduciales
+						  AffineTransform tx = AffineTransform.getRotateInstance(info_en_el_tiempo[6],imgGral.getImage((int)info_en_el_tiempo[0]).getWidth()/2,imgGral.getImage((int)info_en_el_tiempo[0]).getHeight()/2);
+						  g2d.setTransform(tx);
+						  g2d.drawImage(imgGral.getImage((int)info_en_el_tiempo[0]), (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
+					  }
+					}
 				}
 
 			}
 			if(miConfiguracion.isMural_activado()) {
-				System.out.println("Asd");
 				float [] info_en_el_tiempo= {num_img,this.x-150,this.y-150, (this.x + miConfiguracion.getConfig_Regla()[0]-150), (this.y + miConfiguracion.getConfig_Regla()[0]-150), miConfiguracion.getConfig_Transparencia()[0], (float)this.anguloRadianes};
 				lista.add(info_en_el_tiempo);
 			}
