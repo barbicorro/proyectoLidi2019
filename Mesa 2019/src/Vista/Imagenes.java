@@ -6,22 +6,77 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Imagenes {
-	private BufferedImage[] image=new BufferedImage[9] ;
+	private BufferedImage[] image=new BufferedImage[63] ;
 	private BufferedImage[] imagen_config=new BufferedImage[13];
 	private BufferedImage[] imagen_gomas=new BufferedImage[5];
 	private BufferedImage[] imagen_lapiz=new BufferedImage[7];
 	private BufferedImage fondo;
 	
 	
-	private String [] rutaSellos= {"src/Imagenes/Objetos-01.png", //0- Mamushka
-			"src/Imagenes/Objetos-02.png",  //1- Pelota 
-			"src/Imagenes/Objetos-03.png",  //2- Caracol1
-			"src/Imagenes/Objetos-04.png",  //3- Caracol2
-			"src/Imagenes/Objetos-05.png",  //4- Caracol3
-			"src/Imagenes/Objetos-06.png",  //5- Flor rosa
-			"src/Imagenes/Objetos-07.png",  //6- Flor amarilla
-			"src/Imagenes/Objetos-08.png",  //7- Flor roja
-			"src/Imagenes/Objetos-09.png",};  //8- Flor blanca
+	private String [] rutaSellos= {
+			"src/Imagenes/Objeto0/0-0.png", //0- Mamushka
+			"src/Imagenes/Objeto0/0-1.png",   
+			"src/Imagenes/Objeto0/0-2.png",  
+			"src/Imagenes/Objeto0/0-3.png",  
+			"src/Imagenes/Objeto0/0-4.png",  
+			"src/Imagenes/Objeto0/0-5.png",  
+			"src/Imagenes/Objeto0/0-6.png",  
+			"src/Imagenes/Objeto1/1-0.png",  //1- Pelota
+			"src/Imagenes/Objeto1/1-1.png",
+			"src/Imagenes/Objeto1/1-2.png",
+			"src/Imagenes/Objeto1/1-3.png",
+			"src/Imagenes/Objeto1/1-4.png",
+			"src/Imagenes/Objeto1/1-5.png",
+			"src/Imagenes/Objeto1/1-6.png",
+			"src/Imagenes/Objeto2/2-0.png",  //2- Caracol1
+			"src/Imagenes/Objeto2/2-1.png",
+			"src/Imagenes/Objeto2/2-2.png",
+			"src/Imagenes/Objeto2/2-3.png",
+			"src/Imagenes/Objeto2/2-4.png",
+			"src/Imagenes/Objeto2/2-5.png",
+			"src/Imagenes/Objeto2/2-6.png",
+			"src/Imagenes/Objeto3/3-0.png",  //3- Caracol2
+			"src/Imagenes/Objeto3/3-1.png",
+			"src/Imagenes/Objeto3/3-2.png",
+			"src/Imagenes/Objeto3/3-3.png",
+			"src/Imagenes/Objeto3/3-4.png",
+			"src/Imagenes/Objeto3/3-5.png",
+			"src/Imagenes/Objeto3/3-6.png",
+			"src/Imagenes/Objeto4/4-0.png",  //4- Caracol3
+			"src/Imagenes/Objeto4/4-1.png",
+			"src/Imagenes/Objeto4/4-2.png",
+			"src/Imagenes/Objeto4/4-3.png",
+			"src/Imagenes/Objeto4/4-4.png",
+			"src/Imagenes/Objeto4/4-5.png",
+			"src/Imagenes/Objeto4/4-6.png",
+			"src/Imagenes/Objeto5/5-0.png",  //5- Flor rosa
+			"src/Imagenes/Objeto5/5-1.png",
+			"src/Imagenes/Objeto5/5-2.png",
+			"src/Imagenes/Objeto5/5-3.png",
+			"src/Imagenes/Objeto5/5-4.png",
+			"src/Imagenes/Objeto5/5-5.png",
+			"src/Imagenes/Objeto5/5-6.png",
+			"src/Imagenes/Objeto6/6-0.png",  //6- Flor amarilla
+			"src/Imagenes/Objeto6/6-1.png",
+			"src/Imagenes/Objeto6/6-2.png",
+			"src/Imagenes/Objeto6/6-3.png",
+			"src/Imagenes/Objeto6/6-4.png",
+			"src/Imagenes/Objeto6/6-5.png",
+			"src/Imagenes/Objeto6/6-6.png",
+			"src/Imagenes/Objeto7/7-0.png",  //7- Flor Naranja
+			"src/Imagenes/Objeto7/7-1.png",
+			"src/Imagenes/Objeto7/7-2.png",
+			"src/Imagenes/Objeto7/7-3.png",
+			"src/Imagenes/Objeto7/7-4.png",
+			"src/Imagenes/Objeto7/7-5.png",
+			"src/Imagenes/Objeto7/7-6.png",
+			"src/Imagenes/Objeto8/8-0.png",  //8- Flor Blanca
+			"src/Imagenes/Objeto8/8-1.png",
+			"src/Imagenes/Objeto8/8-2.png",
+			"src/Imagenes/Objeto8/8-3.png",
+			"src/Imagenes/Objeto8/8-4.png",
+			"src/Imagenes/Objeto8/8-5.png",
+			"src/Imagenes/Objeto8/8-6.png",};  
 	
 	private String [] rutaObjetosConfiguracion= {"src/Imagenes/Regla.png",  //0
 			"src/Imagenes/Transparencias.png",								//1
@@ -51,6 +106,7 @@ public class Imagenes {
 			"src/Imagenes/CirculoVerde.png",						//5
 			"src/Imagenes/CirculoAmarillo.png",};					//6
 	
+						
 	private String rutaFondo= "src/Imagenes/fondo_config.png";
 	
 	public Imagenes()  {
@@ -144,7 +200,6 @@ public class Imagenes {
 	public void setImage(BufferedImage image, int i) {
 		this.image[i] = image;
 	}
-	
 	
 	
 

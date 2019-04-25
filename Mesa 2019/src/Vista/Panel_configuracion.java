@@ -164,7 +164,7 @@ public class Panel_configuracion extends JPanel {
 								miConfiguracion.setConfig_ColoresNivel(1);
 							} else {
 								if ((anguloGrados>=75) && (anguloGrados<125)){
-									System.out.println("Fucsia");
+									System.out.println("Magenta");
 									miConfiguracion.setConfig_ColoresNivel(2);
 								} else {
 									if ((anguloGrados>=125) && (anguloGrados<175)){
@@ -172,7 +172,7 @@ public class Panel_configuracion extends JPanel {
 										miConfiguracion.setConfig_ColoresNivel(3);
 									} else {
 										if ((anguloGrados>=175) && (anguloGrados<225)){
-											System.out.println("Celeste");
+											System.out.println("Cian");
 											miConfiguracion.setConfig_ColoresNivel(4);
 										} else {
 											if ((anguloGrados>=225) && (anguloGrados<275)){

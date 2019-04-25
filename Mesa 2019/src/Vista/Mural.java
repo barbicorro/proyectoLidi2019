@@ -1,6 +1,6 @@
 package Vista;
-
-
+import java.awt.image.BufferedImage;
+import Modelo.CambioColores;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.awt.*;
@@ -104,9 +104,10 @@ public class Mural extends JPanel {
 						  break;
 					  } 
 					  default:{ //fiduciales
-						  AffineTransform tx = AffineTransform.getRotateInstance(info_en_el_tiempo[6],imgGral.getImage((int)info_en_el_tiempo[0]).getWidth()/2,imgGral.getImage((int)info_en_el_tiempo[0]).getHeight()/2);
+						  BufferedImage img=imgGral.getImage((int)((info_en_el_tiempo[0]*7)+info_en_el_tiempo[7])) ;
+						  AffineTransform tx = AffineTransform.getRotateInstance(info_en_el_tiempo[6],img.getWidth()/2,img.getHeight()/2);
 						  g2d.setTransform(tx);
-						  g2d.drawImage(imgGral.getImage((int)info_en_el_tiempo[0]), (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
+						  g2d.drawImage(img, (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
 					  }
 					}
 				}
