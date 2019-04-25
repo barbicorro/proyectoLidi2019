@@ -5,6 +5,7 @@ public class Fiduciales {
 
 	public Fiduciales () {
 		//version para simular
+		
 		idMarcador[0] = 0;   //Mamushka
 		idMarcador[1] = 1;   //Pelota
 		idMarcador[2] = 2;   //Caracol1
@@ -35,7 +36,7 @@ public class Fiduciales {
 		idMarcador[10] = 118;  //Transparencias
 		idMarcador[11] = 119;  //Selector de fondos
 		idMarcador[12] = 120;  //Goma
-		idMarcador[13] = 121; //Circulo cromatico
+		idMarcador[13] = 142; //Circulo cromatico
 		*/
 	}
 	

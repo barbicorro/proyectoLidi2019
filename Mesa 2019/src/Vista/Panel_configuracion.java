@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -30,7 +31,9 @@ public class Panel_configuracion extends JPanel {
 		
 		this.x=(int) (x*1024);
 		this.y=(int) (y*768);
+		System.out.println(id);
 		this.num_img_de_configuracion=id;
+		System.out.println(num_img_de_configuracion);
 		this.anguloGrados = anguloGrados;
 		repaint();
 	}
@@ -54,8 +57,8 @@ public class Panel_configuracion extends JPanel {
 		AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,miConfiguracion.getConfig_Transparencia()[0]);
         g2d.setComposite(alcom);
        // g2d.drawImage(imgGral.getImage(0), 0, 0, (0 + miConfiguracion.getConfig_Regla()[0]), (0 + miConfiguracion.getConfig_Regla()[0]), 0, 0, 1024, 768, null);
-
-		if(num_img_de_configuracion == fiduciales.getIdMarcador()[9]) { // 9 es el id de la regla
+        System.out.println("dentro paint "  +num_img_de_configuracion);
+        if(num_img_de_configuracion == fiduciales.getIdMarcador()[9]) { // 9 es el id de la regla
 			miConfiguracion.setConfig_Regla(x,y);
 			g.drawImage(imgGral.getImagen_config()[nivelActRegla], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+600) , (miConfiguracion.getConfig_Regla()[2] + 300), 0, 0, 1024, 768, null);
 			imgActual=0; //posicion de la regla en el vector
@@ -73,7 +76,7 @@ public class Panel_configuracion extends JPanel {
 					imgActual=2; //posicion de la herramienta de fondos en el vector
 				}
 				else {
-					if (num_img_de_configuracion== fiduciales.getIdMarcador()[13]) { //13 es el id del circulo cromatico
+					if (num_img_de_configuracion== fiduciales.getIdMarcador()[13]) { //en la pos 13 esta el id del circulo cromatico
 						miConfiguracion.setConfig_Colores(x, y);
 						g.drawImage(imgGral.getImagen_config()[miConfiguracion.getConfig_Colores()[0]+11], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
 						imgActual= miConfiguracion.getConfig_Colores()[0]+11; //posicion del color seleccionado en el vector de imagenes
@@ -211,7 +214,9 @@ public class Panel_configuracion extends JPanel {
 				}
 			}
 		}
-        g2d.drawImage(imgGral.getImage(0), 0, 0, (0 + miConfiguracion.getConfig_Regla()[0]), (0 + miConfiguracion.getConfig_Regla()[0]), 0, 0, 744, 768, null);
+		  BufferedImage img=imgGral.getImage((int)(miConfiguracion.getConfig_Colores()[0])) ;
+
+        g2d.drawImage(img, 0, 0, (0 + miConfiguracion.getConfig_Regla()[0]), (0 + miConfiguracion.getConfig_Regla()[0]), 0, 0, 744, 768, null);
 
 		if(num_img_de_configuracion==666) { //solo lo utilizo para configurar algunas cosas no se usa en el juego final. O SI?
 			g.drawImage(imgGral.getImage(1), x, y, (x+25), (y+25), 0, 0, 1024, 768, null);

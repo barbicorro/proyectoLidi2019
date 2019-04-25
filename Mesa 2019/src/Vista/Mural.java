@@ -77,8 +77,11 @@ public class Mural extends JPanel {
 			g2d.drawImage(null, x, y, null);
 		}else {
 			if(miConfiguracion.isMural_activado() && !miConfiguracion.isCambioConfig()) {
-				float [] info_en_el_tiempo= {num_img,this.x-150,this.y-150, (this.x + miConfiguracion.getConfig_Regla()[0]-150), (this.y + miConfiguracion.getConfig_Regla()[0]-150), miConfiguracion.getConfig_Transparencia()[0], (float)this.anguloRadianes, miConfiguracion.getConfig_Colores()[0]};
-				lista.add(info_en_el_tiempo);
+				//ACA se resta 108 ------------------------------------------------------------
+				//if(num_img!=99) {
+					float [] info_en_el_tiempo= {num_img-108,this.x,this.y, (this.x + miConfiguracion.getConfig_Regla()[0]), (this.y + miConfiguracion.getConfig_Regla()[0]), miConfiguracion.getConfig_Transparencia()[0], (float)this.anguloRadianes, miConfiguracion.getConfig_Colores()[0]};
+					lista.add(info_en_el_tiempo);
+				//}
 				System.out.println("No cambio la configuracion");
 			} else {
 				if (miConfiguracion.isCambioConfig()) {
@@ -98,14 +101,16 @@ public class Mural extends JPanel {
 						  break;
 					  }
 					  case 12:{ //goma
-						  AffineTransform tx = AffineTransform.getRotateInstance(info_en_el_tiempo[6],imgGral.getImagen_gomas(actualBackground).getWidth()/2,imgGral.getImagen_gomas(actualBackground).getHeight()/2);
+						  AffineTransform tx = AffineTransform.getRotateInstance(info_en_el_tiempo[6],info_en_el_tiempo[1],info_en_el_tiempo[2]);
 						  g2d.setTransform(tx);
 						  g2d.drawImage(imgGral.getImagen_gomas(actualBackground), (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
 						  break;
 					  } 
 					  default:{ //fiduciales
+						  
+						 
 						  BufferedImage img=imgGral.getImage((int)((info_en_el_tiempo[0]*7)+info_en_el_tiempo[7])) ;
-						  AffineTransform tx = AffineTransform.getRotateInstance(info_en_el_tiempo[6],img.getWidth()/2,img.getHeight()/2);
+						  AffineTransform tx = AffineTransform.getRotateInstance(info_en_el_tiempo[6],(info_en_el_tiempo[1]),(info_en_el_tiempo[2]));
 						  g2d.setTransform(tx);
 						  g2d.drawImage(img, (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
 					  }
