@@ -6,8 +6,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Imagenes {
+
 	private BufferedImage[] image=new BufferedImage[63] ;
-	private BufferedImage[] imagen_config=new BufferedImage[13];
+	private BufferedImage[] imagen_config=new BufferedImage[18];
 	private BufferedImage[] imagen_gomas=new BufferedImage[5];
 	private BufferedImage[] imagen_lapiz=new BufferedImage[7];
 	private BufferedImage fondo;
@@ -78,19 +79,25 @@ public class Imagenes {
 			"src/Imagenes/Objeto8/8-5.png",
 			"src/Imagenes/Objeto8/8-6.png",};  
 	
-	private String [] rutaObjetosConfiguracion= {"src/Imagenes/Regla.png",  //0
-			"src/Imagenes/Transparencias.png",								//1
-			"src/Imagenes/Selector-de-fondos.png",  						//2
-			"src/Imagenes/Deshacer.png",  									//3
-			"src/Imagenes/Goma.png",  										//4
-			"src/Imagenes/Circulo-cromaticoBlanco.png",  					//5
-			"src/Imagenes/Circulo-cromaticoRojo.png",  						//6
-			"src/Imagenes/Circulo-cromaticoFucsia.png",  					//7
-			"src/Imagenes/Circulo-cromaticoAzul.png",  						//8
-			"src/Imagenes/Circulo-cromaticoCeleste.png",  					//9
-			"src/Imagenes/Circulo-cromaticoVerde.png",  					//10
-			"src/Imagenes/Circulo-cromaticoAmarillo.png",  					//11
-			"src/Imagenes/Texturas.png",};  								//12
+	private String [] rutaObjetosConfiguracion= {"src/Imagenes/Regla-13.png",  //0
+			"src/Imagenes/Regla-14.png",									//1
+			"src/Imagenes/Regla-15.png",									//2
+			"src/Imagenes/Regla-16.png",									//3
+			"src/Imagenes/Regla-17.png",									//4
+			"src/Imagenes/Transparencia18.png",								//5
+			"src/Imagenes/Transparencia19.png",								//6
+			"src/Imagenes/Transparencia20.png",								//7
+			"src/Imagenes/Selector-de-fondos.png",  						//8
+			"src/Imagenes/Deshacer.png",  									//9
+			"src/Imagenes/Goma.png",  										//10
+			"src/Imagenes/Circulo-cromaticoBlanco.png",  					//11
+			"src/Imagenes/Circulo-cromaticoRojo.png",  						//12
+			"src/Imagenes/Circulo-cromaticoFucsia.png",  					//13
+			"src/Imagenes/Circulo-cromaticoAzul.png",  						//14
+			"src/Imagenes/Circulo-cromaticoCeleste.png",  					//15
+			"src/Imagenes/Circulo-cromaticoVerde.png",  					//16
+			"src/Imagenes/Circulo-cromaticoAmarillo.png",  					//17
+			"src/Imagenes/Texturas.png",};  								//18
 	
 	private String [] rutaGomas= {"src/Imagenes/cuadradoblanco.png", //0
 			"src/Imagenes/cuadradorojo.png",						 //1
