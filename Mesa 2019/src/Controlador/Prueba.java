@@ -51,6 +51,7 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 		getContentPane().setLayout(null);
 		setBounds(0, 0, 1024, 768);
 		setResizable(false);
+		this.setUndecorated(true);
 		setVisible(true);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		panel_configuracion.setSize(1024, 768);
@@ -60,7 +61,7 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 		
 		btnActivarPanel = new JButton("Activar panel de configuraci\u00F3n");
 		btnActivarPanel.setSize(400, 60);
-		mural.add(btnActivarPanel);
+		//mural.add(btnActivarPanel);
 		btnActivarPanel.addActionListener(this);
 		panel_configuracion.setVisible(false);
 		panel_configuracion.setOpaque(false);
@@ -87,7 +88,18 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	@Override
 	//Se llama cuando un objeto se hace visible
 	public void addTuioObject(TuioObject tobj) { 
-		if((!panel_configuracion.isVisible()) && ((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12])) {
+		if(tobj.getSymbolID()==fiduciales.getIdMarcador()[14]) {
+			if(!panel_configuracion.isVisible()) {
+				miConfiguracion.setMural_activado(false);
+				panel_configuracion.setVisible(true);
+			}else {
+				miConfiguracion.setMural_activado(true);
+				panel_configuracion.setVisible(false);
+			}
+		}
+		
+		
+		if((!panel_configuracion.isVisible()) && ((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12])||(tobj.getSymbolID())==fiduciales.getIdMarcador()[15]) {
 			mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees());
 		}else {
 			if((panel_configuracion.isVisible())) {	

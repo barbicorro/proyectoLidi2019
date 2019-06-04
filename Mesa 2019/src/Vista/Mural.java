@@ -10,6 +10,7 @@ import java.lang.Math.*;
 import javax.swing.JPanel;
 
 import Modelo.Configuracion;
+import Modelo.Fiduciales;
 
 public class Mural extends JPanel {
 	private Imagenes imgGral = new Imagenes();
@@ -79,7 +80,7 @@ public class Mural extends JPanel {
 			if(miConfiguracion.isMural_activado() && !miConfiguracion.isCambioConfig()) {
 				//ACA se resta 108 ------------------------------------------------------------
 				//if(num_img!=99) {
-					float [] info_en_el_tiempo= {num_img-108,this.x,this.y, (this.x + miConfiguracion.getConfig_Regla()[0]), (this.y + miConfiguracion.getConfig_Regla()[0]), miConfiguracion.getConfig_Transparencia()[0], (float)this.anguloRadianes, miConfiguracion.getConfig_Colores()[0]};
+					float [] info_en_el_tiempo= {num_img,this.x,this.y, (this.x + miConfiguracion.getConfig_Regla()[0]), (this.y + miConfiguracion.getConfig_Regla()[0]), miConfiguracion.getConfig_Transparencia()[0], (float)this.anguloRadianes, miConfiguracion.getConfig_Colores()[0]};
 					lista.add(info_en_el_tiempo);
 				//}
 				System.out.println("No cambio la configuracion");
@@ -89,7 +90,7 @@ public class Mural extends JPanel {
 					System.out.println("Cambio la configuracion y la pase a falso");
 				}
 			}
-			if(! lista.isEmpty()) {
+			if((! lista.isEmpty())&&(num_img!=Fiduciales.getIdMarcador()[15])) {
 				Iterator<float []> listaIterada=lista.iterator();  //iteramos el ArrayList para poder recorrerlo
 				while(listaIterada.hasNext()) {
 					info_en_el_tiempo=listaIterada.next();
@@ -108,7 +109,7 @@ public class Mural extends JPanel {
 					  } 
 					  default:{ //fiduciales
 						  
-						 
+
 						  BufferedImage img=imgGral.getImage((int)((info_en_el_tiempo[0]*7)+info_en_el_tiempo[7])) ;
 						  AffineTransform tx = AffineTransform.getRotateInstance(info_en_el_tiempo[6],(info_en_el_tiempo[1]),(info_en_el_tiempo[2]));
 						  g2d.setTransform(tx);
@@ -118,5 +119,9 @@ public class Mural extends JPanel {
 				}
 			}
 		}	
+		if(num_img==Fiduciales.getIdMarcador()[15]) {
+			lista.clear();
+			
+		}
 	}	 
 }

@@ -16,10 +16,11 @@ import java.lang.Math.*;
 
 public class Panel_configuracion extends JPanel {
 	private Imagenes imgGral = new Imagenes();
-	private int x,y,num_img_de_configuracion,imgActual,nivelActRegla=0,nivelActTrans=6;
+	private int x,y,num_img_de_configuracion,num_pieza_actual,imgActual,nivelActRegla=0,nivelActTrans=6;
 	private double anguloGrados=0;
 	private Configuracion miConfiguracion;
 	private Fiduciales fiduciales;
+	private boolean dibujar=false;
 	
 	public Panel_configuracion(){
 		//setBackground(Color.PINK);
@@ -31,9 +32,10 @@ public class Panel_configuracion extends JPanel {
 		
 		this.x=(int) (x*1024);
 		this.y=(int) (y*768);
-		System.out.println(id);
+		if((id>=0)&&(id<=8)){
+			num_pieza_actual=id;
+		}
 		this.num_img_de_configuracion=id;
-		System.out.println(num_img_de_configuracion);
 		this.anguloGrados = anguloGrados;
 		repaint();
 	}
@@ -42,8 +44,7 @@ public class Panel_configuracion extends JPanel {
 		
 		this.x=(int) (x*1024);
 		this.y=(int) (y*768);
-		this.num_img_de_configuracion=666; //ID del punto es 666 
-		
+		dibujar=true; 
 		
 		repaint();//----->Entra al repaint() antes de asignarle el numero de configuracion... De todas formas no vamos a utilizar el punto en la mesa
 		
@@ -51,42 +52,53 @@ public class Panel_configuracion extends JPanel {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D)g;
 		
+
+		Graphics2D g2d = (Graphics2D)g;
 		g.drawImage(imgGral.getFondo(), 0, 0,null);
-		AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,miConfiguracion.getConfig_Transparencia()[0]);
-        g2d.setComposite(alcom);
-       // g2d.drawImage(imgGral.getImage(0), 0, 0, (0 + miConfiguracion.getConfig_Regla()[0]), (0 + miConfiguracion.getConfig_Regla()[0]), 0, 0, 1024, 768, null);
-        System.out.println("dentro paint "  +num_img_de_configuracion);
-        if(num_img_de_configuracion == fiduciales.getIdMarcador()[9]) { // 9 es el id de la regla
-			miConfiguracion.setConfig_Regla(x,y);
-			g.drawImage(imgGral.getImagen_config()[nivelActRegla], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+600) , (miConfiguracion.getConfig_Regla()[2] + 300), 0, 0, 1024, 768, null);
-			imgActual=0; //posicion de la regla en el vector
-		}
-		else {
-			if (num_img_de_configuracion== fiduciales.getIdMarcador()[10]) { //10 es el id de las tranparencias
-				miConfiguracion.setConfig_Transparencia(x,y);
-				g.drawImage(imgGral.getImagen_config()[nivelActTrans], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+600) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 300), 0, 0, 1024, 768, null);
-				imgActual=1; //posicion de la herramienta de transparencia en el vector
-			} 
-			else {
-				if (num_img_de_configuracion== fiduciales.getIdMarcador()[11]) { //11 es el id del selector de fondos
-					miConfiguracion.setConfig_Fondo(x, y);
-					g.drawImage(imgGral.getImagen_config()[8], (int)miConfiguracion.getConfig_Fondo()[1], (int)miConfiguracion.getConfig_Fondo()[2], (int)(miConfiguracion.getConfig_Fondo()[1]+500) , (int)(miConfiguracion.getConfig_Fondo()[2] + 700), 0, 0, 512, 768, null);
-					imgActual=2; //posicion de la herramienta de fondos en el vector
+
+		   if(num_img_de_configuracion == fiduciales.getIdMarcador()[9]) { // 9 es el id de la regla
+				if(dibujar==false) {
+	        	miConfiguracion.setConfig_Regla(x,y);
 				}
+				g.drawImage(imgGral.getImagen_config()[nivelActRegla], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+600) , (miConfiguracion.getConfig_Regla()[2] + 300), 0, 0, 1024, 768, null);
+				imgActual=0; //posicion de la regla en el vector
+			}
+			else {
+				if (num_img_de_configuracion== fiduciales.getIdMarcador()[10]) { //10 es el id de las tranparencias
+					if(dibujar==false) {
+					miConfiguracion.setConfig_Transparencia(x,y);
+					}
+					g.drawImage(imgGral.getImagen_config()[nivelActTrans], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+600) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 300), 0, 0, 1024, 768, null);
+					imgActual=1; //posicion de la herramienta de transparencia en el vector
+				} 
 				else {
-					if (num_img_de_configuracion== fiduciales.getIdMarcador()[13]) { //en la pos 13 esta el id del circulo cromatico
-						miConfiguracion.setConfig_Colores(x, y);
-						g.drawImage(imgGral.getImagen_config()[miConfiguracion.getConfig_Colores()[0]+11], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
-						imgActual= miConfiguracion.getConfig_Colores()[0]+11; //posicion del color seleccionado en el vector de imagenes
-						
+					if (num_img_de_configuracion== fiduciales.getIdMarcador()[11]) { //11 es el id del selector de fondos
+						if(dibujar==false) {
+						miConfiguracion.setConfig_Fondo(x, y);
+						}
+						g.drawImage(imgGral.getImagen_config()[8], (int)miConfiguracion.getConfig_Fondo()[1], (int)miConfiguracion.getConfig_Fondo()[2], (int)(miConfiguracion.getConfig_Fondo()[1]+500) , (int)(miConfiguracion.getConfig_Fondo()[2] + 700), 0, 0, 512, 768, null);
+						imgActual=2; //posicion de la herramienta de fondos en el vector
+					}
+					else {
+						if (num_img_de_configuracion== fiduciales.getIdMarcador()[13]) { //en la pos 13 esta el id del circulo cromatico
+							if(dibujar==false) {
+							miConfiguracion.setConfig_Colores(x, y);
+							}
+							g.drawImage(imgGral.getImagen_config()[miConfiguracion.getConfig_Colores()[0]+11], (int)miConfiguracion.getConfig_Colores()[1], (int)miConfiguracion.getConfig_Colores()[2], (int)(miConfiguracion.getConfig_Colores()[1]+500) , (int)(miConfiguracion.getConfig_Colores()[2] + 700), 0, 0, 512, 768, null);
+							imgActual= miConfiguracion.getConfig_Colores()[0]+11; //posicion del color seleccionado en el vector de imagenes
+							
+						}
 					}
 				}
 			}
-		}
-		if((imgActual==0)&&(num_img_de_configuracion==666)){
-			g.drawImage(imgGral.getImagen_config()[nivelActRegla], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+600) , (miConfiguracion.getConfig_Regla()[2] + 300), 0, 0, 1024, 768, null);
+		AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,miConfiguracion.getConfig_Transparencia()[0]);
+        g2d.setComposite(alcom);
+        
+        
+     
+		if((imgActual==0)&&(dibujar==true)){
+			//g.drawImage(imgGral.getImagen_config()[nivelActRegla], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+600) , (miConfiguracion.getConfig_Regla()[2] + 300), 0, 0, 1024, 768, null);
 			if(((x-miConfiguracion.getConfig_Regla()[1])<104)&&((x-miConfiguracion.getConfig_Regla()[1])>0)&&(((y-miConfiguracion.getConfig_Regla()[2])<64)&&(y-miConfiguracion.getConfig_Regla()[2])>0)){ //Hizo click en el nivel 1. 
 				nivelActRegla=3;
 				System.out.println("Nivel 1");
@@ -115,12 +127,12 @@ public class Panel_configuracion extends JPanel {
 						}
 			
 					}
-			g.drawImage(imgGral.getImagen_config()[nivelActRegla], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+600) , (miConfiguracion.getConfig_Regla()[2] + 300), 0, 0, 1024, 768, null);
+		//	g.drawImage(imgGral.getImagen_config()[nivelActRegla], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+600) , (miConfiguracion.getConfig_Regla()[2] + 300), 0, 0, 1024, 768, null);
 
 			//g2d.drawImage(imgGral.getImage(0), 0, 0, (0 + miConfiguracion.getConfig_Regla()[0]), (0 + miConfiguracion.getConfig_Regla()[0]), 0, 0, 744, 768, null);
 		}
 		else {
-			if((imgActual==1)&&(num_img_de_configuracion==666)){
+			if((imgActual==1)&&(dibujar==true)){
 		       // g2d.drawImage(imgGral.getImage(0), 0, 0, (0 + miConfiguracion.getConfig_Regla()[0]), (0 + miConfiguracion.getConfig_Regla()[0]), 0, 0, 1024, 768, null);
 				g.drawImage(imgGral.getImagen_config()[nivelActTrans], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+600) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 300), 0, 0, 1024, 768, null);
 
@@ -150,7 +162,7 @@ public class Panel_configuracion extends JPanel {
 
 			}
 			else {
-				if((imgActual==2)&&(num_img_de_configuracion==666)){
+				if((imgActual==2)&&(dibujar==true)){
 					g.drawImage(imgGral.getImagen_config()[8], (int)miConfiguracion.getConfig_Fondo()[1], (int)miConfiguracion.getConfig_Fondo()[2], (int)(miConfiguracion.getConfig_Fondo()[1]+500) , (int)(miConfiguracion.getConfig_Fondo()[2] + 700), 0, 0, 512, 768, null);
 					if(((x-miConfiguracion.getConfig_Fondo()[1])<90)&&((y-miConfiguracion.getConfig_Fondo()[2])<86)){ //Hizo click en el nivel 1. 
 						System.out.println("Nivel 1");
@@ -214,13 +226,13 @@ public class Panel_configuracion extends JPanel {
 				}
 			}
 		}
-		  BufferedImage img=imgGral.getImage((int)(miConfiguracion.getConfig_Colores()[0])) ;
+		  BufferedImage img=imgGral.getImage((int)(miConfiguracion.getConfig_Colores()[0]+(num_pieza_actual*7))) ;
 
-        g2d.drawImage(img, 0, 0, (0 + miConfiguracion.getConfig_Regla()[0]), (0 + miConfiguracion.getConfig_Regla()[0]), 0, 0, 744, 768, null);
+        g2d.drawImage(img, 655, 80, (655 + miConfiguracion.getConfig_Regla()[0]), (80 + miConfiguracion.getConfig_Regla()[0]), 0, 0, 744, 768, null);
 
-		if(num_img_de_configuracion==666) { //solo lo utilizo para configurar algunas cosas no se usa en el juego final. O SI?
+		if(dibujar==true) { //solo lo utilizo para configurar algunas cosas no se usa en el juego final. O SI?
 			g.drawImage(imgGral.getImage(1), x, y, (x+25), (y+25), 0, 0, 1024, 768, null);
-			
+			dibujar=false;
 		}
 	}
 
