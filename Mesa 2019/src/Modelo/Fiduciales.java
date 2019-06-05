@@ -17,7 +17,7 @@ public class Fiduciales {
 		idMarcador[8] = 8;   //Flor blanca
 		idMarcador[9] = 9;   //Regla
 		idMarcador[10] = 10; //Transparencias
-		idMarcador[11] = 11; //Selector de fondos
+		idMarcador[11] = 11; //Circulo cromatico
 		idMarcador[12] = 12; //Goma
 		idMarcador[13] = 16; //Circulo cromatico
 		idMarcador[14] = 20; //abrir/cerrar panel

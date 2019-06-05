@@ -8,9 +8,9 @@ import javax.imageio.ImageIO;
 public class Imagenes {
 
 	private BufferedImage[] image=new BufferedImage[63] ;
-	private BufferedImage[] imagen_config=new BufferedImage[18];
+	private BufferedImage[] imagen_config=new BufferedImage[26];
 	private BufferedImage[] imagen_gomas=new BufferedImage[5];
-	private BufferedImage[] imagen_lapiz=new BufferedImage[7];
+	private BufferedImage[] imagen_lapiz=new BufferedImage[6];
 	private BufferedImage fondo;
 	
 	
@@ -79,39 +79,48 @@ public class Imagenes {
 			"src/Imagenes/Objeto8/8-5.png",
 			"src/Imagenes/Objeto8/8-6.png",};  
 	
-	private String [] rutaObjetosConfiguracion= {"src/Imagenes/Regla-13.png",  //0
-			"src/Imagenes/Regla-14.png",									//1
-			"src/Imagenes/Regla-15.png",									//2
-			"src/Imagenes/Regla-16.png",									//3
-			"src/Imagenes/Regla-17.png",									//4
-			"src/Imagenes/Transparencia18.png",								//5
-			"src/Imagenes/Transparencia19.png",								//6
-			"src/Imagenes/Transparencia20.png",								//7
-			"src/Imagenes/Selector-de-fondos.png",  						//8
-			"src/Imagenes/Deshacer.png",  									//9
-			"src/Imagenes/Goma.png",  										//10
-			"src/Imagenes/Circulo-cromaticoBlanco.png",  					//11
-			"src/Imagenes/Circulo-cromaticoRojo.png",  						//12
-			"src/Imagenes/Circulo-cromaticoFucsia.png",  					//13
-			"src/Imagenes/Circulo-cromaticoAzul.png",  						//14
-			"src/Imagenes/Circulo-cromaticoCeleste.png",  					//15
-			"src/Imagenes/Circulo-cromaticoVerde.png",  					//16
-			"src/Imagenes/Circulo-cromaticoAmarillo.png",  					//17
-			"src/Imagenes/Texturas.png",};  								//18
+	private String [] rutaObjetosConfiguracion= {
+			"src/Imagenes/Zoom/Regla-13.png",  								//0
+			"src/Imagenes/Zoom/Regla-14.png",								//1
+			"src/Imagenes/Zoom/Regla-15.png",								//2
+			"src/Imagenes/Zoom/Regla-16.png",								//3
+			"src/Imagenes/Zoom/Regla-17.png",								//4
+			"src/Imagenes/Transparencia/Transparencia18.png",				//5
+			"src/Imagenes/Transparencia/Transparencia19.png",				//6
+			"src/Imagenes/Transparencia/Transparencia20.png",				//7
+			"src/Imagenes/SelectorFondo/Circulo-cromaticoBlanco.png",  		//8
+			"src/Imagenes/SelectorFondo/Circulo-cromaticoRojo.png",  		//9
+			"src/Imagenes/SelectorFondo/Circulo-cromaticoFucsia.png",  		//10
+			"src/Imagenes/SelectorFondo/Circulo-cromaticoAzul.png",  		//11
+			"src/Imagenes/SelectorFondo/Circulo-cromaticoCeleste.png",  	//12
+			"src/Imagenes/SelectorFondo/Circulo-cromaticoVerde.png",  		//13
+			"src/Imagenes/SelectorFondo/Circulo-cromaticoAmarillo.png",		//14
+			"src/Imagenes/ColoresTexturas/CirculoBlanco.png",					//15
+			"src/Imagenes/ColoresTexturas/CirculoRojo.png",						//16
+			"src/Imagenes/ColoresTexturas/CirculoRosa.png",						//17
+			"src/Imagenes/ColoresTexturas/CirculoAzul.png",						//18
+			"src/Imagenes/ColoresTexturas/CirculoVerde.png",					//19
+			"src/Imagenes/ColoresTexturas/CirculoAmarillo.png",					//20
+			"src/Imagenes/ColoresTexturas/CirculoSepia.png",					//21
+			"src/Imagenes/ColoresTexturas/CirculoDesenfoque.png",				//22
+			"src/Imagenes/ColoresTexturas/CirculoPixel.png",					//23
+			"src/Imagenes/ColoresTexturas/CirculoByN.png",						//24
+			"src/Imagenes/ColoresTexturas/CirculoGrises.png",};  				//25
 	
-	private String [] rutaGomas= {"src/Imagenes/cuadradoblanco.png", //0
-			"src/Imagenes/cuadradorojo.png",						 //1
-			"src/Imagenes/cuadradoazul.png",						 //2
-			"src/Imagenes/cuadradoverde.png",						 //3
-			"src/Imagenes/cuadradoamarillo.png",};					 //4
+	private String [] rutaGomas= {
+			"src/Imagenes/Goma/cuadradoblanco.png", 	//0
+			"src/Imagenes/Goma/cuadradorojo.png",						//1
+			"src/Imagenes/Goma/cuadradoazul.png",						//2
+			"src/Imagenes/Goma/cuadradoverde.png",						//3
+			"src/Imagenes/Goma/cuadradoamarillo.png",};					//4
 	
-	private String [] rutaLapiz= {"src/Imagenes/CirculoBlanco.png", //0
-			"src/Imagenes/CirculoRojo.png",							//1
-			"src/Imagenes/CirculoMagenta.png",						//2
-			"src/Imagenes/CirculoAzul.png",							//3
-			"src/Imagenes/CirculoCian.png",							//4
-			"src/Imagenes/CirculoVerde.png",						//5
-			"src/Imagenes/CirculoAmarillo.png",};					//6
+	private String [] rutaLapiz= {
+			"src/Imagenes/Lapiz/LapizNegro.png", //0
+			"src/Imagenes/Lapiz/LapizRojo.png",							//1
+			"src/Imagenes/Lapiz/LapizMagenta.png",						//2
+			"src/Imagenes/Lapiz/LapizAzul.png",							//3
+			"src/Imagenes/Lapiz/LapizVerde.png",						//4
+			"src/Imagenes/Lapiz/LapizAmarillo.png",};					//5
 	
 						
 	private String rutaFondo= "src/Imagenes/fondo_config.png";

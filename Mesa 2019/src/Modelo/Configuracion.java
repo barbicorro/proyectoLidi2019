@@ -7,7 +7,7 @@ public class Configuracion { //Esta clase deberia ser estatica? definir correcta
 	private static int[] config_Regla= {190,0,0};   //0-Nivel de zoom       1-eje x      2-eje y
 	private static float[] config_Transparencia = {1,0,0}; //0-Nivel de opacidad   1-eje x   2-eje y
 	private static int [] config_Fondo= {0,0,0};
-	private static int [] config_Colores= {0,0,0}; //0-Color     1-eje x      2-eje y
+	private static int [] config_ColoresTexturas= {0,0,0,0}; //0-ColorOTextura  1-eje x  2-eje y 3-colorLapiz
 	private static boolean cambioConfig;
 
 	private static boolean mural_activado=true;
@@ -67,9 +67,7 @@ public class Configuracion { //Esta clase deberia ser estatica? definir correcta
 	public static int[] getConfig_Fondo() {
 		return config_Fondo;
 	}
-
-
-
+	
 	public static void setConfig_Fondo(int x, int y) {
 		Configuracion.config_Fondo[1] = x;
 		Configuracion.config_Fondo[2] = y;
@@ -81,19 +79,21 @@ public class Configuracion { //Esta clase deberia ser estatica? definir correcta
 	}
 	
 	
-	public static int[] getConfig_Colores() {
-		return config_Colores;
+	public static int[] getConfig_ColoresTexturas() {
+		return config_ColoresTexturas;
 	}
 
-
-
-	public static void setConfig_Colores(int x, int y) {
-		Configuracion.config_Colores[1] = x;
-		Configuracion.config_Colores[2] = y;
+	public static void setConfig_ColoresTexturas(int x, int y) {
+		Configuracion.config_ColoresTexturas[1] = x;
+		Configuracion.config_ColoresTexturas[2] = y;
 	}
 	
-	public static void setConfig_ColoresNivel(int nivel) {
-		Configuracion.config_Colores[0] = nivel;
+	public static void setConfig_ColoresTexturasNivel(int nivel) {
+		//si viene una textura entonces no cambio el color del lapiz
+		if(nivel<5) { //para el lapiz
+			Configuracion.config_ColoresTexturas[3]= nivel;	
+		} 
+		Configuracion.config_ColoresTexturas[0] = nivel;
 		cambioConfig = true;
 	}
 
