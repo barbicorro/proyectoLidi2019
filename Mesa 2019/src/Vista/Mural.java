@@ -117,7 +117,7 @@ public class Mural extends JPanel {
 						  break;
 					  } 
 					  default:{ //fiduciales
-						  BufferedImage img=imgGral.getImage((int)((info_en_el_tiempo[0]*7)+info_en_el_tiempo[7])) ;
+						  BufferedImage img=imgGral.getImage((int)((info_en_el_tiempo[0]*11)+info_en_el_tiempo[7])) ;
 						  AffineTransform tx = AffineTransform.getRotateInstance(info_en_el_tiempo[6],(info_en_el_tiempo[1]),(info_en_el_tiempo[2]));
 						  g2d.setTransform(tx);
 						  g2d.drawImage(img, (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);

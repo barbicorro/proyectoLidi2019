@@ -7,9 +7,9 @@ import javax.imageio.ImageIO;
 
 public class Imagenes {
 
-	private BufferedImage[] image=new BufferedImage[63] ;
+	private BufferedImage[] image=new BufferedImage[99] ;
 	private BufferedImage[] imagen_config=new BufferedImage[26];
-	private BufferedImage[] imagen_gomas=new BufferedImage[5];
+	private BufferedImage[] imagen_gomas=new BufferedImage[7];
 	private BufferedImage[] imagen_lapiz=new BufferedImage[6];
 	private BufferedImage fondo;
 	
@@ -21,7 +21,11 @@ public class Imagenes {
 			"src/Imagenes/Objeto0/0-3.png",  
 			"src/Imagenes/Objeto0/0-4.png",  
 			"src/Imagenes/Objeto0/0-5.png",  
-			"src/Imagenes/Objeto0/0-6.png",  
+			"src/Imagenes/Objeto0/0-6.png", 
+			"src/Imagenes/Objeto0/0-7.png",  
+			"src/Imagenes/Objeto0/0-8.png",  
+			"src/Imagenes/Objeto0/0-9.png", 
+			"src/Imagenes/Objeto0/0-10.png", 
 			"src/Imagenes/Objeto1/1-0.png",  //1- Pelota
 			"src/Imagenes/Objeto1/1-1.png",
 			"src/Imagenes/Objeto1/1-2.png",
@@ -29,6 +33,10 @@ public class Imagenes {
 			"src/Imagenes/Objeto1/1-4.png",
 			"src/Imagenes/Objeto1/1-5.png",
 			"src/Imagenes/Objeto1/1-6.png",
+			"src/Imagenes/Objeto1/1-7.png",  
+			"src/Imagenes/Objeto1/1-8.png",  
+			"src/Imagenes/Objeto1/1-9.png", 
+			"src/Imagenes/Objeto1/1-10.png",
 			"src/Imagenes/Objeto2/2-0.png",  //2- Caracol1
 			"src/Imagenes/Objeto2/2-1.png",
 			"src/Imagenes/Objeto2/2-2.png",
@@ -36,6 +44,10 @@ public class Imagenes {
 			"src/Imagenes/Objeto2/2-4.png",
 			"src/Imagenes/Objeto2/2-5.png",
 			"src/Imagenes/Objeto2/2-6.png",
+			"src/Imagenes/Objeto2/2-7.png",  
+			"src/Imagenes/Objeto2/2-8.png",  
+			"src/Imagenes/Objeto2/2-9.png", 
+			"src/Imagenes/Objeto2/2-10.png",
 			"src/Imagenes/Objeto3/3-0.png",  //3- Caracol2
 			"src/Imagenes/Objeto3/3-1.png",
 			"src/Imagenes/Objeto3/3-2.png",
@@ -43,6 +55,10 @@ public class Imagenes {
 			"src/Imagenes/Objeto3/3-4.png",
 			"src/Imagenes/Objeto3/3-5.png",
 			"src/Imagenes/Objeto3/3-6.png",
+			"src/Imagenes/Objeto3/3-7.png",  
+			"src/Imagenes/Objeto3/3-8.png",  
+			"src/Imagenes/Objeto3/3-9.png", 
+			"src/Imagenes/Objeto3/3-10.png",
 			"src/Imagenes/Objeto4/4-0.png",  //4- Caracol3
 			"src/Imagenes/Objeto4/4-1.png",
 			"src/Imagenes/Objeto4/4-2.png",
@@ -50,6 +66,10 @@ public class Imagenes {
 			"src/Imagenes/Objeto4/4-4.png",
 			"src/Imagenes/Objeto4/4-5.png",
 			"src/Imagenes/Objeto4/4-6.png",
+			"src/Imagenes/Objeto4/4-7.png",  
+			"src/Imagenes/Objeto4/4-8.png",  
+			"src/Imagenes/Objeto4/4-9.png", 
+			"src/Imagenes/Objeto4/4-10.png",
 			"src/Imagenes/Objeto5/5-0.png",  //5- Flor rosa
 			"src/Imagenes/Objeto5/5-1.png",
 			"src/Imagenes/Objeto5/5-2.png",
@@ -57,6 +77,10 @@ public class Imagenes {
 			"src/Imagenes/Objeto5/5-4.png",
 			"src/Imagenes/Objeto5/5-5.png",
 			"src/Imagenes/Objeto5/5-6.png",
+			"src/Imagenes/Objeto5/5-7.png",  
+			"src/Imagenes/Objeto5/5-8.png",  
+			"src/Imagenes/Objeto5/5-9.png", 
+			"src/Imagenes/Objeto5/5-10.png",
 			"src/Imagenes/Objeto6/6-0.png",  //6- Flor amarilla
 			"src/Imagenes/Objeto6/6-1.png",
 			"src/Imagenes/Objeto6/6-2.png",
@@ -64,6 +88,10 @@ public class Imagenes {
 			"src/Imagenes/Objeto6/6-4.png",
 			"src/Imagenes/Objeto6/6-5.png",
 			"src/Imagenes/Objeto6/6-6.png",
+			"src/Imagenes/Objeto6/6-7.png",  
+			"src/Imagenes/Objeto6/6-8.png",  
+			"src/Imagenes/Objeto6/6-9.png", 
+			"src/Imagenes/Objeto6/6-10.png",
 			"src/Imagenes/Objeto7/7-0.png",  //7- Flor Naranja
 			"src/Imagenes/Objeto7/7-1.png",
 			"src/Imagenes/Objeto7/7-2.png",
@@ -71,13 +99,21 @@ public class Imagenes {
 			"src/Imagenes/Objeto7/7-4.png",
 			"src/Imagenes/Objeto7/7-5.png",
 			"src/Imagenes/Objeto7/7-6.png",
+			"src/Imagenes/Objeto7/7-7.png",  
+			"src/Imagenes/Objeto7/7-8.png",  
+			"src/Imagenes/Objeto7/7-9.png", 
+			"src/Imagenes/Objeto7/7-10.png",
 			"src/Imagenes/Objeto8/8-0.png",  //8- Flor Blanca
 			"src/Imagenes/Objeto8/8-1.png",
 			"src/Imagenes/Objeto8/8-2.png",
 			"src/Imagenes/Objeto8/8-3.png",
 			"src/Imagenes/Objeto8/8-4.png",
 			"src/Imagenes/Objeto8/8-5.png",
-			"src/Imagenes/Objeto8/8-6.png",};  
+			"src/Imagenes/Objeto8/8-6.png",
+			"src/Imagenes/Objeto8/8-7.png",  
+			"src/Imagenes/Objeto8/8-8.png",  
+			"src/Imagenes/Objeto8/8-9.png", 
+			"src/Imagenes/Objeto8/8-10.png",};  
 	
 	private String [] rutaObjetosConfiguracion= {
 			"src/Imagenes/Zoom/Regla-13.png",  								//0
@@ -108,14 +144,16 @@ public class Imagenes {
 			"src/Imagenes/ColoresTexturas/CirculoGrises.png",};  				//25
 	
 	private String [] rutaGomas= {
-			"src/Imagenes/Goma/cuadradoblanco.png", 	//0
+			"src/Imagenes/Goma/cuadradoblanco.png", 					//0
 			"src/Imagenes/Goma/cuadradorojo.png",						//1
-			"src/Imagenes/Goma/cuadradoazul.png",						//2
-			"src/Imagenes/Goma/cuadradoverde.png",						//3
-			"src/Imagenes/Goma/cuadradoamarillo.png",};					//4
+			"src/Imagenes/Goma/cuadradomagenta.png",					//2
+			"src/Imagenes/Goma/cuadradoazul.png",						//3
+			"src/Imagenes/Goma/cuadradocian.png",						//4
+			"src/Imagenes/Goma/cuadradoverde.png",						//5
+			"src/Imagenes/Goma/cuadradoamarillo.png",};					//6
 	
 	private String [] rutaLapiz= {
-			"src/Imagenes/Lapiz/LapizNegro.png", //0
+			"src/Imagenes/Lapiz/LapizNegro.png", 						//0
 			"src/Imagenes/Lapiz/LapizRojo.png",							//1
 			"src/Imagenes/Lapiz/LapizMagenta.png",						//2
 			"src/Imagenes/Lapiz/LapizAzul.png",							//3
