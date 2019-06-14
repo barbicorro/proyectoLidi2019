@@ -99,7 +99,7 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 		}
 		
 		
-		if((!panel_configuracion.isVisible()) && ((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12])||(tobj.getSymbolID())==fiduciales.getIdMarcador()[15]) {
+		if(((!panel_configuracion.isVisible()) && ((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12])||(tobj.getSymbolID())==fiduciales.getIdMarcador()[15])&&!panel_configuracion.isVisible()) {
 			mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees());
 		}else {
 			if((panel_configuracion.isVisible())) {	
@@ -112,7 +112,7 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	@Override
 	// Se llama cuando un objeto fue movido(arrastrado) sobre la superficie de la mesa
 	public void updateTuioObject(TuioObject tobj) {
-		if((!panel_configuracion.isVisible()) && ((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12])) {
+		if(((!panel_configuracion.isVisible()) && ((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12]))&&!panel_configuracion.isVisible()) {
 			mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees());
 		}else {
 			if((panel_configuracion.isVisible())) {	
@@ -138,8 +138,8 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 			panel_configuracion.dibujar_punto(tcur.getX(), tcur.getY());
 		}
 		else {
-			//el cursor tiene id = 0 siempre, pero mando 99 para que no se confunda con la mamushka
-			mural.actualizar(tcur.getX(), tcur.getY(), 99, 0);
+			//el cursor tiene id = 0 siempre, pero mando 150 para que no se confunda con la mamushka
+			mural.actualizar(tcur.getX(), tcur.getY(), 150, 0);
 		}
 	}
 
@@ -151,8 +151,8 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 			panel_configuracion.dibujar_punto(tcur.getX(), tcur.getY());
 		}
 		else {
-			//el cursor tiene id = 0 siempre, pero mando 99 para que no se confunda con la mamushka
-			mural.actualizar(tcur.getX(), tcur.getY(), 99, 0);
+			//el cursor tiene id = 0 siempre, pero mando 150 para que no se confunda con la mamushka
+			mural.actualizar(tcur.getX(), tcur.getY(), 150, 0);
 		}
 	}
 

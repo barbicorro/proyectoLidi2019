@@ -1,9 +1,12 @@
 package Vista;
+import java.awt.Frame;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 public class Imagenes {
 
@@ -11,6 +14,7 @@ public class Imagenes {
 	private BufferedImage[] imagen_config=new BufferedImage[26];
 	private BufferedImage[] imagen_gomas=new BufferedImage[7];
 	private BufferedImage[] imagen_lapiz=new BufferedImage[6];
+	private BufferedImage imagen_fondo;
 	private BufferedImage fondo;
 	
 	
@@ -255,6 +259,28 @@ public class Imagenes {
 		this.image[i] = image;
 	}
 	
+	public void imprimirCap(JPanel paintPane) {
+		BufferedImage image = new BufferedImage(1024, 768, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = image.createGraphics();
+		paintPane.printAll(g);
+		g.dispose();
+		try { 
+		    System.out.println("imprimio " + ImageIO.write(image, "png", new File("C:/Users/Franco/Desktop" + "/asd.png"))); 
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+	}
+	
+	public BufferedImage getCap() {
+		try {
+			imagen_fondo=ImageIO.read(new File("C:/Users/Franco/Desktop" + "/asd.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+System.out.println("no se encontro archio");
+			e.printStackTrace();
+		}
+		return imagen_fondo;
+	}
 	
 
 

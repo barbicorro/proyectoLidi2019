@@ -22,6 +22,7 @@ public class Fiduciales {
 		idMarcador[13] = 16; //Circulo cromatico
 		idMarcador[14] = 20; //abrir/cerrar panel
 		idMarcador[15] = 24; //reset
+		
 		//version para la mesa        ---->Poner -108 en linea 84 mural, vengo del futuro y ya no es la 84 ahre
 		/*
 		idMarcador[0] = 108;   //Mamushka
@@ -38,8 +39,8 @@ public class Fiduciales {
 		idMarcador[11] = 119;  //Selector de fondos
 		idMarcador[12] = 120;  //Goma
 		idMarcador[13] = 142; //Circulo cromatico
-		idMarcador[14] = 143;	//abrir/cerrar panel
-		idMarcador[15] = 144;	//reset
+		idMarcador[14] = 139;	//abrir/cerrar panel
+		idMarcador[15] = 140;	//reset
 		*/
 	}
 	
