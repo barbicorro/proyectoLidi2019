@@ -13,7 +13,7 @@ public class Imagenes {
 	private BufferedImage[] image=new BufferedImage[99] ;
 	private BufferedImage[] imagen_config=new BufferedImage[26];
 	private BufferedImage[] imagen_gomas=new BufferedImage[7];
-	private BufferedImage[] imagen_lapiz=new BufferedImage[6];
+	private BufferedImage[] imagen_lapiz=new BufferedImage[1];
 	private BufferedImage imagen_fondo;
 	private BufferedImage fondo;
 	
@@ -157,12 +157,7 @@ public class Imagenes {
 			"src/Imagenes/Goma/cuadradoamarillo.png",};					//6
 	
 	private String [] rutaLapiz= {
-			"src/Imagenes/Lapiz/LapizNegro.png", 						//0
-			"src/Imagenes/Lapiz/LapizRojo.png",							//1
-			"src/Imagenes/Lapiz/LapizMagenta.png",						//2
-			"src/Imagenes/Lapiz/LapizAzul.png",							//3
-			"src/Imagenes/Lapiz/LapizVerde.png",						//4
-			"src/Imagenes/Lapiz/LapizAmarillo.png",};					//5
+			"src/Imagenes/Lapiz/LapizNegro.png",};						//0
 	
 						
 	private String rutaFondo= "src/Imagenes/fondo_config.png";
@@ -265,7 +260,8 @@ public class Imagenes {
 		paintPane.printAll(g);
 		g.dispose();
 		try { 
-		    System.out.println("imprimio " + ImageIO.write(image, "png", new File("C:/Users/Franco/Desktop" + "/asd.png"))); 
+			//System.out.println("imprimio " + ImageIO.write(image, "png", new File("C:/Users/Franco/Desktop" + "/asd.png")));
+		    System.out.println("imprimio " + ImageIO.write(image, "png", new File("src/Imagenes/MuralActual" + "/copiaMuralActual.png"))); 
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}
@@ -273,10 +269,9 @@ public class Imagenes {
 	
 	public BufferedImage getCap() {
 		try {
-			imagen_fondo=ImageIO.read(new File("C:/Users/Franco/Desktop" + "/asd.png"));
+			imagen_fondo=ImageIO.read(new File("src/Imagenes/MuralActual" + "/copiaMuralActual.png"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-System.out.println("no se encontro archio");
+			System.out.println("no se encontro archivo");
 			e.printStackTrace();
 		}
 		return imagen_fondo;

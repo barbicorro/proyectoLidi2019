@@ -22,7 +22,7 @@ public class Mural extends JPanel {
 	private int num_img=-1;
 	private Panel_configuracion panel_configuracion;
 	private ArrayList<float []> lista = new ArrayList<float []>();
-	private float [] info_en_el_tiempo; // 0->numero imagen     1->coordenada x    2->coordenada y     3->ancho del rectangulo donde se va a dibujar      4-> alto del rectangulo donde se va a dibujar	5->Transparencia 6->Angulo de rotacion 7->Color/Textura 8->Color lapiz
+	private float [] info_en_el_tiempo; // 0->numero imagen     1->coordenada x    2->coordenada y     3->ancho del rectangulo donde se va a dibujar      4-> alto del rectangulo donde se va a dibujar	5->Transparencia 6->Angulo de rotacion 7->Color/Textura 
 	private Configuracion miConfiguracion;
 	private int actualBackground = 0;
 	private JPanel paintPane;
@@ -106,10 +106,10 @@ public class Mural extends JPanel {
 	
 						lista.clear();
 						//imgGral.imprimirCap(this); --->linea 44
-						float [] info_en_el_tiempo= {-2,this.x,this.y, (this.x + miConfiguracion.getConfig_Regla()[0]), (this.y + miConfiguracion.getConfig_Regla()[0]), miConfiguracion.getConfig_Transparencia()[0], (float)this.anguloRadianes, miConfiguracion.getConfig_ColoresTexturas()[0], miConfiguracion.getConfig_ColoresTexturas()[3]};
+						float [] info_en_el_tiempo= {-2,this.x,this.y, (this.x + miConfiguracion.getConfig_Regla()[0]), (this.y + miConfiguracion.getConfig_Regla()[0]), miConfiguracion.getConfig_Transparencia()[0], (float)this.anguloRadianes, miConfiguracion.getConfig_ColoresTexturas()[0]};
 						lista.add(info_en_el_tiempo);
 					}else {
-						float [] info_en_el_tiempo= {num_img,this.x,this.y, (this.x + miConfiguracion.getConfig_Regla()[0]), (this.y + miConfiguracion.getConfig_Regla()[0]), miConfiguracion.getConfig_Transparencia()[0], (float)this.anguloRadianes, miConfiguracion.getConfig_ColoresTexturas()[0], miConfiguracion.getConfig_ColoresTexturas()[3]};
+						float [] info_en_el_tiempo= {num_img,this.x,this.y, (this.x + miConfiguracion.getConfig_Regla()[0]), (this.y + miConfiguracion.getConfig_Regla()[0]), miConfiguracion.getConfig_Transparencia()[0], (float)this.anguloRadianes, miConfiguracion.getConfig_ColoresTexturas()[0]};
 						lista.add(info_en_el_tiempo);
 					}
 					System.out.println(lista.size());
@@ -129,8 +129,9 @@ public class Mural extends JPanel {
 					AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,info_en_el_tiempo[5]);
 					g2d.setComposite(alcom);
 					switch((int)info_en_el_tiempo[0]) {
-					  case 42:{ //lapiz
-						  g2d.drawImage(imgGral.getImagen_lapiz((int)info_en_el_tiempo[8]), (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
+						//aca decia case 42 para el lapiz no se xq -------------------
+					  case 150:{ //lapiz
+						  g2d.drawImage(imgGral.getImagen_lapiz(0), (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
 						  break;
 					  }
 					  case 12:{ //goma
