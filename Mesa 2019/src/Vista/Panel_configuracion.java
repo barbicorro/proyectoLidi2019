@@ -2,17 +2,16 @@ package Vista;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Iterator;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Modelo.*;
-import java.lang.Math.*;
 
 public class Panel_configuracion extends JPanel {
 	private Imagenes imgGral = new Imagenes();
@@ -21,10 +20,23 @@ public class Panel_configuracion extends JPanel {
 	private Configuracion miConfiguracion;
 	private Fiduciales fiduciales;
 	private boolean dibujar=false;
+	private JLabel feedback = new JLabel();
+	private String[] feedbackHerramienta= {"<html><body>Esta regla te permite achicar o agrandar ",
+			"<html><body>Con esta regla podes hacer más o menos transparente ",
+			"<html><body>El selector de fondos te permite cambiar éste al color quieras!",
+			"<html><body>El círculo cromático te permite darle distintos colores o texturas "};
+	private String[] feedbackObjeto= {"a la mamushka</body></html>","a la pelota</body></html>", 
+			"al caracol</body></html>","a la flor</body></html>"};
 	
 	public Panel_configuracion(){
 		//setBackground(Color.PINK);
 		setBounds(512, 0, 512, 768);
+		setLayout(null); //el layout por defecto centra todos los elementos, asique lo saque
+		feedback.setFont(new Font("Verdana",1,20));
+		feedback.setForeground(Color.white);
+		feedback.setBounds(new Rectangle(70, 20, 400, 500));
+		//feedback.setVisible(false);
+	    add(feedback);
 		
 	}
 	
@@ -57,45 +69,112 @@ public class Panel_configuracion extends JPanel {
 		Graphics2D g2d = (Graphics2D)g;
 		g.drawImage(imgGral.getFondo(), 0, 0,null);
 
-		   if(num_img_de_configuracion == fiduciales.getIdMarcador()[9]) { // 9 es el id de la regla
+	//Reconocimiento de la herramienta ------------------------------------------------------------------------
+	   if(num_img_de_configuracion == fiduciales.getIdMarcador()[9]) { // 9 es el id de la regla
+			if(dibujar==false) {
+				miConfiguracion.setConfig_Regla(x,y);
+			}
+			g.drawImage(imgGral.getImagen_config()[nivelActRegla], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+600) , (miConfiguracion.getConfig_Regla()[2] + 300), 0, 0, 1024, 768, null);
+			imgActual=0; //posicion de la regla en el vector
+		}
+		else {
+			if (num_img_de_configuracion== fiduciales.getIdMarcador()[10]) { //10 es el id de las tranparencias
 				if(dibujar==false) {
-					miConfiguracion.setConfig_Regla(x,y);
+					miConfiguracion.setConfig_Transparencia(x,y);
 				}
-				g.drawImage(imgGral.getImagen_config()[nivelActRegla], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+600) , (miConfiguracion.getConfig_Regla()[2] + 300), 0, 0, 1024, 768, null);
-				imgActual=0; //posicion de la regla en el vector
-			}
+				g.drawImage(imgGral.getImagen_config()[nivelActTrans], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+600) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 300), 0, 0, 1024, 768, null);
+				imgActual=1; //posicion de la herramienta de transparencia en el vector
+			} 
 			else {
-				if (num_img_de_configuracion== fiduciales.getIdMarcador()[10]) { //10 es el id de las tranparencias
+				if (num_img_de_configuracion== fiduciales.getIdMarcador()[11]) { //11 es el id del selector de fondos
 					if(dibujar==false) {
-						miConfiguracion.setConfig_Transparencia(x,y);
+						miConfiguracion.setConfig_Fondo(x, y);
 					}
-					g.drawImage(imgGral.getImagen_config()[nivelActTrans], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+600) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 300), 0, 0, 1024, 768, null);
-					imgActual=1; //posicion de la herramienta de transparencia en el vector
-				} 
+					g.drawImage(imgGral.getImagen_config()[miConfiguracion.getConfig_Fondo()[0]+8], (int)miConfiguracion.getConfig_Fondo()[1], (int)miConfiguracion.getConfig_Fondo()[2], (int)(miConfiguracion.getConfig_Fondo()[1]+500) , (int)(miConfiguracion.getConfig_Fondo()[2] + 700), 0, 0, 512, 768, null);
+					imgActual= miConfiguracion.getConfig_Fondo()[0]+8; //posicion del color seleccionado en el vector de imagenes del selector
+				}
 				else {
-					if (num_img_de_configuracion== fiduciales.getIdMarcador()[11]) { //11 es el id del selector de fondos
+					if (num_img_de_configuracion== fiduciales.getIdMarcador()[13]) { //en la pos 13 esta el id del circulo cromatico
 						if(dibujar==false) {
-							miConfiguracion.setConfig_Fondo(x, y);
+							miConfiguracion.setConfig_ColoresTexturas(x, y);
 						}
-						g.drawImage(imgGral.getImagen_config()[miConfiguracion.getConfig_Fondo()[0]+8], (int)miConfiguracion.getConfig_Fondo()[1], (int)miConfiguracion.getConfig_Fondo()[2], (int)(miConfiguracion.getConfig_Fondo()[1]+500) , (int)(miConfiguracion.getConfig_Fondo()[2] + 700), 0, 0, 512, 768, null);
-						imgActual= miConfiguracion.getConfig_Fondo()[0]+8; //posicion del color seleccionado en el vector de imagenes del selector
-					}
-					else {
-						if (num_img_de_configuracion== fiduciales.getIdMarcador()[13]) { //en la pos 13 esta el id del circulo cromatico
-							if(dibujar==false) {
-								miConfiguracion.setConfig_ColoresTexturas(x, y);
-							}
-							g.drawImage(imgGral.getImagen_config()[miConfiguracion.getConfig_ColoresTexturas()[0]+15], (int)miConfiguracion.getConfig_ColoresTexturas()[1], (int)miConfiguracion.getConfig_ColoresTexturas()[2], (int)(miConfiguracion.getConfig_ColoresTexturas()[1]+500) , (int)(miConfiguracion.getConfig_ColoresTexturas()[2] + 700), 0, 0, 512, 768, null);
-							imgActual= miConfiguracion.getConfig_ColoresTexturas()[0]+15; //posicion del color seleccionado en el vector de imagenes
-							
-						}
+						g.drawImage(imgGral.getImagen_config()[miConfiguracion.getConfig_ColoresTexturas()[0]+15], (int)miConfiguracion.getConfig_ColoresTexturas()[1], (int)miConfiguracion.getConfig_ColoresTexturas()[2], (int)(miConfiguracion.getConfig_ColoresTexturas()[1]+500) , (int)(miConfiguracion.getConfig_ColoresTexturas()[2] + 700), 0, 0, 512, 768, null);
+						imgActual= miConfiguracion.getConfig_ColoresTexturas()[0]+15; //posicion del color seleccionado en el vector de imagenes
+						
 					}
 				}
 			}
+		}
 		AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,miConfiguracion.getConfig_Transparencia()[0]);
         g2d.setComposite(alcom);
         
+      //Feedback ----------------------------------------------------------------------------------------
+        switch (num_img_de_configuracion) {
+ 	        case 9:{ //tamaño
+ 	        	if(num_pieza_actual==0) {
+ 	        		feedback.setText(feedbackHerramienta[0]+feedbackObjeto[0]);
+ 	        	} else {
+ 	        		if(num_pieza_actual==1) {
+ 	        			feedback.setText(feedbackHerramienta[0]+feedbackObjeto[1]);
+ 	        		} else {
+ 	        			if(num_pieza_actual>=2 && num_pieza_actual<=4) {
+ 	        				feedback.setText(feedbackHerramienta[0]+feedbackObjeto[2]);
+ 		        		} else {
+ 		        			if(num_pieza_actual>=5 && num_pieza_actual<=8) {
+ 		        				feedback.setText(feedbackHerramienta[0]+feedbackObjeto[3]);
+ 		        			}
+ 		        		}
+ 	        		}
+ 	        	}
+ 	        	break;
+ 	        }
+ 	        case 10:{ //transparencia
+ 	        	if(num_pieza_actual==0) {
+ 	        		feedback.setText(feedbackHerramienta[1]+feedbackObjeto[0]);
+ 	        	} else {
+ 	        		if(num_pieza_actual==1) {
+ 	        			feedback.setText(feedbackHerramienta[1]+feedbackObjeto[1]);
+ 	        		} else {
+ 	        			if(num_pieza_actual>=2 && num_pieza_actual<=4) {
+ 	        				feedback.setText(feedbackHerramienta[1]+feedbackObjeto[2]);
+ 		        		} else {
+ 		        			if(num_pieza_actual>=5 && num_pieza_actual<=8) {
+ 		        				feedback.setText(feedbackHerramienta[1]+feedbackObjeto[3]);
+ 		        			}
+ 		        		}
+ 	        		}
+ 	        	}
+ 	        	break;
+ 	        }
+ 	        case 11:{ //fondo
+ 	        	feedback.setText(feedbackHerramienta[2]);
+ 	          break;
+ 	        }
+ 	        case 16:{ //color
+ 	        	if(num_pieza_actual==0) {
+ 	        		feedback.setText(feedbackHerramienta[3]+feedbackObjeto[0]);
+ 	        	} else {
+ 	        		if(num_pieza_actual==1) {
+ 	        			feedback.setText(feedbackHerramienta[3]+feedbackObjeto[1]);
+ 	        		} else {
+ 	        			if(num_pieza_actual>=2 && num_pieza_actual<=4) {
+ 	        				feedback.setText(feedbackHerramienta[3]+feedbackObjeto[2]);
+ 		        		} else {
+ 		        			if(num_pieza_actual>=5 && num_pieza_actual<=8) {
+ 		        				feedback.setText(feedbackHerramienta[3]+feedbackObjeto[3]);
+ 		        			}
+ 		        		}
+ 	        		}
+ 	        	}
+ 	        	break;
+ 	        }
+ 	        default:{
+ 	        	feedback.setText("<html><body>¡Bienvenido al panel de configuración!</body></html>");
+ 		        break;
+ 	        }
+         }
         
+        //Acción de la herramienta -----------------------------------------------------------------------------
      
 		if((imgActual==0)&&(dibujar==true)){
 			//g.drawImage(imgGral.getImagen_config()[nivelActRegla], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+600) , (miConfiguracion.getConfig_Regla()[2] + 300), 0, 0, 1024, 768, null);
@@ -259,9 +338,8 @@ public class Panel_configuracion extends JPanel {
 				} imgActual=0;
 			}
 		}
-		
-		  BufferedImage img=imgGral.getImage((int)(miConfiguracion.getConfig_ColoresTexturas()[0]+(num_pieza_actual*11))) ;
-
+		//Imagen de previsualizacion --------------------------------------------------------
+		BufferedImage img=imgGral.getImage((int)(miConfiguracion.getConfig_ColoresTexturas()[0]+(num_pieza_actual*11))) ;
         g2d.drawImage(img, 655, 80, (655 + miConfiguracion.getConfig_Regla()[0]), (80 + miConfiguracion.getConfig_Regla()[0]), 0, 0, 744, 768, null);
 
 		if(dibujar==true) { //solo lo utilizo para configurar algunas cosas no se usa en el juego final. O SI?

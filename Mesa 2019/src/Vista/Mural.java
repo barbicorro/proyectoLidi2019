@@ -1,13 +1,9 @@
 package Vista;
 import java.awt.image.BufferedImage;
-import java.io.File;
-
-import Modelo.CambioColores;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.lang.Math.*;
 
 import javax.swing.JPanel;
 

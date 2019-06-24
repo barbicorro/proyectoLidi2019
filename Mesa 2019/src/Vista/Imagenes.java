@@ -1,5 +1,4 @@
 package Vista;
-import java.awt.Frame;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;

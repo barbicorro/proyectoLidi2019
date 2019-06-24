@@ -1,24 +1,21 @@
 package Controlador;
 
 import javax.swing.JFrame;
+
 import java.io.*;
 import TUIO.TuioBlob;
 import TUIO.TuioClient;
 import TUIO.TuioCursor;
 import TUIO.TuioSimulator;
 import TUIO.TuioTime;
-import Vista.Imagenes;
 import Vista.Mural;
 import Vista.Panel_configuracion;
 import TUIO.TuioListener;
 import TUIO.TuioObject;
-import javax.swing.JPanel;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
 
 import Modelo.*;
 
@@ -34,7 +31,6 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	private final JButton btnDesactivarPanel = new JButton("Desactivar Panel");
 
 	public static void main(String[] args) {   
-		// TODO Auto-generated method stub
 		TuioSimulator simulador = new TuioSimulator();
 		File archconfig = new File("config.xml");
 		String[] argv = { "-host", "127.0.0.1", "-port", "3333", "-config", archconfig.getAbsolutePath() };
@@ -76,10 +72,7 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 				}
 			}
 		});
-		
 		panel_configuracion.add(btnDesactivarPanel);
-		
-		
 	}
 	
 	
