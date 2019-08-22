@@ -44,8 +44,9 @@ public class Panel_configuracion extends JPanel {
 		
 		this.x=(int) (x*1024);
 		this.y=(int) (y*768);
-		if((id>=0)&&(id<=8)){
-			num_pieza_actual=id;
+		//if((id>=0)&&(id<=8)){
+		if((id>=108)&&(id<=116)){
+			num_pieza_actual=id-108;
 		}
 		this.num_img_de_configuracion=id;
 		this.anguloGrados = anguloGrados;
@@ -68,6 +69,79 @@ public class Panel_configuracion extends JPanel {
 
 		Graphics2D g2d = (Graphics2D)g;
 		g.drawImage(imgGral.getFondo(), 0, 0,null);
+		
+		 //Feedback simulador ----------------------------------------------------------------------------------------
+	     
+        switch (num_img_de_configuracion) {
+        	case 117:{
+ 	        //case 9:{ //tamaño
+ 	        	if(num_pieza_actual==0) {
+ 	        		
+ 	        		feedback.setText(feedbackHerramienta[0]+feedbackObjeto[0]);
+ 	        	} else {
+ 	        		if(num_pieza_actual==1) {
+ 	        			feedback.setText(feedbackHerramienta[0]+feedbackObjeto[1]);
+ 	        		} else {
+ 	        			if(num_pieza_actual>=2 && num_pieza_actual<=4) {
+ 	        				feedback.setText(feedbackHerramienta[0]+feedbackObjeto[2]);
+ 		        		} else {
+ 		        			if(num_pieza_actual>=5 && num_pieza_actual<=8) {
+ 		        				feedback.setText(feedbackHerramienta[0]+feedbackObjeto[3]);
+ 		        			}
+ 		        		}
+ 	        		}
+ 	        	}
+ 	        	break;
+ 	        }
+        	case 118:{
+ 	        //case 10:{ //transparencia
+ 	        	if(num_pieza_actual==0) {
+ 	        		feedback.setText(feedbackHerramienta[1]+feedbackObjeto[0]);
+ 	        	} else {
+ 	        		if(num_pieza_actual==1) {
+ 	        			feedback.setText(feedbackHerramienta[1]+feedbackObjeto[1]);
+ 	        		} else {
+ 	        			if(num_pieza_actual>=2 && num_pieza_actual<=4) {
+ 	        				feedback.setText(feedbackHerramienta[1]+feedbackObjeto[2]);
+ 		        		} else {
+ 		        			if(num_pieza_actual>=5 && num_pieza_actual<=8) {
+ 		        				feedback.setText(feedbackHerramienta[1]+feedbackObjeto[3]);
+ 		        			}
+ 		        		}
+ 	        		}
+ 	        	}
+ 	        	break;
+ 	        }
+        	case 119:{
+ 	        //case 11:{ //fondo
+ 	        	feedback.setText(feedbackHerramienta[2]);
+ 	          break;
+ 	        }
+        	case 142:{
+ 	        //case 16:{ //color
+ 	        	if(num_pieza_actual==0) {
+ 	        		feedback.setText(feedbackHerramienta[3]+feedbackObjeto[0]);
+ 	        	} else {
+ 	        		if(num_pieza_actual==1) {
+ 	        			feedback.setText(feedbackHerramienta[3]+feedbackObjeto[1]);
+ 	        		} else {
+ 	        			if(num_pieza_actual>=2 && num_pieza_actual<=4) {
+ 	        				feedback.setText(feedbackHerramienta[3]+feedbackObjeto[2]);
+ 		        		} else {
+ 		        			if(num_pieza_actual>=5 && num_pieza_actual<=8) {
+ 		        				feedback.setText(feedbackHerramienta[3]+feedbackObjeto[3]);
+ 		        			}
+ 		        		}
+ 	        		}
+ 	        	}
+ 	        	break;
+ 	        }
+ 	        default:{
+ 	        	feedback.setText("<html><body>¡Bienvenido al panel de configuración!</body></html>");
+ 		        break;
+ 	        }
+         }
+	      
 
 	//Reconocimiento de la herramienta ------------------------------------------------------------------------
 	   if(num_img_de_configuracion == fiduciales.getIdMarcador()[9]) { // 9 es el id de la regla
@@ -105,75 +179,11 @@ public class Panel_configuracion extends JPanel {
 				}
 			}
 		}
-		AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,miConfiguracion.getConfig_Transparencia()[0]);
-        g2d.setComposite(alcom);
+		//AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,miConfiguracion.getConfig_Transparencia()[0]);
+       // g2d.setComposite(alcom);
+	 
         
-      //Feedback ----------------------------------------------------------------------------------------
-        switch (num_img_de_configuracion) {
- 	        case 9:{ //tamaño
- 	        	if(num_pieza_actual==0) {
- 	        		feedback.setText(feedbackHerramienta[0]+feedbackObjeto[0]);
- 	        	} else {
- 	        		if(num_pieza_actual==1) {
- 	        			feedback.setText(feedbackHerramienta[0]+feedbackObjeto[1]);
- 	        		} else {
- 	        			if(num_pieza_actual>=2 && num_pieza_actual<=4) {
- 	        				feedback.setText(feedbackHerramienta[0]+feedbackObjeto[2]);
- 		        		} else {
- 		        			if(num_pieza_actual>=5 && num_pieza_actual<=8) {
- 		        				feedback.setText(feedbackHerramienta[0]+feedbackObjeto[3]);
- 		        			}
- 		        		}
- 	        		}
- 	        	}
- 	        	break;
- 	        }
- 	        case 10:{ //transparencia
- 	        	if(num_pieza_actual==0) {
- 	        		feedback.setText(feedbackHerramienta[1]+feedbackObjeto[0]);
- 	        	} else {
- 	        		if(num_pieza_actual==1) {
- 	        			feedback.setText(feedbackHerramienta[1]+feedbackObjeto[1]);
- 	        		} else {
- 	        			if(num_pieza_actual>=2 && num_pieza_actual<=4) {
- 	        				feedback.setText(feedbackHerramienta[1]+feedbackObjeto[2]);
- 		        		} else {
- 		        			if(num_pieza_actual>=5 && num_pieza_actual<=8) {
- 		        				feedback.setText(feedbackHerramienta[1]+feedbackObjeto[3]);
- 		        			}
- 		        		}
- 	        		}
- 	        	}
- 	        	break;
- 	        }
- 	        case 11:{ //fondo
- 	        	feedback.setText(feedbackHerramienta[2]);
- 	          break;
- 	        }
- 	        case 16:{ //color
- 	        	if(num_pieza_actual==0) {
- 	        		feedback.setText(feedbackHerramienta[3]+feedbackObjeto[0]);
- 	        	} else {
- 	        		if(num_pieza_actual==1) {
- 	        			feedback.setText(feedbackHerramienta[3]+feedbackObjeto[1]);
- 	        		} else {
- 	        			if(num_pieza_actual>=2 && num_pieza_actual<=4) {
- 	        				feedback.setText(feedbackHerramienta[3]+feedbackObjeto[2]);
- 		        		} else {
- 		        			if(num_pieza_actual>=5 && num_pieza_actual<=8) {
- 		        				feedback.setText(feedbackHerramienta[3]+feedbackObjeto[3]);
- 		        			}
- 		        		}
- 	        		}
- 	        	}
- 	        	break;
- 	        }
- 	        default:{
- 	        	feedback.setText("<html><body>¡Bienvenido al panel de configuración!</body></html>");
- 		        break;
- 	        }
-         }
-        
+     
         //Acción de la herramienta -----------------------------------------------------------------------------
      
 		if((imgActual==0)&&(dibujar==true)){
@@ -339,9 +349,13 @@ public class Panel_configuracion extends JPanel {
 			}
 		}
 		//Imagen de previsualizacion --------------------------------------------------------
+		
 		BufferedImage img=imgGral.getImage((int)(miConfiguracion.getConfig_ColoresTexturas()[0]+(num_pieza_actual*11))) ;
-        g2d.drawImage(img, 655, 80, (655 + miConfiguracion.getConfig_Regla()[0]), (80 + miConfiguracion.getConfig_Regla()[0]), 0, 0, 744, 768, null);
-
+		AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,miConfiguracion.getConfig_Transparencia()[0]);
+	    g2d.setComposite(alcom);
+		g2d.drawImage(img, 655, 80, (655 + miConfiguracion.getConfig_Regla()[0]), (80 + miConfiguracion.getConfig_Regla()[0]), 0, 0, 744, 768, null);
+		alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1);
+	    g2d.setComposite(alcom);
 		if(dibujar==true) { //solo lo utilizo para configurar algunas cosas no se usa en el juego final. O SI?
 			g.drawImage(imgGral.getImage(1), x, y, (x+25), (y+25), 0, 0, 1024, 768, null);
 			dibujar=false;

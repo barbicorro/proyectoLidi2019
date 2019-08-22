@@ -47,6 +47,7 @@ public class Mural extends JPanel {
 		this.x=(int) (x*1024);
 		this.y=(int) (y*768);
 		this.anguloRadianes = anguloGrados*Math.PI/180;
+		System.out.println(this.anguloRadianes);
 		this.num_img=num_id;
 		repaint();
 		
@@ -96,7 +97,7 @@ public class Mural extends JPanel {
 		}else {
 			if(miConfiguracion.isMural_activado() && !miConfiguracion.isCambioConfig()) {
 				//ACA se resta 108 ------------------------------------------------------------
-				//if(num_img!=99) {
+				if(num_img!=99) {
 					
 					if(lista.size()==300) {
 	
@@ -108,8 +109,7 @@ public class Mural extends JPanel {
 						float [] info_en_el_tiempo= {num_img,this.x,this.y, (this.x + miConfiguracion.getConfig_Regla()[0]), (this.y + miConfiguracion.getConfig_Regla()[0]), miConfiguracion.getConfig_Transparencia()[0], (float)this.anguloRadianes, miConfiguracion.getConfig_ColoresTexturas()[0]};
 						lista.add(info_en_el_tiempo);
 					}
-					System.out.println(lista.size());
-				//}
+				}
 			} else {
 				if (miConfiguracion.isCambioConfig()) {
 					miConfiguracion.setCambioConfig(false);
@@ -124,9 +124,14 @@ public class Mural extends JPanel {
 					info_en_el_tiempo=listaIterada.next();
 					AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,info_en_el_tiempo[5]);
 					g2d.setComposite(alcom);
+
 					switch((int)info_en_el_tiempo[0]) {
-						//aca decia case 42 para el lapiz no se xq -------------------
+						//Para el case del lapiz utilizar 42 para la mesa y 150 para el simulador.
 					  case 150:{ //lapiz
+						  //System.out.println("info 1 " + info_en_el_tiempo[1]  + "info 2 " + info_en_el_tiempo[2] +"info 3 " + info_en_el_tiempo[3] + "info 4 " + info_en_el_tiempo[4]);
+						  System.out.println("info 1 " + info_en_el_tiempo[2] );
+						  AffineTransform tx = AffineTransform.getRotateInstance(info_en_el_tiempo[6],info_en_el_tiempo[1],info_en_el_tiempo[2]);
+						  g2d.setTransform(tx);
 						  g2d.drawImage(imgGral.getImagen_lapiz(0), (int)info_en_el_tiempo[1], (int)info_en_el_tiempo[2], (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
 						  break;
 					  }
@@ -147,6 +152,9 @@ public class Mural extends JPanel {
 							  g2d.setTransform(tx);
 							  //CENTRADO DE IMAGENES
 							  g2d.drawImage(img, (int)info_en_el_tiempo[1]-150, (int)info_en_el_tiempo[2]-150, (int)info_en_el_tiempo[3], (int)info_en_el_tiempo[4], 0, 0, 744, 768, null);
+							  //g2d.drawImage(img, (int)info_en_el_tiempo[1]-150, (int)info_en_el_tiempo[2]-150, (int)info_en_el_tiempo[3]-150, (int)info_en_el_tiempo[4]-150, 0, 0, 744, 768, null);
+							  //g2d.drawImage(img, (int)info_en_el_tiempo[1]-400, (int)info_en_el_tiempo[2]-400, (int)info_en_el_tiempo[3]-400, (int)info_en_el_tiempo[4]-400, 0, 0, 744, 768, null);
+
 						  }
 						  
 					  }
