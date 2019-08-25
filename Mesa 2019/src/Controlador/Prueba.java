@@ -81,45 +81,42 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	@Override
 	//Se llama cuando un objeto se hace visible
 	public void addTuioObject(TuioObject tobj) { 
-		if(tobj.getSymbolID()==fiduciales.getIdMarcador()[14]) {
-			if(!panel_configuracion.isVisible()) {
+		if(tobj.getSymbolID()==fiduciales.getIdMarcador()[14] && !panel_configuracion.isVisible()) {
 				miConfiguracion.setMural_activado(false);
 				panel_configuracion.setVisible(true);
+		} else {
+			if(((!panel_configuracion.isVisible()) && ((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12])||(tobj.getSymbolID())==fiduciales.getIdMarcador()[15])||(tobj.getSymbolID())==fiduciales.getIdMarcador()[16]) {
+				mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees());
 			}else {
-				miConfiguracion.setMural_activado(true);
-				panel_configuracion.setVisible(false);
-			}
-		}
-		
-		
-		if(((!panel_configuracion.isVisible()) && ((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12])||(tobj.getSymbolID())==fiduciales.getIdMarcador()[15])&&!panel_configuracion.isVisible()) {
-			mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees());
-		}else {
-			if((panel_configuracion.isVisible())) {	
-				panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY(), tobj.getAngleDegrees());
+				if((panel_configuracion.isVisible())) {	
+					panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY(), tobj.getAngleDegrees());
+				}
 			}
 		}
 	}
-
-
+	
 	@Override
 	// Se llama cuando un objeto fue movido(arrastrado) sobre la superficie de la mesa
 	public void updateTuioObject(TuioObject tobj) {
-		if(((!panel_configuracion.isVisible()) && ((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12]))&&!panel_configuracion.isVisible()) {
-			mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees());
-		}else {
-			if((panel_configuracion.isVisible())) {	
-				panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY(), tobj.getAngleDegrees());
+		
+		if(panel_configuracion.isVisible()) {
+			panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY(), tobj.getAngleDegrees());
+		} else {
+			if((((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12])||(tobj.getSymbolID())==fiduciales.getIdMarcador()[15])) {
+				mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees());
 			}
-		}	
+		}
 	}
 
 
 	@Override
 	// Se llama cuando un objeto es removido de la mesa
 	public void removeTuioObject(TuioObject tobj) {
-		// TODO Auto-generated method stub
-		
+		if(tobj.getSymbolID()==fiduciales.getIdMarcador()[14] && panel_configuracion.isVisible()) {
+			miConfiguracion.setMural_activado(true);
+			miConfiguracion.setSalioPanel(true);
+			panel_configuracion.setVisible(false);
+		}
 	}
 
 

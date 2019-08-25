@@ -1,8 +1,10 @@
 package Vista;
 import java.awt.Graphics2D;
+import java.util.Date;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -254,13 +256,27 @@ public class Imagenes {
 	}
 	
 	public void imprimirCap(JPanel paintPane) {
-		BufferedImage image = new BufferedImage(1024, 768, BufferedImage.TYPE_INT_RGB);
+		BufferedImage image = new BufferedImage(1024, 768, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = image.createGraphics();
 		paintPane.printAll(g);
 		g.dispose();
 		try { 
 			//System.out.println("imprimio " + ImageIO.write(image, "png", new File("C:/Users/Franco/Desktop" + "/asd.png")));
 		    System.out.println("imprimio " + ImageIO.write(image, "png", new File("src/Imagenes/MuralActual" + "/copiaMuralActual.png"))); 
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+	}
+	
+	public void guardarMural(JPanel paintPane) {
+		BufferedImage image = new BufferedImage(1024, 768, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = image.createGraphics();
+		paintPane.printAll(g);
+		g.dispose();
+		try {
+			Date date = new Date() ;
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy HH-mm-ss") ;
+		    System.out.println("imprimio " + ImageIO.write(image, "png", new File("src/Imagenes/MuralesGuardados/"+dateFormat.format(date)+".png"))); 
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}

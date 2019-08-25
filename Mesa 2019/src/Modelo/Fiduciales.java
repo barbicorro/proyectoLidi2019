@@ -1,7 +1,7 @@
 package Modelo;
 
 public class Fiduciales {
-	private static int [] idMarcador= new int[16];
+	private static int [] idMarcador= new int[17];
 
 	public Fiduciales () {
 		//version para simular
@@ -22,6 +22,7 @@ public class Fiduciales {
 		idMarcador[13] = 16; //Circulo cromatico
 		idMarcador[14] = 20; //abrir/cerrar panel
 		idMarcador[15] = 24; //reset
+		idMarcador[16] = 28; //guardar mural
 		
 		//version para la mesa        ---->Poner -108 en linea 84 mural, vengo del futuro y ya no es la 84 ahre
 		/*                            ---->cambiar el case del lapiz a 42 para la mesa y 150 para simular

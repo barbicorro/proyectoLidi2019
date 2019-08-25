@@ -9,6 +9,7 @@ public class Configuracion { //Esta clase deberia ser estatica? definir correcta
 	private static int [] config_Fondo= {0,0,0};
 	private static int [] config_ColoresTexturas= {0,0,0}; //0-ColorOTextura  1-eje x  2-eje y 
 	private static boolean cambioConfig;
+	private static boolean salioPanel;
 
 	private static boolean mural_activado=true;
 
@@ -26,6 +27,19 @@ public class Configuracion { //Esta clase deberia ser estatica? definir correcta
 
 	public Configuracion()  {
 		cambioConfig = false;
+		salioPanel = false;
+	}
+
+
+
+	public static boolean isSalioPanel() {
+		return salioPanel;
+	}
+
+
+
+	public static void setSalioPanel(boolean salioPanel) {
+		Configuracion.salioPanel = salioPanel;
 	}
 
 
