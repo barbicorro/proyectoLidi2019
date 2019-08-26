@@ -31,10 +31,10 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	private final JButton btnDesactivarPanel = new JButton("Desactivar Panel");
 
 	public static void main(String[] args) {   
-		TuioSimulator simulador = new TuioSimulator();
+		//TuioSimulator simulador = new TuioSimulator();
 		File archconfig = new File("config.xml");
 		String[] argv = { "-host", "127.0.0.1", "-port", "3333", "-config", archconfig.getAbsolutePath() };
-		simulador.main(argv);
+		//simulador.main(argv);
 		final TuioClient cliente = new TuioClient();
 		cliente.connect();
 		Prueba carga = new Prueba(cliente);
