@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import Modelo.Configuracion;
 import Modelo.Fiduciales;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 
 public class Mural extends JPanel {
@@ -76,6 +77,7 @@ public class Mural extends JPanel {
 			vaciarLista = true;
 			restaurarFondo();
 		}
+
 		
 		//this.x=(int) (x*744);
 		//this.y=(int) (y*768);
@@ -103,26 +105,34 @@ public class Mural extends JPanel {
 
 	
 	public void paintComponent(Graphics g) {
+		
 		if(!miConfiguracion.isSalioPanel()) {
 			super.paintComponent(g);
 			Graphics2D g2d = (Graphics2D)g; //Lo casteamos para poder usar "alphaComposite"
 			//CAMBIO DE COLOR DEL FONDO
 			restaurarFondo();
+			
 			if(num_img==-1) {
 				g2d.drawImage(null, x, y, null);
+				
 			}else{
+				
 				if(miConfiguracion.isMural_activado() && !miConfiguracion.isCambioConfig()) {
 					//ACA se resta 108 ------------------------------------------------------------
 					if((num_img!=99) && (num_img!=90)) {
 						if(lista.size()==300 && vaciarLista) {
+							System.out.println("no me rompi, aun");
 							lista.clear();
+							
 							float [] info_en_el_tiempo= {-2,this.x,this.y, (this.x + miConfiguracion.getConfig_Regla()[0]), (this.y + miConfiguracion.getConfig_Regla()[0]), 1, (float)this.anguloRadianes, miConfiguracion.getConfig_ColoresTexturas()[0]};
 							lista.add(info_en_el_tiempo);
+							
 							vaciarLista= false;
 						} else {
-							if(lista.size()!=300 && num_img<18 && num_img>=0) {
-								
-								float [] info_en_el_tiempo= {num_img,this.x,this.y, (this.x + miConfiguracion.getConfig_Regla()[0]), (this.y + miConfiguracion.getConfig_Regla()[0]), miConfiguracion.getConfig_Transparencia()[0], (float)this.anguloRadianes, miConfiguracion.getConfig_ColoresTexturas()[0]};
+							//if(lista.size()!=300 && num_img<18 && num_img>=0) {
+							if((lista.size()<300) && ((num_img<=116 && num_img>=108) || (num_img==150))) {
+								System.out.println(lista.size());
+								float [] info_en_el_tiempo= {num_img-108,this.x,this.y, (this.x + miConfiguracion.getConfig_Regla()[0]), (this.y + miConfiguracion.getConfig_Regla()[0]), miConfiguracion.getConfig_Transparencia()[0], (float)this.anguloRadianes, miConfiguracion.getConfig_ColoresTexturas()[0]};
 								lista.add(info_en_el_tiempo);
 							 }
 						} 
@@ -138,10 +148,20 @@ public class Mural extends JPanel {
 					while(listaIterada.hasNext()) {
 						
 						
-						info_en_el_tiempo=listaIterada.next();
+						try {
+							info_en_el_tiempo=listaIterada.next();
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							if(listaIterada !=null ) {
+							JOptionPane.showConfirmDialog(null, info_en_el_tiempo.length);
+							}else {
+								JOptionPane.showConfirmDialog(null, "la lista esta vacia");
+							}
+						}
 						AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,info_en_el_tiempo[5]);
 						g2d.setComposite(alcom);
-
+						
 						switch((int)info_en_el_tiempo[0]) {
 							//Para el case del lapiz utilizar 42--fIDUCIAL CHICOS 150FIDUCIAL para la mesa y 150 para el simulador.
 						  case 42:{ //lapiz
@@ -166,6 +186,7 @@ public class Mural extends JPanel {
 								  AffineTransform tx = AffineTransform.getRotateInstance(info_en_el_tiempo[6],(info_en_el_tiempo[1]),(info_en_el_tiempo[2]));
 								  g2d.setTransform(tx);
 								  //CENTRADO DE IMAGENES
+								 
 								  g2d.drawImage(img, (int)info_en_el_tiempo[1]-75, (int)info_en_el_tiempo[2]-75, (int)info_en_el_tiempo[3]-60, (int)info_en_el_tiempo[4]-60, 0, 0, 744, 768, null);
 								  //g2d.drawImage(img, (int)info_en_el_tiempo[1]-150, (int)info_en_el_tiempo[2]-150, (int)info_en_el_tiempo[3]-150, (int)info_en_el_tiempo[4]-150, 0, 0, 744, 768, null);
 								  //g2d.drawImage(img, (int)info_en_el_tiempo[1]-400, (int)info_en_el_tiempo[2]-400, (int)info_en_el_tiempo[3]-400, (int)info_en_el_tiempo[4]-400, 0, 0, 744, 768, null);

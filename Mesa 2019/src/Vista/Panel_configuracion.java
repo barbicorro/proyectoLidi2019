@@ -48,6 +48,7 @@ public class Panel_configuracion extends JPanel {
 		if((id>=108)&&(id<=116)){
 			num_pieza_actual=id-108;
 		}
+		
 		this.num_img_de_configuracion=id;
 		this.anguloGrados = anguloGrados;
 		repaint();
@@ -153,7 +154,8 @@ public class Panel_configuracion extends JPanel {
 			if(dibujar==false) {
 				miConfiguracion.setConfig_Regla(x,y);
 			}
-			g.drawImage(imgGral.getImagen_config()[nivelActRegla], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+600) , (miConfiguracion.getConfig_Regla()[2] + 300), 0, 0, 1024, 768, null);
+			g.drawImage(imgGral.getImagen_config()[nivelActRegla], (int)miConfiguracion.getConfig_Regla()[1]+90,(int) miConfiguracion.getConfig_Regla()[2]-40,(int) (miConfiguracion.getConfig_Regla()[1]+325) ,(int) (miConfiguracion.getConfig_Regla()[2] + 300), 0, 0, 1024, 768, null);
+
 			imgActual=0; //posicion de la regla en el vector
 		}
 		else {
@@ -161,7 +163,7 @@ public class Panel_configuracion extends JPanel {
 				if(dibujar==false) {
 					miConfiguracion.setConfig_Transparencia(x,y);
 				}
-				g.drawImage(imgGral.getImagen_config()[nivelActTrans], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+600) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 300), 0, 0, 1024, 768, null);
+				//g.drawImage(imgGral.getImagen_config()[nivelActTrans], (int)miConfiguracion.getConfig_Transparencia()[1]-250, (int)miConfiguracion.getConfig_Transparencia()[2]-250, (int)(miConfiguracion.getConfig_Transparencia()[1]) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 50), 0, 0, 1024, 768, null);
 				imgActual=1; //posicion de la herramienta de transparencia en el vector
 			} 
 			else {
@@ -193,58 +195,64 @@ public class Panel_configuracion extends JPanel {
      
 		if((imgActual==0)&&(dibujar==true)){
 			//g.drawImage(imgGral.getImagen_config()[nivelActRegla], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+600) , (miConfiguracion.getConfig_Regla()[2] + 300), 0, 0, 1024, 768, null);
-			if(((x-miConfiguracion.getConfig_Regla()[1])<104)&&((x-miConfiguracion.getConfig_Regla()[1])>0)&&(((y-miConfiguracion.getConfig_Regla()[2])<64)&&(y-miConfiguracion.getConfig_Regla()[2])>0)){ //Hizo click en el nivel 1. 
+			if(((x-miConfiguracion.getConfig_Regla()[1])<110)&&((x-miConfiguracion.getConfig_Regla()[1])>0)&&(((y-miConfiguracion.getConfig_Regla()[2])<40)&&(y-miConfiguracion.getConfig_Regla()[2])>-15)){ //Hizo click en el nivel 1. 
 				nivelActRegla=3;
 				System.out.println("Nivel 1");
 				miConfiguracion.getConfig_Regla()[0]=50;
 
+
 			}else {
-				if(((x-miConfiguracion.getConfig_Regla()[1])<213)&&((x-miConfiguracion.getConfig_Regla()[1])>104)&&(((y-miConfiguracion.getConfig_Regla()[2])<64)&&(y-miConfiguracion.getConfig_Regla()[2])>0)){ //Hizo click en el nivel 1. 
+				if(((x-miConfiguracion.getConfig_Regla()[1])<150)&&((x-miConfiguracion.getConfig_Regla()[1])>100)&&(((y-miConfiguracion.getConfig_Regla()[2])<40)&&(y-miConfiguracion.getConfig_Regla()[2])>-15)){ //Hizo click en el nivel 1. 
 					nivelActRegla=1;
 					System.out.println("Nivel 2");
 					miConfiguracion.getConfig_Regla()[0]=100;
+
 				}else
-					if(((x-miConfiguracion.getConfig_Regla()[1])<322)&&((x-miConfiguracion.getConfig_Regla()[1])>213)&&(((y-miConfiguracion.getConfig_Regla()[2])<64)&&(y-miConfiguracion.getConfig_Regla()[2])>0)){ //Hizo click en el nivel 1. 
+					if(((x-miConfiguracion.getConfig_Regla()[1])<200)&&((x-miConfiguracion.getConfig_Regla()[1])>150)&&(((y-miConfiguracion.getConfig_Regla()[2])<40)&&(y-miConfiguracion.getConfig_Regla()[2])>-15)){ //Hizo click en el nivel 1. 
 						nivelActRegla=0;
 						System.out.println("Nivel 3");
 						miConfiguracion.getConfig_Regla()[0]=190;
+
 					}else
-						if(((x-miConfiguracion.getConfig_Regla()[1])<432)&&((x-miConfiguracion.getConfig_Regla()[1])>322)&&(((y-miConfiguracion.getConfig_Regla()[2])<64)&&(y-miConfiguracion.getConfig_Regla()[2])>0)){ //Hizo click en el nivel 1. 	
+						if(((x-miConfiguracion.getConfig_Regla()[1])<250)&&((x-miConfiguracion.getConfig_Regla()[1])>200)&&(((y-miConfiguracion.getConfig_Regla()[2])<40)&&(y-miConfiguracion.getConfig_Regla()[2])>-15)){ //Hizo click en el nivel 1. 	
 							nivelActRegla=2;
 							System.out.println("Nivel 4");
 							miConfiguracion.getConfig_Regla()[0]=250;
+
 					}else
-						if(((x-miConfiguracion.getConfig_Regla()[1])<542)&&((x-miConfiguracion.getConfig_Regla()[1])>432)&&(((y-miConfiguracion.getConfig_Regla()[2])<64)&&(y-miConfiguracion.getConfig_Regla()[2])>0)){ //Hizo click en el nivel 1. 
+						if(((x-miConfiguracion.getConfig_Regla()[1])<310)&&((x-miConfiguracion.getConfig_Regla()[1])>250)&&(((y-miConfiguracion.getConfig_Regla()[2])<40)&&(y-miConfiguracion.getConfig_Regla()[2])>-15)){ //Hizo click en el nivel 1. 
 							nivelActRegla=4;
 							System.out.println("Nivel 5");
 							miConfiguracion.getConfig_Regla()[0]=400;
+
 						}
 			
 					}
-		//	g.drawImage(imgGral.getImagen_config()[nivelActRegla], miConfiguracion.getConfig_Regla()[1], miConfiguracion.getConfig_Regla()[2], (miConfiguracion.getConfig_Regla()[1]+600) , (miConfiguracion.getConfig_Regla()[2] + 300), 0, 0, 1024, 768, null);
+		//FUNCIONANDO A MEDIASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS	
+			g.drawImage(imgGral.getImagen_config()[nivelActRegla], (int)miConfiguracion.getConfig_Regla()[1]+90,(int) miConfiguracion.getConfig_Regla()[2]-40,(int) (miConfiguracion.getConfig_Regla()[1]+325) ,(int) (miConfiguracion.getConfig_Regla()[2] + 300), 0, 0, 1024, 768, null);
 
 			//g2d.drawImage(imgGral.getImage(0), 0, 0, (0 + miConfiguracion.getConfig_Regla()[0]), (0 + miConfiguracion.getConfig_Regla()[0]), 0, 0, 744, 768, null);
 		}
 		else {
 			if((imgActual==1)&&(dibujar==true)){
 		       // g2d.drawImage(imgGral.getImage(0), 0, 0, (0 + miConfiguracion.getConfig_Regla()[0]), (0 + miConfiguracion.getConfig_Regla()[0]), 0, 0, 1024, 768, null);
-				g.drawImage(imgGral.getImagen_config()[nivelActTrans], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+600) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 300), 0, 0, 1024, 768, null);
+				//g.drawImage(imgGral.getImagen_config()[nivelActTrans], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+600) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 300), 0, 0, 1024, 768, null);
 
-		        if(((x-miConfiguracion.getConfig_Transparencia()[1])<104)&&((x-miConfiguracion.getConfig_Transparencia()[1])>0)&&(((y-miConfiguracion.getConfig_Transparencia()[2])<64)&&(y-miConfiguracion.getConfig_Transparencia()[2])>0)){ //Hizo click en el nivel 1. 
+		        if(((x-miConfiguracion.getConfig_Transparencia()[1])<120)&&((x-miConfiguracion.getConfig_Transparencia()[1])>0)&&(((y-miConfiguracion.getConfig_Transparencia()[2])<40)&&(y-miConfiguracion.getConfig_Transparencia()[2])>0)){ //Hizo click en el nivel 1. 
 					System.out.println("Nivel 1");
 					nivelActTrans=7;
 					miConfiguracion.getConfig_Transparencia()[0]=0.1f;
 
 
 				}else {
-					if(((x-miConfiguracion.getConfig_Transparencia()[1])>104)&&((x-miConfiguracion.getConfig_Transparencia()[1])<212)&&(((y-miConfiguracion.getConfig_Transparencia()[2])<64)&&(y-miConfiguracion.getConfig_Transparencia()[2])>0)) {
+					if(((x-miConfiguracion.getConfig_Transparencia()[1])>120)&&((x-miConfiguracion.getConfig_Transparencia()[1])<212)&&(((y-miConfiguracion.getConfig_Transparencia()[2])<40)&&(y-miConfiguracion.getConfig_Transparencia()[2])>0)) {
 						System.out.println("Nivel 2");
 						nivelActTrans=5;
 						miConfiguracion.getConfig_Transparencia()[0]=0.5f;
 
 
 					}else
-						if(((x-miConfiguracion.getConfig_Transparencia()[1])>212)&&((x-miConfiguracion.getConfig_Transparencia()[1])<321)&&(((y-miConfiguracion.getConfig_Transparencia()[2])<64)&&(y-miConfiguracion.getConfig_Transparencia()[2])>0)) {
+						if(((x-miConfiguracion.getConfig_Transparencia()[1])>212)&&((x-miConfiguracion.getConfig_Transparencia()[1])<321)&&(((y-miConfiguracion.getConfig_Transparencia()[2])<40)&&(y-miConfiguracion.getConfig_Transparencia()[2])>0)) {
 							System.out.println("Nivel 3");
 							nivelActTrans=6;
 							miConfiguracion.getConfig_Transparencia()[0]=1f;
@@ -252,7 +260,7 @@ public class Panel_configuracion extends JPanel {
 
 						}
 				}
-				g.drawImage(imgGral.getImagen_config()[nivelActTrans], (int)miConfiguracion.getConfig_Transparencia()[1], (int)miConfiguracion.getConfig_Transparencia()[2], (int)(miConfiguracion.getConfig_Transparencia()[1]+600) , (int)(miConfiguracion.getConfig_Transparencia()[2] + 300), 0, 0, 1024, 768, null);
+				g.drawImage(imgGral.getImagen_config()[nivelActTrans], (int)miConfiguracion.getConfig_Transparencia()[1]+75, (int)miConfiguracion.getConfig_Transparencia()[2]-40, (int)(miConfiguracion.getConfig_Transparencia()[1])+500 , (int)(miConfiguracion.getConfig_Transparencia()[2] + 300), 0, 0, 1024, 768, null);
 
 			}
 			else {

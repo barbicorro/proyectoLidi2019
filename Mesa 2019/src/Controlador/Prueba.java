@@ -33,10 +33,10 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	private final JButton btnDesactivarPanel = new JButton("Desactivar Panel");
 
 	public static void main(String[] args) {   
-		TuioSimulator simulador = new TuioSimulator();
+		//TuioSimulator simulador = new TuioSimulator();
 		File archconfig = new File("config.xml");
 		String[] argv = { "-host", "127.0.0.1", "-port", "3333", "-config", archconfig.getAbsolutePath() };
-		simulador.main(argv);
+		//simulador.main(argv);
 		final TuioClient cliente = new TuioClient();
 		cliente.connect();
 		Prueba carga = new Prueba(cliente);
@@ -134,14 +134,14 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	@Override
 	// Se llama cuando se detecta un nuevo objeto(puede ser un dedo o el marcador) en la mesa
 	public void addTuioCursor(TuioCursor tcur) {
-		if(panel_configuracion.isVisible()) {
+		/*if(panel_configuracion.isVisible()) {
 			//panel_configuracion.actualizar(666, tcur.getX(), tcur.getY());
 			panel_configuracion.dibujar_punto(tcur.getX(), tcur.getY());
 		}
 		else {
 			//el cursor tiene id = 0 siempre, pero mando 150 para que no se confunda con la mamushka
 			mural.actualizar(tcur.getX(), tcur.getY(), 150, 0,msj);
-		}
+		}*/
 	}
 
 
