@@ -8,6 +8,7 @@ import TUIO.TuioClient;
 import TUIO.TuioCursor;
 import TUIO.TuioSimulator;
 import TUIO.TuioTime;
+import Vista.Msj_mural_guardado;
 import Vista.Mural;
 import Vista.Panel_configuracion;
 import TUIO.TuioListener;
@@ -28,13 +29,14 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	private Configuracion miConfiguracion;
 	private JButton btnActivarPanel;
 	private Fiduciales fiduciales = new Fiduciales();
+	private Msj_mural_guardado msj = new Msj_mural_guardado();
 	private final JButton btnDesactivarPanel = new JButton("Desactivar Panel");
 
 	public static void main(String[] args) {   
-		//TuioSimulator simulador = new TuioSimulator();
+		TuioSimulator simulador = new TuioSimulator();
 		File archconfig = new File("config.xml");
 		String[] argv = { "-host", "127.0.0.1", "-port", "3333", "-config", archconfig.getAbsolutePath() };
-		//simulador.main(argv);
+		simulador.main(argv);
 		final TuioClient cliente = new TuioClient();
 		cliente.connect();
 		Prueba carga = new Prueba(cliente);
@@ -52,8 +54,11 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		panel_configuracion.setSize(1024, 768);
 		panel_configuracion.setLocation(0, 0);
+		getContentPane().add(msj);
 		getContentPane().add(panel_configuracion);
 		getContentPane().add(mural);
+		msj.setVisible(false);
+		
 		
 		btnActivarPanel = new JButton("Activar panel de configuraci\u00F3n");
 		btnActivarPanel.setSize(400, 60);
@@ -81,12 +86,14 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	@Override
 	//Se llama cuando un objeto se hace visible
 	public void addTuioObject(TuioObject tobj) { 
+		
 		if(tobj.getSymbolID()==fiduciales.getIdMarcador()[14] && !panel_configuracion.isVisible()) {
 				miConfiguracion.setMural_activado(false);
 				panel_configuracion.setVisible(true);
 		} else {
 			if(((!panel_configuracion.isVisible()) && ((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12])||(tobj.getSymbolID())==fiduciales.getIdMarcador()[15])||(tobj.getSymbolID())==fiduciales.getIdMarcador()[16]) {
-				mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees());
+				mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees(), msj);
+				
 			}else {
 				if((panel_configuracion.isVisible())) {	
 					panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY(), tobj.getAngleDegrees());
@@ -103,7 +110,7 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 			panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY(), tobj.getAngleDegrees());
 		} else {
 			if((((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12])||(tobj.getSymbolID())==fiduciales.getIdMarcador()[15])) {
-				mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees());
+				mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees(),msj);
 			}
 		}
 	}
@@ -112,10 +119,14 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	@Override
 	// Se llama cuando un objeto es removido de la mesa
 	public void removeTuioObject(TuioObject tobj) {
-		if(tobj.getSymbolID()==fiduciales.getIdMarcador()[14] && panel_configuracion.isVisible()) {
-			miConfiguracion.setMural_activado(true);
+		if(tobj.getSymbolID()>=fiduciales.getIdMarcador()[9] && panel_configuracion.isVisible()) {
+			/*miConfiguracion.setMural_activado(true);
 			miConfiguracion.setSalioPanel(true);
-			panel_configuracion.setVisible(false);
+			panel_configuracion.setVisible(false);*/
+			panel_configuracion.eliminarHerramienta();
+			if(tobj.getSymbolID()==fiduciales.getIdMarcador()[14]) {
+				panel_configuracion.setVisible(false);
+			}
 		}
 	}
 
@@ -129,7 +140,7 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 		}
 		else {
 			//el cursor tiene id = 0 siempre, pero mando 150 para que no se confunda con la mamushka
-			mural.actualizar(tcur.getX(), tcur.getY(), 150, 0);
+			mural.actualizar(tcur.getX(), tcur.getY(), 150, 0,msj);
 		}
 	}
 
@@ -142,7 +153,7 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 		}
 		else {
 			//el cursor tiene id = 0 siempre, pero mando 150 para que no se confunda con la mamushka
-			mural.actualizar(tcur.getX(), tcur.getY(), 150, 0);
+			mural.actualizar(tcur.getX(), tcur.getY(), 150, 0,msj);
 		}
 	}
 

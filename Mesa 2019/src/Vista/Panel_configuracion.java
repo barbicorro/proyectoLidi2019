@@ -53,6 +53,11 @@ public class Panel_configuracion extends JPanel {
 		repaint();
 	}
 	
+	public void eliminarHerramienta() {
+		this.num_img_de_configuracion=-1;
+		repaint();
+	}
+	
 	public void dibujar_punto(double x, double y) {
 		
 		this.x=(int) (x*1024);

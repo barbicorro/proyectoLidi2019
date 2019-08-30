@@ -5,7 +5,7 @@ public class Fiduciales {
 
 	public Fiduciales () {
 		//version para simular
-		/*
+		
 		idMarcador[0] = 0;   //Mamushka
 		idMarcador[1] = 1;   //Pelota
 		idMarcador[2] = 2;   //Caracol1
@@ -23,10 +23,10 @@ public class Fiduciales {
 		idMarcador[14] = 20; //abrir/cerrar panel
 		idMarcador[15] = 24; //reset
 		idMarcador[16] = 28; //guardar mural
-		*/
+		
 		//version para la mesa        ---->Poner -108 en linea 84 mural, vengo del futuro y ya no es la 84 ahre
 		                      //   ---->cambiar el case del lapiz a 42 para la mesa y 150 para simular*/
-		/*
+		/*						// ---->cambiar linea 84 en la clase mural (por el 130)
 		idMarcador[0] = 108;   //Mamushka
 		idMarcador[1] = 109;   //Pelota
 		idMarcador[2] = 110;   //Caracol1
@@ -46,7 +46,7 @@ public class Fiduciales {
 		idMarcador[16] = 130; //guardar 
 		*/
 		//Fiducial chicos
-		
+		/*
 		idMarcador[0] = 0;   //Mamushka
 		idMarcador[1] = 1;   //Pelota
 		idMarcador[2] = 2;   //Caracol1
@@ -65,7 +65,7 @@ public class Fiduciales {
 		idMarcador[15] = 16;	//reset
 		//idMarcador[16] = 13;      //guardar
 		
-		
+		*/
 	} 
 	
 	public static int[] getIdMarcador() {

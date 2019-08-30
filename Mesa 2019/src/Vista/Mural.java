@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 
 import Modelo.Configuracion;
 import Modelo.Fiduciales;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class Mural extends JPanel {
 	private Imagenes imgGral = new Imagenes();
@@ -27,6 +29,7 @@ public class Mural extends JPanel {
 		//setBounds(0, 0, 744, 768);
 		setBounds(0,0,1024,768);
 		setBackground(Color.WHITE);
+		setLayout(null);
 	}
 	
 	public void restaurarFondo() {
@@ -65,7 +68,7 @@ public class Mural extends JPanel {
 		}
 	}
 	
-	public void actualizar(double x,double y, int num_id, float anguloGrados) {
+	public void actualizar(double x,double y, int num_id, float anguloGrados, JPanel msj) {
 		if(lista.size()==299) {
 			//archivo.delete();
 			setBackground(new Color(255,255,255,0));
@@ -81,9 +84,18 @@ public class Mural extends JPanel {
 		this.anguloRadianes = anguloGrados*Math.PI/180;
 		this.num_img=num_id;
 		
-		if (num_img==130){ //guardar
+		if (num_img==Fiduciales.getIdMarcador()[16]){ //guardar
 			
 			imgGral.guardarMural(this);
+			msj.setVisible(true);
+			try {
+				Thread.sleep(1660);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			msj.setVisible(false);
+			
 		}
 		repaint();
 		
@@ -165,7 +177,7 @@ public class Mural extends JPanel {
 					}
 				}
 			}
-			if (num_img==198){ //reset era 24
+			if (num_img==Fiduciales.getIdMarcador()[15]){ //reset era 24
 				lista.clear();
 			}
 		} else {
