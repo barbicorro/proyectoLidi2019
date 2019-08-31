@@ -260,8 +260,12 @@ public class Imagenes {
 		Graphics2D g = image.createGraphics();
 		paintPane.printAll(g);
 		g.dispose();
+		try {
+			Thread.sleep(5);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		try { 
-			//System.out.println("imprimio " + ImageIO.write(image, "png", new File("C:/Users/Franco/Desktop" + "/asd.png")));
 		    System.out.println("imprimio " + ImageIO.write(image, "png", new File("src/Imagenes/MuralActual" + "/copiaMuralActual.png"))); 
 		} catch (IOException e) {
 		    e.printStackTrace();
@@ -286,7 +290,6 @@ public class Imagenes {
 		try {
 			imagen_fondo=ImageIO.read(new File("src/Imagenes/MuralActual" + "/copiaMuralActual.png"));
 		} catch (IOException e) {
-			System.out.println("no se encontro archivo");
 			e.printStackTrace();
 		}
 		return imagen_fondo;

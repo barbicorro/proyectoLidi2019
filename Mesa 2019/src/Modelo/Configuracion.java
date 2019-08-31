@@ -1,7 +1,5 @@
 package Modelo;
 
-import java.util.ArrayList;
-
 public class Configuracion { //Esta clase deberia ser estatica? definir correctamente que vamos hacer ac�
 	
 	private static int[] config_Regla= {190,0,0};   //0-Nivel de zoom       1-eje x      2-eje y
@@ -10,27 +8,28 @@ public class Configuracion { //Esta clase deberia ser estatica? definir correcta
 	private static int [] config_ColoresTexturas= {0,0,0}; //0-ColorOTextura  1-eje x  2-eje y 
 	private static boolean cambioConfig;
 	private static boolean salioPanel;
-
+	private static boolean simulando;
 	private static boolean mural_activado=true;
+
+	public Configuracion()  {
+		cambioConfig = false;
+		salioPanel = false;
+		simulando = false; // ACTIVAR/DESACTIVAR PARA SIMULACION
+	}
+
+	
+	public static boolean isSimulando() {
+		return simulando;
+	}
 
 	public static boolean isMural_activado() {
 		return mural_activado;
 	}
 
-
-
+	
 	public static void setMural_activado(boolean mural_activado) {
 		Configuracion.mural_activado = mural_activado;
 	}
-
-
-
-	public Configuracion()  {
-		cambioConfig = false;
-		salioPanel = false;
-	}
-
-
 
 	public static boolean isSalioPanel() {
 		return salioPanel;

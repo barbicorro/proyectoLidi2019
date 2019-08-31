@@ -1,7 +1,6 @@
 package Controlador;
 
 import javax.swing.JFrame;
-
 import java.io.*;
 import TUIO.TuioBlob;
 import TUIO.TuioClient;
@@ -15,28 +14,25 @@ import TUIO.TuioListener;
 import TUIO.TuioObject;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-
 import Modelo.*;
 
 
 public class Prueba  extends JFrame implements TuioListener, ActionListener {
 
 	private static TuioClient cliente;
-	private Mural mural = new Mural();;
+	private Mural mural = new Mural();
 	private Panel_configuracion panel_configuracion = new Panel_configuracion();
-	private Configuracion miConfiguracion;
-	private JButton btnActivarPanel;
+	private Configuracion miConfiguracion = new Configuracion();
 	private Fiduciales fiduciales = new Fiduciales();
 	private Msj_mural_guardado msj = new Msj_mural_guardado();
-	private final JButton btnDesactivarPanel = new JButton("Desactivar Panel");
-
+	private int numId;
+	
+	
 	public static void main(String[] args) {   
-		//TuioSimulator simulador = new TuioSimulator();
+		TuioSimulator simulador = new TuioSimulator();
 		File archconfig = new File("config.xml");
 		String[] argv = { "-host", "127.0.0.1", "-port", "3333", "-config", archconfig.getAbsolutePath() };
-		//simulador.main(argv);
+		simulador.main(argv);
 		final TuioClient cliente = new TuioClient();
 		cliente.connect();
 		Prueba carga = new Prueba(cliente);
@@ -58,26 +54,8 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 		getContentPane().add(panel_configuracion);
 		getContentPane().add(mural);
 		msj.setVisible(false);
-		
-		
-		btnActivarPanel = new JButton("Activar panel de configuraci\u00F3n");
-		btnActivarPanel.setSize(400, 60);
-		//mural.add(btnActivarPanel);
-		btnActivarPanel.addActionListener(this);
 		panel_configuracion.setVisible(false);
 		panel_configuracion.setOpaque(false);
-		btnDesactivarPanel.setVisible(false);
-		btnDesactivarPanel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(arg0.getSource()==btnDesactivarPanel) {
-					panel_configuracion.setVisible(false);
-					btnDesactivarPanel.setVisible(false);
-					btnActivarPanel.setVisible(true);
-					miConfiguracion.setMural_activado(true);
-				}
-			}
-		});
-		panel_configuracion.add(btnDesactivarPanel);
 	}
 	
 	
@@ -85,18 +63,43 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 
 	@Override
 	//Se llama cuando un objeto se hace visible
-	public void addTuioObject(TuioObject tobj) { 
-		
-		if(tobj.getSymbolID()==fiduciales.getIdMarcador()[14] && !panel_configuracion.isVisible()) {
-				miConfiguracion.setMural_activado(false);
+	public void addTuioObject(TuioObject tobj) {
+		if(Configuracion.isSimulando()) {
+			if(tobj.getSymbolID()==Fiduciales.getIdMarcador()[14] && !panel_configuracion.isVisible()) {
+				Configuracion.setMural_activado(false);
 				panel_configuracion.setVisible(true);
+			} else {
+				if(((!panel_configuracion.isVisible()) && ((tobj.getSymbolID()>=Fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=Fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==Fiduciales.getIdMarcador()[12])||(tobj.getSymbolID())==Fiduciales.getIdMarcador()[15])||(tobj.getSymbolID())==Fiduciales.getIdMarcador()[16]) {
+					mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees(), msj);
+				} else {
+					if((panel_configuracion.isVisible())) {	
+						if((tobj.getSymbolID()>=Fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=Fiduciales.getIdMarcador()[8])) {
+							panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY(), 0);
+						} else {
+							panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY(), tobj.getAngleDegrees());
+						}
+					}
+				}
+			}
 		} else {
-			if(((!panel_configuracion.isVisible()) && ((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12])||(tobj.getSymbolID())==fiduciales.getIdMarcador()[15])||(tobj.getSymbolID())==fiduciales.getIdMarcador()[16]) {
-				mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees(), msj);
-				
-			}else {
-				if((panel_configuracion.isVisible())) {	
-					panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY(), tobj.getAngleDegrees());
+			numId=tobj.getSymbolID()+108;
+			if(tobj.getSymbolID()==24) {
+				numId=198;
+			}
+			if(numId==Fiduciales.getIdMarcador()[14] && !panel_configuracion.isVisible()) {
+				Configuracion.setMural_activado(false);
+				panel_configuracion.setVisible(true);
+			} else {
+				if(((!panel_configuracion.isVisible()) && ((numId>=Fiduciales.getIdMarcador()[0])&&(numId<=Fiduciales.getIdMarcador()[8]))||(numId==Fiduciales.getIdMarcador()[12])||(numId)==Fiduciales.getIdMarcador()[15])||(numId)==Fiduciales.getIdMarcador()[16]) {
+					mural.actualizar(tobj.getX(), tobj.getY(),numId,tobj.getAngleDegrees(), msj);
+				} else {
+					if((panel_configuracion.isVisible())) {	
+						if((numId>=Fiduciales.getIdMarcador()[0])&&(numId<=Fiduciales.getIdMarcador()[8])) {
+							panel_configuracion.actualizar(numId, tobj.getX(), tobj.getY(), 0);
+						} else {
+							panel_configuracion.actualizar(numId, tobj.getX(), tobj.getY(), tobj.getAngleDegrees());
+						}
+					}
 				}
 			}
 		}
@@ -105,12 +108,30 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	@Override
 	// Se llama cuando un objeto fue movido(arrastrado) sobre la superficie de la mesa
 	public void updateTuioObject(TuioObject tobj) {
-		
-		if(panel_configuracion.isVisible()) {
-			panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY(), tobj.getAngleDegrees());
+		if(Configuracion.isSimulando()) {
+			if(panel_configuracion.isVisible()) {
+				if((tobj.getSymbolID()>=Fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=Fiduciales.getIdMarcador()[8])) {
+					panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY(), 0);
+				} else {
+					panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY(), tobj.getAngleDegrees());
+				}
+			} else {
+				if((((tobj.getSymbolID()>=Fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=Fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==Fiduciales.getIdMarcador()[12])||(tobj.getSymbolID())==Fiduciales.getIdMarcador()[15])) {
+					mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees(),msj);
+				}
+			}
 		} else {
-			if((((tobj.getSymbolID()>=fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=fiduciales.getIdMarcador()[8]))||(tobj.getSymbolID()==fiduciales.getIdMarcador()[12])||(tobj.getSymbolID())==fiduciales.getIdMarcador()[15])) {
-				mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees(),msj);
+			numId=tobj.getSymbolID()+108;
+			if(panel_configuracion.isVisible()) {
+				if((numId>=Fiduciales.getIdMarcador()[0])&&(numId<=Fiduciales.getIdMarcador()[8])) {
+					panel_configuracion.actualizar(numId, tobj.getX(), tobj.getY(), 0);
+				} else {
+					panel_configuracion.actualizar(numId, tobj.getX(), tobj.getY(), tobj.getAngleDegrees());
+				}
+			} else {
+				if((((numId>=Fiduciales.getIdMarcador()[0])&&(numId<=Fiduciales.getIdMarcador()[8]))||(numId==Fiduciales.getIdMarcador()[12])||(numId)==Fiduciales.getIdMarcador()[15])) {
+					mural.actualizar(tobj.getX(), tobj.getY(),numId,tobj.getAngleDegrees(),msj);
+				}
 			}
 		}
 	}
@@ -119,14 +140,11 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	@Override
 	// Se llama cuando un objeto es removido de la mesa
 	public void removeTuioObject(TuioObject tobj) {
-		if(tobj.getSymbolID()>=fiduciales.getIdMarcador()[9] && panel_configuracion.isVisible()) {
-			/*miConfiguracion.setMural_activado(true);
-			miConfiguracion.setSalioPanel(true);
-			panel_configuracion.setVisible(false);*/
+		if(tobj.getSymbolID()>=Fiduciales.getIdMarcador()[9] && panel_configuracion.isVisible()) {
 			panel_configuracion.eliminarHerramienta();
-			if(tobj.getSymbolID()==fiduciales.getIdMarcador()[14]) {
-				panel_configuracion.setVisible(false);
-			}
+			panel_configuracion.setVisible(false);
+			Configuracion.setMural_activado(true);
+			Configuracion.setSalioPanel(true);
 		}
 	}
 
@@ -139,9 +157,11 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 			panel_configuracion.dibujar_punto(tcur.getX(), tcur.getY());
 		}
 		else {
-			//el cursor tiene id = 0 siempre, pero mando 150 para que no se confunda con la mamushka
-			mural.actualizar(tcur.getX(), tcur.getY(), 150, 0,msj);
+			mural.actualizar(tcur.getX(), tcur.getY(), Fiduciales.getIdMarcador()[17], 0,msj);
 		}*/
+		if(!panel_configuracion.isVisible()) {
+			mural.actualizar(tcur.getX(), tcur.getY(), Fiduciales.getIdMarcador()[17], 0,msj);
+		}
 	}
 
 
@@ -152,8 +172,7 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 			panel_configuracion.dibujar_punto(tcur.getX(), tcur.getY());
 		}
 		else {
-			//el cursor tiene id = 0 siempre, pero mando 150 para que no se confunda con la mamushka
-			mural.actualizar(tcur.getX(), tcur.getY(), 150, 0,msj);
+			mural.actualizar(tcur.getX(), tcur.getY(), Fiduciales.getIdMarcador()[17], 0,msj);
 		}
 	}
 
@@ -195,13 +214,7 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if(arg0.getSource()==btnActivarPanel) {
-			miConfiguracion.setMural_activado(false);
-
-			panel_configuracion.setVisible(true);
-			btnActivarPanel.setVisible(false);
-			btnDesactivarPanel.setVisible(true);
-		}
 		
 	}
+	
 }
