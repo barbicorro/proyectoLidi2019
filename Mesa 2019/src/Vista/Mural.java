@@ -17,7 +17,7 @@ public class Mural extends JPanel {
 	private float [] info_en_el_tiempo; // 0->numero imagen     1->coordenada x    2->coordenada y     3->ancho del rectangulo donde se va a dibujar      4-> alto del rectangulo donde se va a dibujar	5->Transparencia 6->Angulo de rotacion 7->Color/Textura 
 	private int actualBackground = 0;
 	boolean ok=true;
-	boolean vaciarLista=false;
+	boolean sacoFoto=false;
 	public Mural() {
 		setBounds(0,0,1024,768);
 		setBackground(Color.WHITE);
@@ -26,7 +26,7 @@ public class Mural extends JPanel {
 	
 	public void restaurarFondo() {
 		int color = Configuracion.getConfig_Fondo()[0];
-		if (actualBackground != color || vaciarLista) {
+		if (actualBackground != color || sacoFoto) {
 			switch(color) {
 			  case 0: //blanco
 			    setBackground(Color.WHITE);
@@ -59,13 +59,16 @@ public class Mural extends JPanel {
 			}
 		}
 	}
-	
+
+
 	private void capturarLista() {
-		if (lista.size() == 299) {
+		if (lista.size() == 100) {
+			
 			setBackground(new Color(255,255,255,0));
 			imgGral.imprimirCap(this);
-			vaciarLista = true;
-			restaurarFondo();	
+			sacoFoto = true;
+			restaurarFondo();
+			reiniciarLista();
 		}
 	}
 	
@@ -83,7 +86,7 @@ public class Mural extends JPanel {
 	}
 	
 	public void actualizar(double x,double y, int num_id, float anguloGrados, JPanel msj) {
-		capturarLista();
+		//capturarLista();
 		this.x=(int) (x*1024);
 		this.y=(int) (y*768);
 		this.anguloRadianes = anguloGrados*Math.PI/180;
@@ -94,9 +97,11 @@ public class Mural extends JPanel {
 	
 	private void reiniciarLista() {
 		lista.clear();
+		lista=null;
+		lista = new ArrayList<float []>();
 		float [] info_en_el_tiempo= {-2,this.x,this.y, (this.x + Configuracion.getConfig_Regla()[0]), (this.y + Configuracion.getConfig_Regla()[0]), 1, (float)this.anguloRadianes, Configuracion.getConfig_ColoresTexturas()[0]};
 		lista.add(info_en_el_tiempo);
-		vaciarLista= false;
+		sacoFoto= false;
 	}
 	
 	private void agregarSello() {
@@ -105,12 +110,19 @@ public class Mural extends JPanel {
 		}
 		float [] info_en_el_tiempo= {num_img,this.x,this.y, (this.x + Configuracion.getConfig_Regla()[0]), (this.y + Configuracion.getConfig_Regla()[0]), Configuracion.getConfig_Transparencia()[0], (float)this.anguloRadianes, Configuracion.getConfig_ColoresTexturas()[0]};
 		lista.add(info_en_el_tiempo);
+		System.out.println(lista.size());
+		capturarLista();
 	}
 	
 	private void dibujarListaSellos(Graphics2D g2d) {
 		Iterator<float []> listaIterada=lista.iterator();  //iteramos el ArrayList para poder recorrerlo
 		while(listaIterada.hasNext()) {
-			info_en_el_tiempo=listaIterada.next();
+			try {
+				info_en_el_tiempo=listaIterada.next();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,info_en_el_tiempo[5]); //Setea la transparencia del sello a dibujar
 			g2d.setComposite(alcom);
 			switch((int)info_en_el_tiempo[0]) {
@@ -150,13 +162,13 @@ public class Mural extends JPanel {
 				} else {
 					if(Configuracion.isMural_activado() && !Configuracion.isCambioConfig()) {
 						//if((num_img!=99) && (num_img!=90)) { //No deberia hacer falta ----------
-						if(lista.size()==300 && vaciarLista) {
+						/*if(lista.size()>=100 && vaciarLista) {
 							reiniciarLista();
-						} else { //En este caso la lista no esta llena, y la imagen es un sello o lapiz
-							if(lista.size()!=300 && ((num_img>=Fiduciales.getIdMarcador()[0] && num_img<=Fiduciales.getIdMarcador()[8]) || num_img==Fiduciales.getIdMarcador()[17])) {
+						} else { //En este caso la lista no esta llena, y la imagen es un sello o lapiz*/
+							if(lista.size()!=100 && ((num_img>=Fiduciales.getIdMarcador()[0] && num_img<=Fiduciales.getIdMarcador()[8]) || num_img==Fiduciales.getIdMarcador()[17])) {
 								agregarSello();
 							 }
-						} 
+						
 					} else if (Configuracion.isCambioConfig()) {Configuracion.setCambioConfig(false);}
 					if(!lista.isEmpty()) {
 						dibujarListaSellos(g2d);

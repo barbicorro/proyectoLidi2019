@@ -29,10 +29,10 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	
 	
 	public static void main(String[] args) {   
-		TuioSimulator simulador = new TuioSimulator();
+		//TuioSimulator simulador = new TuioSimulator();
 		File archconfig = new File("config.xml");
 		String[] argv = { "-host", "127.0.0.1", "-port", "3333", "-config", archconfig.getAbsolutePath() };
-		simulador.main(argv);
+		//simulador.main(argv);
 		final TuioClient cliente = new TuioClient();
 		cliente.connect();
 		Prueba carga = new Prueba(cliente);
@@ -64,7 +64,7 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 	@Override
 	//Se llama cuando un objeto se hace visible
 	public void addTuioObject(TuioObject tobj) {
-		if(Configuracion.isSimulando()) {
+		//if(Configuracion.isSimulando()) {
 			if(tobj.getSymbolID()==Fiduciales.getIdMarcador()[14] && !panel_configuracion.isVisible()) {
 				Configuracion.setMural_activado(false);
 				panel_configuracion.setVisible(true);
@@ -81,11 +81,12 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 					}
 				}
 			}
-		} else {
+		/*} else {							//esto sirve para simular la mesa en nuestras casas
 			numId=tobj.getSymbolID()+108;
 			if(tobj.getSymbolID()==24) {
 				numId=198;
 			}
+			
 			if(numId==Fiduciales.getIdMarcador()[14] && !panel_configuracion.isVisible()) {
 				Configuracion.setMural_activado(false);
 				panel_configuracion.setVisible(true);
@@ -102,13 +103,13 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 					}
 				}
 			}
-		}
+		}*/
 	}
 	
 	@Override
 	// Se llama cuando un objeto fue movido(arrastrado) sobre la superficie de la mesa
 	public void updateTuioObject(TuioObject tobj) {
-		if(Configuracion.isSimulando()) {
+		//if(Configuracion.isSimulando()) {
 			if(panel_configuracion.isVisible()) {
 				if((tobj.getSymbolID()>=Fiduciales.getIdMarcador()[0])&&(tobj.getSymbolID()<=Fiduciales.getIdMarcador()[8])) {
 					panel_configuracion.actualizar(tobj.getSymbolID(), tobj.getX(), tobj.getY(), 0);
@@ -120,7 +121,7 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 					mural.actualizar(tobj.getX(), tobj.getY(),tobj.getSymbolID(),tobj.getAngleDegrees(),msj);
 				}
 			}
-		} else {
+		/*} else {                //esto sirve para simular la mesa en nuestras casas
 			numId=tobj.getSymbolID()+108;
 			if(panel_configuracion.isVisible()) {
 				if((numId>=Fiduciales.getIdMarcador()[0])&&(numId<=Fiduciales.getIdMarcador()[8])) {
@@ -133,14 +134,15 @@ public class Prueba  extends JFrame implements TuioListener, ActionListener {
 					mural.actualizar(tobj.getX(), tobj.getY(),numId,tobj.getAngleDegrees(),msj);
 				}
 			}
-		}
+		}*/
 	}
 
 
 	@Override
 	// Se llama cuando un objeto es removido de la mesa
 	public void removeTuioObject(TuioObject tobj) {
-		if(tobj.getSymbolID()>=Fiduciales.getIdMarcador()[9] && panel_configuracion.isVisible()) {
+		
+		if(tobj.getSymbolID()==Fiduciales.getIdMarcador()[14] && panel_configuracion.isVisible() ) {
 			panel_configuracion.eliminarHerramienta();
 			panel_configuracion.setVisible(false);
 			Configuracion.setMural_activado(true);

@@ -254,19 +254,20 @@ public class Imagenes {
 	public void setImage(BufferedImage image, int i) {
 		this.image[i] = image;
 	}
-	
 	public void imprimirCap(JPanel paintPane) {
+	
+		
 		BufferedImage image = new BufferedImage(1024, 768, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = image.createGraphics();
 		paintPane.printAll(g);
 		g.dispose();
-		try {
+		/*try {
 			Thread.sleep(5);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
+		}*/
 		try { 
-		    System.out.println("imprimio " + ImageIO.write(image, "png", new File("src/Imagenes/MuralActual" + "/copiaMuralActual.png"))); 
+		    System.out.println("imprimio en cap "+  ImageIO.write(image, "png", new File("src/Imagenes/MuralActual" + "/copiaMuralActual.png"))); 
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}
@@ -277,13 +278,14 @@ public class Imagenes {
 		Graphics2D g = image.createGraphics();
 		paintPane.printAll(g);
 		g.dispose();
+		Date date = new Date() ;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy HH-mm-ss") ;
 		try {
-			Date date = new Date() ;
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy HH-mm-ss") ;
-		    System.out.println("imprimio " + ImageIO.write(image, "png", new File("src/Imagenes/MuralesGuardados/"+dateFormat.format(date)+".png"))); 
+			System.out.println("imprimio en guardar mural " + ImageIO.write(image, "png", new File("src/Imagenes/MuralesGuardados/"+dateFormat.format(date)+".png")));
 		} catch (IOException e) {
-		    e.printStackTrace();
-		}
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 	
 	public BufferedImage getCap() {

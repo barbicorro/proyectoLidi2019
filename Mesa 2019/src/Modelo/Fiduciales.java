@@ -40,7 +40,7 @@ public class Fiduciales {
 			//el puesto 12 esta libre, era la goma
 			idMarcador[13] = 123; //Circulo cromatico
 			idMarcador[14] = 121;	//abrir/cerrar panel
-			idMarcador[15] = 198;	//reset
+			idMarcador[15] = 124;	//reset
 			idMarcador[16] = 130; //guardar
 			idMarcador[17] = 150; //lapiz 
 		}
