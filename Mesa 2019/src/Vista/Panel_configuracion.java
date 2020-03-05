@@ -12,7 +12,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Modelo.*;
+/**
 
+ * Esta clase se utiliza para visualizar y controlar el panel de configuracion 
+
+ * Para crear el diseño de los JPanel se utilizo WindowBuilder
+ 
+ * Ver comentarios en el codigo
+
+ * @author: Franco Pirondo, Barbara Corro, Barbara Ibañez
+
+ */
 public class Panel_configuracion extends JPanel {
 	private Imagenes imgGral = new Imagenes();
 	private int x,y,x_cursor,y_cursor,num_img_de_configuracion,num_pieza_actual,imgActual,nivelActRegla=0,nivelActTrans=6;

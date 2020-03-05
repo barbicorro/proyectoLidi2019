@@ -9,6 +9,18 @@ import java.text.SimpleDateFormat;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+
+/**
+
+ * Esta clase se encarga de levantar las imagenes de cada objeto, las mismas se encuentran dentro del proyecto.
+ 
+	
+ * @author: Franco Pirondo, Barbara Corro, Barbara Ibañez
+
+
+
+
+ */
 public class Imagenes {
 
 	private BufferedImage[] image=new BufferedImage[99] ;
@@ -162,7 +174,13 @@ public class Imagenes {
 	
 						
 	private String rutaFondo= "src/Imagenes/fondo_config.png";
-	
+	/**
+
+     * Constructor de la clase, se encarga de llamar a los demas metodos en el orden correcto.
+     
+     */
+
+
 	public Imagenes()  {
 		cargaImagenes();
 		cargarImagenesConfiguracion();
@@ -254,6 +272,13 @@ public class Imagenes {
 	public void setImage(BufferedImage image, int i) {
 		this.image[i] = image;
 	}
+	/**
+
+     * Método que imprime la ubicacion de los objetos. Este luego se utiliza en la clase mural para guardar la ubicacion de los objetos una vez que superan los 100 elementos de esta forma se optimizá el almacenamiento de la posición de los obejtos en el array.
+     * No confundir con la imagen que se guarda con el objeto guardar.
+	 * @see Mural.java
+     */
+	
 	public void imprimirCap(JPanel paintPane) {
 	
 		
@@ -272,7 +297,13 @@ public class Imagenes {
 		    e.printStackTrace();
 		}
 	}
-	
+	/**
+
+     * Método que se encarga de guardar el mural
+
+     */
+
+
 	public void guardarMural(JPanel paintPane) {
 		BufferedImage image = new BufferedImage(1024, 768, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = image.createGraphics();
@@ -287,6 +318,12 @@ public class Imagenes {
 			e.printStackTrace();
 		} 
 	}
+	/**
+
+     * Método que se encarga de levantar la captura de imagen que se realiza cuando se superan los 300 elementos
+     * No confundir con la imagen que se guarda con el objeto guardar.
+	 * @see Mural.java
+     */
 	
 	public BufferedImage getCap() {
 		try {

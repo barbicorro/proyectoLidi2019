@@ -6,7 +6,15 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import javax.swing.JPanel;
 import Modelo.*;
+/**
 
+ * Esta es la clase central del paquete "vista". Se encarga de crear el mural a la espera de pintar los objetos. 
+
+ * Para crear el diseño de los JPanel se utilizo WindowBuilder
+
+ * @author: Franco Pirondo, Barbara Corro, Barbara Ibañez
+
+ */
 public class Mural extends JPanel {
 	private Imagenes imgGral = new Imagenes();
 	private int x=0;
@@ -23,6 +31,12 @@ public class Mural extends JPanel {
 		setBackground(Color.WHITE);
 		setLayout(null);
 	}
+	/**
+
+     * Método que se encarga de restaurar el fondo configurado previamente.
+     * Los objetos se pintan por encima del fondo y no sobre el fondo. 
+
+     */
 	
 	public void restaurarFondo() {
 		int color = Configuracion.getConfig_Fondo()[0];
@@ -59,7 +73,13 @@ public class Mural extends JPanel {
 			}
 		}
 	}
+	/**
 
+     * Método que "toma una foto" de la posicion de los elementos una vez que el array llega a 100, lo reincia(al array) y colaca la foto al principio de esta forma se ahorra memoria.
+     * El seteo del Background se utiliza para que no salga el color del fondo, ya que si en el futuro se quiere cambiar el color del mismo, la foto con el viejo color de fondo taparia el nuevo color
+	 * En otras palabras, realiza una especie de marca de agua de los 100 objetos
+	 * @see Imagenes.java
+     */
 
 	private void capturarLista() {
 		if (lista.size() == 100) {
@@ -71,6 +91,13 @@ public class Mural extends JPanel {
 			reiniciarLista();
 		}
 	}
+	/**
+
+     * Método que se activa cuando se apoya en la mesa el fiducial con el número del objeto "guardar".
+     * Se encarga de sacar una captura de pantalla del JFrame del mural (junto con el fondo), guardarlo y mostrar el mensaje final.
+	 * @see Imagenes.java
+	 * @see Msj_mural_guardado.java
+     */
 	
 	private void herramientaGuardado(JPanel msj) {
 		if (num_img==Fiduciales.getIdMarcador()[16]){ //guardar
@@ -84,7 +111,13 @@ public class Mural extends JPanel {
 			msj.setVisible(false);
 		}
 	}
+	/**
+
+     * Este metodo es llamado en varias ocasiones por los meotodos de la interfaz TuioListener de la clase mural
+     * Se encarga de actualizar todo el tiempo el número del fiducial apoyado junto con su posición y el angulo de giro.
+	 * @see Prueba.java
 	
+     */
 	public void actualizar(double x,double y, int num_id, float anguloGrados, JPanel msj) {
 		//capturarLista();
 		this.x=(int) (x*1024);
@@ -94,7 +127,13 @@ public class Mural extends JPanel {
 		herramientaGuardado(msj);
 		repaint();
 	}
+	/**
+
+     * Este metodo se encarga de reinciar la lista cuando se llego a los 100 elementos
+     * Para utilizar el array ver los comentarios en su declaración
+	 * @see Prueba.java
 	
+     */
 	private void reiniciarLista() {
 		lista.clear();
 		lista=null;
@@ -148,7 +187,15 @@ public class Mural extends JPanel {
 		}
 	}
 
+	/**
+
+     * Este metodo es llamado implicitamente por la clase JPanel (que a su vez lo hereda de la clase JComponent), con el metodo repaint().
+     * Se encarga de pintar los sellos tomando la informacion del array (lista).
+     * Se recomienda consultar su funcionamiento en la api de oracle
+     * @see <a href = "https://docs.oracle.com/javase/7/docs/api/" /> Web oficial Oracle </a>
 	
+	
+     */
 	public void paintComponent(Graphics g) {
 		if(!Configuracion.isSalioPanel()) {
 			super.paintComponent(g);

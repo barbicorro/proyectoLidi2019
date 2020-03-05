@@ -2,7 +2,18 @@ package Modelo;
 import java.awt.image.BufferedImage;
 
 import Vista.Imagenes;
+/**
 
+ * Esta clase se utiliza para cambiar el color de los paises
+ * Ver comentarios
+
+	
+ * @author: Franco Pirondo, Barbara Corro, Barbara Ibañez
+
+
+
+
+ */
 public class CambioColores {
 	private static Imagenes imgGral = new Imagenes();
 	

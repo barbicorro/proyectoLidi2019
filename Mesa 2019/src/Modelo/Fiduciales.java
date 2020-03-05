@@ -1,6 +1,17 @@
 package Modelo;
 import Modelo.Configuracion;
+/**
 
+ * Esta clase se utiliza solo para cambiar el valor de los fiduciales segundo el ambito donde se utilicen.
+ * Tambien estan implementados los fiduciales pequeños (linea 58 a 77) pero no se utilizaron debido a una baja en el rendimiento en la deteccion de objetos.
+
+	
+ * @author: Franco Pirondo, Barbara Corro, Barbara Ibañez
+
+
+
+
+ */
 public class Fiduciales {
 	private static int [] idMarcador= new int[18];
 
@@ -63,7 +74,7 @@ public class Fiduciales {
 		idMarcador[13] = 14; //Circulo cromatico
 		idMarcador[14] = 15;	//abrir/cerrar panel
 		idMarcador[15] = 16;	//reset
-		//idMarcador[16] = 13;      //guardar
+		idMarcador[16] = 13;      //guardar
 		
 		*/
 	} 

@@ -1,5 +1,9 @@
 package Vista;
+/**
 
+ * Método que muestra un cartel cuando se guarda correctamente el mural. En principio se podria trabajarlo más.
+
+ */
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;

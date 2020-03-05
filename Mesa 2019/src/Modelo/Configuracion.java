@@ -1,6 +1,14 @@
 package Modelo;
+/**
 
-public class Configuracion { //Esta clase deberia ser estatica? definir correctamente que vamos hacer ac�
+ * Esta clase se utiliza para setear los valores de los elementos del panel de control. 
+ * Ver comentarios
+
+	
+ * @author: Franco Pirondo, Barbara Corro, Barbara Ibañez
+
+ */
+public class Configuracion { 
 	
 	private static int[] config_Regla= {190,0,0};   //0-Nivel de zoom       1-eje x      2-eje y
 	private static float[] config_Transparencia = {1,0,0}; //0-Nivel de opacidad   1-eje x   2-eje y
@@ -10,11 +18,16 @@ public class Configuracion { //Esta clase deberia ser estatica? definir correcta
 	private static boolean salioPanel;
 	private static boolean simulando;
 	private static boolean mural_activado=true;
+	/**
 
+     * Constructor de la clase
+     * PARA UTILIZAR LA SIMULACION ACTIVAR LA LINEA 30
+    
+     */
 	public Configuracion()  {
 		cambioConfig = false;
 		salioPanel = false;
-		simulando = false; // ACTIVAR/DESACTIVAR PARA SIMULACION
+		simulando = true; // ACTIVAR/DESACTIVAR PARA SIMULACION
 	}
 
 	
